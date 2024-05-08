@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8382606373b99741889fee13dd5475a, type: 3}
+  m_Name: Conversacion_1
+  m_EditorClassIdentifier: 
+  desbloqueada: 0
+  finalizada: 0
+  reUsar: 0
+  dialogos:
+  - personaje: {fileID: 11400000, guid: e96f662a441a82348bf3493877119e28, type: 2}
+    dialogo: "Buenos d\xEDas, adelante por favor tome asiento"
+  - personaje: {fileID: 11400000, guid: c715cd050ba041548a7e36f2cd4d7538, type: 2}
+    dialogo: "Buenos d\xEDas Dra. Muchas gracias"
+  pregunta: {fileID: 11400000, guid: 55992ff957813a34ab1893227a2e0138, type: 2}

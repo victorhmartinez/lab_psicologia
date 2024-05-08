@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8382606373b99741889fee13dd5475a, type: 3}
+  m_Name: Conversacion_3
+  m_EditorClassIdentifier: 
+  desbloqueada: 0
+  finalizada: 0
+  reUsar: 0
+  dialogos:
+  - personaje: {fileID: 11400000, guid: e96f662a441a82348bf3493877119e28, type: 2}
+    dialogo: "Antes de seguir quisiera comentarle algo muy importante que tiene que
+      conocer, lo cual es, que todo lo conversado y hablado en esta sesi\xF3n es
+      confidencial al menos que la informaci\xF3n que me brinde ponga en riesgo su
+      vida o la de otros \xBFEst\xE1 de acuerdo?"
+  - personaje: {fileID: 11400000, guid: c715cd050ba041548a7e36f2cd4d7538, type: 2}
+    dialogo: 'Entiendo lo que me dice doctora y estoy de acuerdo con ello. '
+  - personaje: {fileID: 11400000, guid: e96f662a441a82348bf3493877119e28, type: 2}
+    dialogo: "perfecto Crystal com\xE9nteme \xBFCu\xE1l es su estado civil? y \xBFa
+      qu\xE9 se dedica?"
+  - personaje: {fileID: 11400000, guid: c715cd050ba041548a7e36f2cd4d7538, type: 2}
+    dialogo: Me encuentro casada y soy ama de casa
+  - personaje: {fileID: 11400000, guid: e96f662a441a82348bf3493877119e28, type: 2}
+    dialogo: ": listo, ahora cu\xE9nteme el motivo por el que vino a consulta el
+      d\xEDa de hoy "
+  - personaje: {fileID: 11400000, guid: c715cd050ba041548a7e36f2cd4d7538, type: 2}
+    dialogo: "le cuento lo que pasa es que me siento desesperada\u2026.. y solo busco
+      a alguien con quien hablar "
+  - personaje: {fileID: 11400000, guid: e96f662a441a82348bf3493877119e28, type: 2}
+    dialogo: "\xBFHace cu\xE1nto tiempo se ha sentido as\xED?"
+  - personaje: {fileID: 11400000, guid: c715cd050ba041548a7e36f2cd4d7538, type: 2}
+    dialogo: "Ha ido empeorando en los \xFAltimos 8 a 10 meses aproximadamente"
+  - personaje: {fileID: 11400000, guid: e96f662a441a82348bf3493877119e28, type: 2}
+    dialogo: "\xBFSiente que ha ocurrido alg\xFAn evento que desencadenara esta situaci\xF3n?"
+  - personaje: {fileID: 11400000, guid: c715cd050ba041548a7e36f2cd4d7538, type: 2}
+    dialogo: "Tengo muchos conflictos en mi matrimonio y la desconfianza por parte
+      de su familia, eso me ha devastado, as\xED que probablemente ese sea el desencadenante
+      doctora."
+  - personaje: {fileID: 11400000, guid: e96f662a441a82348bf3493877119e28, type: 2}
+    dialogo: "\xBFy c\xF3mo se siente con respecto a esto?"
+  pregunta: {fileID: 0}
