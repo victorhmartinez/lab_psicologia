@@ -46,4 +46,8 @@ MonoBehaviour:
       doctora."
   - personaje: {fileID: 11400000, guid: e96f662a441a82348bf3493877119e28, type: 2}
     dialogo: "\xBFy c\xF3mo se siente con respecto a esto?"
-  pregunta: {fileID: 0}
+  - personaje: {fileID: 11400000, guid: c715cd050ba041548a7e36f2cd4d7538, type: 2}
+    dialogo: "Varias veces me ha costado salir de la cama y hacer mis tareas dom\xE9sticas
+      habituales, suelo despertar abatida y llorosa. Adem\xE1s, me siento culpable
+      por no ser <<la de siempre>> y me irrito con facilidad."
+  pregunta: {fileID: 11400000, guid: be3ebd96f8a4e4a42bac7ab7b586f509, type: 2}

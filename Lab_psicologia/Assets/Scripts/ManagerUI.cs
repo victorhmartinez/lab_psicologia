@@ -63,7 +63,7 @@ public class ManagerUI : MonoBehaviour
     public void cambiarConversacion()
     {
         btn_Siguiente.gameObject.SetActive(false);
-        Debug.Log(dialogosIncial.dialogos.Length);
+
         if (contador >= dialogosIncial.dialogos.Length)
         {
            
