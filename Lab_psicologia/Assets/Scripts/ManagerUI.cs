@@ -49,6 +49,8 @@ public class ManagerUI : MonoBehaviour
         
     }
 
+
+
     public void comenzarDialogos()
     {
         uiDialogo.SetActive(true);
