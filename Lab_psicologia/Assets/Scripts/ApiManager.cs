@@ -22,6 +22,7 @@ public class ApiManager : MonoBehaviour
 
     void Start()
     {
+        //Consumimos la api mediante corrutinas por proceso asincrono
         Debug.Log("ApiManager Start() ejecutado.");
 
         // Generar un número aleatorio entre 1 y 2

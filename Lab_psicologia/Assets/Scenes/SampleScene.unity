@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &36826692
 RectTransform:
   m_ObjectHideFlags: 0
@@ -818,7 +818,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 403610592}
-  - component: {fileID: 403610593}
   m_Layer: 0
   m_Name: ManagerUI
   m_TagString: Untagged
@@ -841,32 +840,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &403610593
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 403610591}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ab7fbf883e953a468888a225dba46de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uiDialogo: {fileID: 36826691}
-  uiPreguntas: {fileID: 955446424}
-  dialogosIncial: {fileID: 11400000, guid: bf8ceffe07fc47b469803c642e39cad3, type: 2}
-  txtMensaje: {fileID: 1022797796}
-  txtPersonaje: {fileID: 711070592}
-  txtPregunta: {fileID: 1203737080}
-  contador: 0
-  btn_iniciar: {fileID: 1689522914}
-  btn_Siguiente: {fileID: 991657155}
-  btn_aceptar: {fileID: 465658957}
-  container_preguntas: {fileID: 1087265199}
-  btn_prefab: {fileID: 8553064184536374997, guid: 3dbc943aa4d29964f8d88f70556c75fe, type: 3}
-  ui_retroalimentacion: {fileID: 219520341}
-  txtRetroalimentacion: {fileID: 401300857}
 --- !u!1001 &405875100
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4433,7 +4406,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 403610593}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ManagerUI, Assembly-CSharp
         m_MethodName: comenzarDialogos
         m_Mode: 1
