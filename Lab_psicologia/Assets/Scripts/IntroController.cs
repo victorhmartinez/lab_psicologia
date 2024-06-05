@@ -26,7 +26,7 @@ public class IntroController : MonoBehaviour
          btnAceptar.SetActive(false);
         if (api != null)
         {
-            Debug.Log("Suscribiendo al evento NumeroAleatorioGeneradoEvent.");
+         //   Debug.Log("Suscribiendo al evento NumeroAleatorioGeneradoEvent.");
             api.NumeroAleatorioGeneradoEvent += OnNumeroAleatorioGenerado;
         }
         else

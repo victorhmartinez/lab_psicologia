@@ -33,28 +33,67 @@ public class DialogosManager : MonoBehaviour
     private GameObject ui_retroalimentacion;
     [SerializeField]
     private TextMeshProUGUI txtRetroalimentacion;
-    private List<Dialogos> dialogosList = new List<Dialogos>();
+    public List<Dialogos> dialogosList = new List<Dialogos>();
+    private List<Dialogos> dialogosListDesarrollo = new List<Dialogos>();
+    private List<Dialogos> dialogosListFin = new List<Dialogos>();
     [SerializeField]
-    private ApiManager ApiManager; 
+    private ApiManager apiManager;
+    [SerializeField]
+    private FichaDiagnostico fichaDiagnostico;
     void Start()
     {
-        // Suscribirse al evento DialogosCargadosEvent de ApiManager
-        ApiManager.DialogosCargadosEvent += OnDialogosCargados;
+        if (apiManager != null)
+        {
+            apiManager.DialogosCargadosEvent += OnDialogosInicialCargados;
+            apiManager.DialogosCargadosDesarrolladoEvent += OnDialogosDesarrolloCargados;
+            apiManager.DialogosCargadosFinalEvent += OnDialogosFinCargados;
+        }
     }
 
     private void OnDestroy()
     {
-        // Desuscribirse del evento al destruir el objeto
-        ApiManager.DialogosCargadosEvent -= OnDialogosCargados;
+        if (apiManager != null)
+        {
+            apiManager.DialogosCargadosEvent -= OnDialogosInicialCargados;
+            apiManager.DialogosCargadosDesarrolladoEvent -= OnDialogosDesarrolloCargados;
+            apiManager.DialogosCargadosFinalEvent -= OnDialogosFinCargados;
+        }
     }
 
     // Método llamado cuando se cargan los diálogos desde ApiManager
-    private void OnDialogosCargados(List<Dialogos> dialogos)
+    private void OnDialogosInicialCargados(List<Dialogos> dialogos)
     {
         // Guardar los diálogos cargados
         dialogosList = dialogos;
         Debug.Log("Hola estas en el evento con las listas cargadas");
      
+    }
+    private void OnDialogosDesarrolloCargados(List<Dialogos> dialogos)
+    {
+        // Guardar los diálogos cargados
+        dialogosListDesarrollo = dialogos;
+        Debug.Log("Hola estas en el evento con las listas de desarrollo");
+
+    }
+    private void OnDialogosFinCargados(List<Dialogos> dialogos)
+    {
+        // Guardar los diálogos cargados
+        dialogosListFin = dialogos;
+        Debug.Log("Hola estas en el evento con las listas de fnal");
+
+    }
+    public void iniciarFase(string fase)
+    {
+        switch(fase) {
+            case "Desarrollo":
+                contador = 0;
+                dialogosList = dialogosListDesarrollo;
+                break;
+            case "Final":
+                dialogosList = dialogosListFin;
+                break;
+
+        }
     }
 
     IEnumerator escribirTexto(string texto, TextMeshProUGUI txt,GameObject btn)
@@ -78,8 +117,7 @@ public class DialogosManager : MonoBehaviour
     public void funcionalidadBtnSiguiente()
     {
         btn_Siguiente.gameObject.SetActive(false);
-
-     
+        Debug.Log("Voy reutilizar");     
         if (dialogosList[contador].tienePregunta)
         {
             Preguntas pregunta = dialogosList[contador].pregunta;
@@ -88,12 +126,13 @@ public class DialogosManager : MonoBehaviour
         else
         {
             contador++;
+            if (contador < dialogosList.Count)
+            {
+                txtPersonaje.text = dialogosList[contador].personaje;
+                StartCoroutine(escribirTexto(dialogosList[contador].contenido, txtMensaje, btn_Siguiente));
+            }
         }
-        if (contador < dialogosList.Count)
-        {
-            txtPersonaje.text = dialogosList[contador].personaje;
-            StartCoroutine(escribirTexto(dialogosList[contador].contenido, txtMensaje, btn_Siguiente));
-        }
+       
        
     }
 
@@ -193,7 +232,8 @@ public class DialogosManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Se termino");
+                    Debug.Log("Se termino la fase inicial");
+                    fichaDiagnostico.notaFichaDiagnostico();
                 }
                
                 

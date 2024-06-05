@@ -15,15 +15,19 @@ public class ApiManager : MonoBehaviour
     public List<Dialogos> dialogosListDes = new List<Dialogos>();
     public List<Dialogos> dialogosListFin = new List<Dialogos>();
     public int nroCaso;
-    // Evento para indicar que los diálogos se han cargado
+    // Evento para indicar que los diálogos se han cargado fase inicial
     public event Action<List<Dialogos>> DialogosCargadosEvent;
+    // Evento para indicar que los diálogos se han cargado fase desarrollo
+    public event Action<List<Dialogos>> DialogosCargadosDesarrolladoEvent;
+    // Evento para indicar que los diálogos se han cargado
+    public event Action<List<Dialogos>> DialogosCargadosFinalEvent;
     // Evento para indicar que el número aleatorio ha sido generado
     public event Action<int> NumeroAleatorioGeneradoEvent;
 
     void Start()
     {
         //Consumimos la api mediante corrutinas por proceso asincrono
-        Debug.Log("ApiManager Start() ejecutado.");
+      
 
         // Generar un número aleatorio entre 1 y 2
         nroCaso = UnityEngine.Random.Range(1, 3);
@@ -38,15 +42,15 @@ public class ApiManager : MonoBehaviour
             DialogosCargadosEvent?.Invoke(dialogosList);
         }));
 
-        StartCoroutine(GetDialogosFromApi(nroCaso, "Desarrollo", (dialogos) => {
+       StartCoroutine(GetDialogosFromApi(nroCaso, "Desarrollo", (dialogos) => {
             dialogosListDes = dialogos;
             Debug.Log("Diálogos Desarrollo cargados: " + dialogosListDes.Count);
-            DialogosCargadosEvent?.Invoke(dialogosListDes);
+            DialogosCargadosDesarrolladoEvent?.Invoke(dialogosListDes);
         }));
         StartCoroutine(GetDialogosFromApi(nroCaso, "Final", (dialogos) => {
             dialogosListFin = dialogos;
             Debug.Log("Diálogos final cargados: " + dialogosListFin.Count);
-            DialogosCargadosEvent?.Invoke(dialogosListFin);
+            DialogosCargadosFinalEvent?.Invoke(dialogosListFin);
         }));
     }
 
@@ -64,7 +68,7 @@ public class ApiManager : MonoBehaviour
             else
             {
                 string jsonData = request.downloadHandler.text;
-                Debug.Log("Dialogos obtenidos correctamente para fase " + fase + ": " + jsonData);
+               // Debug.Log("Dialogos obtenidos correctamente para fase " + fase + ": " + jsonData);
 
                 // Deserializar el JSON en la clase contenedora
                 DialogosContainer dialogosContainer = JsonUtility.FromJson<DialogosContainer>("{\"dialogos\":" + jsonData + "}");
