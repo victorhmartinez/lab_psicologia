@@ -21,8 +21,7 @@ public class ApiManager : MonoBehaviour
     public event Action<List<Dialogos>> DialogosCargadosDesarrolladoEvent;
     // Evento para indicar que los diálogos se han cargado
     public event Action<List<Dialogos>> DialogosCargadosFinalEvent;
-    // Evento para indicar que el número aleatorio ha sido generado
-    public event Action<int> NumeroAleatorioGeneradoEvent;
+   
 
     void Start()
     {
@@ -33,8 +32,7 @@ public class ApiManager : MonoBehaviour
         nroCaso = UnityEngine.Random.Range(1, 3);
         Debug.Log("Número de caso generado: " + nroCaso);
 
-        // Disparamos el evento para indicar que el número aleatorio ha sido generado
-        NumeroAleatorioGeneradoEvent?.Invoke(nroCaso);
+      
 
         StartCoroutine(GetDialogosFromApi(nroCaso, "Inicial", (dialogos) => {
             dialogosList = dialogos;
@@ -112,5 +110,9 @@ public class ApiManager : MonoBehaviour
                 dialogo.pregunta = pregunta;
             }
         }
+    }
+    public int getNroCaso()
+    {
+        return nroCaso;
     }
 }

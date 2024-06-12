@@ -14,15 +14,28 @@ public class PresentarInfoSalas : MonoBehaviour
     [SerializeField]
     private GameObject btnAceptar;
     [SerializeField]
+    private GameObject btnComenzar;
+    [SerializeField]
     private string titulo;
     [SerializeField]
     [TextArea(3,2)]
     private string descripcion;
+    [SerializeField]
+    private GameObject player;
+    [SerializeField]
+    private Camera mainCamera;
+    [SerializeField]
+    private GameObject introController;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        btnAceptar.gameObject.SetActive(false);
+        if (gameObject.name == "Entrada3")
+        {
+            btnComenzar.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -34,6 +47,7 @@ public class PresentarInfoSalas : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            btnAceptar.gameObject.SetActive(false);
             Debug.Log("Entro el jugador al trigger");
             panelInformacion.SetActive(true);
             txtTituloSala.text = titulo;
@@ -47,6 +61,7 @@ public class PresentarInfoSalas : MonoBehaviour
             btnAceptar.gameObject.SetActive(false);
             Debug.Log("Entro el jugador al trigger");
             panelInformacion.SetActive(false);
+            StopAllCoroutines();
             
         }
     }
@@ -60,11 +75,27 @@ public class PresentarInfoSalas : MonoBehaviour
             txtCuerpoSala.maxVisibleCharacters++;
             yield return new WaitForSeconds(15f / 500);
         }
-        button.SetActive(true);
-        button.GetComponent<Button>().onClick.RemoveAllListeners();
-        button.GetComponent<Button>().onClick.AddListener(() =>
+        if(gameObject.name== "Entrada3")
         {
-            //dialogosManager.darFuncionBtnAceptar();
-        });
+            btnComenzar.SetActive(true);
+        }
+        else
+        {
+            button.SetActive(true);
+        }
+        
+        
+    }
+    public void fnBtnEmpezar()
+    {
+        player.SetActive(false);
+        mainCamera.gameObject.SetActive(true);
+        panelInformacion.SetActive(false);
+        StartCoroutine(esperarIntro());
+    }
+    IEnumerator esperarIntro()
+    {
+        yield return new WaitForSeconds(1.0f);
+        introController.gameObject.SetActive(true);
     }
 }

@@ -40,6 +40,9 @@ public class DialogosManager : MonoBehaviour
     private ApiManager apiManager;
     [SerializeField]
     private FichaDiagnostico fichaDiagnostico;
+    [SerializeField]
+    private BeckInventory inventarioBeck;
+    public string fase;
     void Start()
     {
         if (apiManager != null)
@@ -86,10 +89,13 @@ public class DialogosManager : MonoBehaviour
     {
         switch(fase) {
             case "Desarrollo":
+                this.fase = fase;
                 contador = 0;
                 dialogosList = dialogosListDesarrollo;
                 break;
             case "Final":
+                this.fase = fase;
+                contador = 0;
                 dialogosList = dialogosListFin;
                 break;
 
@@ -130,6 +136,15 @@ public class DialogosManager : MonoBehaviour
             {
                 txtPersonaje.text = dialogosList[contador].personaje;
                 StartCoroutine(escribirTexto(dialogosList[contador].contenido, txtMensaje, btn_Siguiente));
+            }
+            else
+            {
+                if (fase == "Desarrollo")
+                {
+                    Debug.Log("entre aqui");
+                    uiDialogo.SetActive(false);
+                    inventarioBeck.notaInventarioBecker();
+                }
             }
         }
        

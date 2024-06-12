@@ -23,11 +23,12 @@ public class IntroController : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("Vamos a inicializar el intro controller");
          btnAceptar.SetActive(false);
         if (api != null)
         {
-         //   Debug.Log("Suscribiendo al evento NumeroAleatorioGeneradoEvent.");
-            api.NumeroAleatorioGeneradoEvent += OnNumeroAleatorioGenerado;
+         Debug.Log("Obtenermos el NumeroAleatorioGeneradoEvent.");
+            OnNumeroAleatorioGenerado(api.getNroCaso());
         }
         else
         {
@@ -35,16 +36,11 @@ public class IntroController : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
-    {
-        if (api != null)
-        {
-            api.NumeroAleatorioGeneradoEvent -= OnNumeroAleatorioGenerado;
-        }
-    }
+ 
 
     private void OnNumeroAleatorioGenerado(int numeroAleatorio)
     {
+        panelIntroduccion.SetActive(true);
         Debug.Log("Número aleatorio recibido en IntroController: " + numeroAleatorio);
         StartCoroutine(escribirIntro(listIntros[numeroAleatorio - 1]));
     }
