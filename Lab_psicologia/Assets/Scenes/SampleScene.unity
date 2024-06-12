@@ -11321,7 +11321,7 @@ MonoBehaviour:
   txtMensaje: {fileID: 1022797796}
   txtPersonaje: {fileID: 711070592}
   txtPregunta: {fileID: 1203737080}
-  contador: 22
+  contador: 0
   btn_Siguiente: {fileID: 991657155}
   btn_aceptar: {fileID: 465658957}
   container_preguntas: {fileID: 1087265199}
@@ -15785,12 +15785,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 46
+  m_fontSize: 35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 40
-  m_fontSizeMax: 46
+  m_fontSizeMin: 32
+  m_fontSizeMax: 35
   m_fontStyle: 0
   m_HorizontalAlignment: 8
   m_VerticalAlignment: 256
