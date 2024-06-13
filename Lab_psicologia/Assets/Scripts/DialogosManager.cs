@@ -159,6 +159,8 @@ public class DialogosManager : MonoBehaviour
                     Debug.Log("entre aqui");
                     txtPersonaje1.gameObject.SetActive(false);
                     txtPersonaje2.gameObject.SetActive(false);
+                    dialagoPsicologo.SetActive(false);
+                    dialagoPaciente.SetActive(false);
                     uiDialogo.SetActive(false);
                     inventarioBeck.notaInventarioBecker();
                 }
