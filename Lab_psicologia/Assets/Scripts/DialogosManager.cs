@@ -268,6 +268,7 @@ public class DialogosManager : MonoBehaviour
                     txtPersonaje1.gameObject.SetActive(true);
                     txtPersonaje2.gameObject.SetActive(true);
                     txtPersonaje.text = dialogosList[contador].personaje;
+                    buscarPersonaje(dialogosList[contador].personaje);
                     StartCoroutine(escribirTexto(dialogosList[contador].contenido, txtMensaje, btn_Siguiente));
                     container_preguntas.gameObject.SetActive(false);
                 }
