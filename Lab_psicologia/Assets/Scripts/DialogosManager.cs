@@ -43,6 +43,15 @@ public class DialogosManager : MonoBehaviour
     [SerializeField]
     private BeckInventory inventarioBeck;
     public string fase;
+    [SerializeField]
+    private GameObject dialagoPsicologo;
+    [SerializeField]
+    private GameObject dialagoPaciente;
+    [SerializeField]
+    private TextMeshProUGUI txtPersonaje1;
+    [SerializeField]
+    private TextMeshProUGUI txtPersonaje2;
+    Preguntas pregunta;
     void Start()
     {
         if (apiManager != null)
@@ -123,10 +132,15 @@ public class DialogosManager : MonoBehaviour
     public void funcionalidadBtnSiguiente()
     {
         btn_Siguiente.gameObject.SetActive(false);
+       
         Debug.Log("Voy reutilizar");     
         if (dialogosList[contador].tienePregunta)
         {
-            Preguntas pregunta = dialogosList[contador].pregunta;
+            dialagoPaciente.SetActive(false);
+            dialagoPsicologo.SetActive(false);
+            txtPersonaje1.gameObject.SetActive(false);
+            txtPersonaje2.gameObject.SetActive(false);
+            pregunta = dialogosList[contador].pregunta;
             cargarPreguntas(pregunta);
         }
         else
@@ -134,6 +148,7 @@ public class DialogosManager : MonoBehaviour
             contador++;
             if (contador < dialogosList.Count)
             {
+                buscarPersonaje(dialogosList[contador].personaje);
                 txtPersonaje.text = dialogosList[contador].personaje;
                 StartCoroutine(escribirTexto(dialogosList[contador].contenido, txtMensaje, btn_Siguiente));
             }
@@ -142,6 +157,8 @@ public class DialogosManager : MonoBehaviour
                 if (fase == "Desarrollo")
                 {
                     Debug.Log("entre aqui");
+                    txtPersonaje1.gameObject.SetActive(false);
+                    txtPersonaje2.gameObject.SetActive(false);
                     uiDialogo.SetActive(false);
                     inventarioBeck.notaInventarioBecker();
                 }
@@ -154,9 +171,10 @@ public class DialogosManager : MonoBehaviour
     public  void cargarPreguntas(Preguntas pregunta)
     {
         uiDialogo.SetActive(false);
-        uiPreguntas.SetActive(true);
+       
+        ui_retroalimentacion.SetActive(true);
         StopAllCoroutines();
-        StartCoroutine(escribirPregunta(pregunta.pregunta, txtPregunta, pregunta));
+        StartCoroutine(escribirPregunta(pregunta.pregunta, txtRetroalimentacion, pregunta));
     }
     //Cargamos los botones en el contianer de pregutnas
     public void ActivarBotones(int cantidad, Preguntas pregunta)
@@ -206,7 +224,8 @@ public class DialogosManager : MonoBehaviour
     public void darFuncionBtn( string retroalimentacion, bool esCorrecta)
     {
 
-
+        txtPersonaje1.gameObject.SetActive(false);
+        txtPersonaje2.gameObject.SetActive(false);
         ui_retroalimentacion.SetActive(true);
         txtRetroalimentacion.text = retroalimentacion;
         uiPreguntas.SetActive(false);
@@ -219,7 +238,11 @@ public class DialogosManager : MonoBehaviour
     public void  darFuncionBtnAceptar()
     {
         uiDialogo.SetActive(true);
-
+        buscarPersonaje(dialogosList[contador].personaje);
+        txtPersonaje1.text= dialogosList[contador].personaje;
+        txtPersonaje2.text = dialogosList[contador+1].personaje;
+        txtPersonaje1.gameObject.SetActive(true);
+        txtPersonaje2.gameObject.SetActive(true);
         txtPersonaje.text = dialogosList[contador].personaje;
         StartCoroutine(escribirTexto(dialogosList[contador].contenido, txtMensaje, btn_Siguiente));
 
@@ -233,6 +256,7 @@ public class DialogosManager : MonoBehaviour
     {
         if (correcto)
         {
+            btn_aceptar.gameObject.SetActive(false);
             btn_aceptar.onClick.RemoveAllListeners();
             btn_aceptar.onClick.AddListener(() => {
                 ui_retroalimentacion.SetActive(false);
@@ -241,6 +265,8 @@ public class DialogosManager : MonoBehaviour
                 if (contador < dialogosList.Count)
                 {
                     uiDialogo.SetActive(true);
+                    txtPersonaje1.gameObject.SetActive(true);
+                    txtPersonaje2.gameObject.SetActive(true);
                     txtPersonaje.text = dialogosList[contador].personaje;
                     StartCoroutine(escribirTexto(dialogosList[contador].contenido, txtMensaje, btn_Siguiente));
                     container_preguntas.gameObject.SetActive(false);
@@ -249,6 +275,8 @@ public class DialogosManager : MonoBehaviour
                 {
                     Debug.Log("Se termino la fase inicial");
                     fichaDiagnostico.notaFichaDiagnostico();
+                    txtPersonaje1.gameObject.SetActive(false);
+                    txtPersonaje2.gameObject.SetActive(false);
                 }
                
                 
@@ -264,10 +292,13 @@ public class DialogosManager : MonoBehaviour
             btn_aceptar.onClick.RemoveAllListeners();
             btn_aceptar.onClick.AddListener(() => {
                 uiPreguntas.SetActive(true);
-                ui_retroalimentacion.SetActive(false);
+                ui_retroalimentacion.SetActive(true);
+                cargarPreguntas(pregunta);
+                btn_aceptar.gameObject.SetActive(false);
+
             });
         }
-        btn_aceptar.gameObject.SetActive(false);
+      
     }
 
 
@@ -282,10 +313,24 @@ public class DialogosManager : MonoBehaviour
             yield return new WaitForSeconds(15f / 500);
 
         }
+        uiPreguntas.SetActive(true);
         ActivarBotones(pregunta.respuestas.Length, pregunta);
         container_preguntas.gameObject.SetActive(true);
 
     }
-
+    public void buscarPersonaje(string personajeHabalndo)
+    {
+     
+        if (personajeHabalndo.Contains("Psicólogo"))
+        {
+            dialagoPsicologo.SetActive(true);
+            dialagoPaciente.SetActive(false);
+        }
+        else if (personajeHabalndo.Contains("Paciente"))
+        {
+            dialagoPaciente.SetActive(true);
+            dialagoPsicologo.SetActive(false);
+        }
+    }
     
 }

@@ -8,6 +8,7 @@ public class IntroController : MonoBehaviour
 {
    
     [SerializeField]
+    [TextArea(5,6)]
     private List<string> listIntros = new List<string>();
     [SerializeField]
     private TextMeshProUGUI txtIntroduccion;
