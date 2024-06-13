@@ -11577,18 +11577,35 @@ MonoBehaviour:
   - {fileID: 437074361}
   - {fileID: 414145660}
   - {fileID: 75480199}
-  comentarios: []
+  togglesNo:
+  - {fileID: 1155122582}
+  - {fileID: 803705623}
+  - {fileID: 227928080}
+  - {fileID: 91974390}
+  - {fileID: 498361940}
+  - {fileID: 512859664}
+  - {fileID: 873749573}
+  - {fileID: 503116290}
+  - {fileID: 891540457}
   resultadoText: {fileID: 1145348992}
   submitButton: {fileID: 1369021486}
-  txtObservacion: {fileID: 520277233}
+  txtObservacion: {fileID: 1718261918}
   objectGuia: {fileID: 219520341}
   txtNota: {fileID: 401300857}
   btnAceptar: {fileID: 465658955}
   panelFicha: {fileID: 1552765332}
-  panelAlerta: {fileID: 1513770975}
+  panelAlerta: {fileID: 488977195}
   dialogosManager: {fileID: 1254019939}
   notaTexto: "Para culminar el proceso de esta fase,  debes llenar la ficha con los
     criterios de diagn\xF3stico."
+  criteriosObservados: 0
+  criteriosObservadosEscritos: 0
+  nroCaso: 0
+  listResultados: 0300000004000000
+  apiManager: {fileID: 1424561234}
+  listaRespuestaObtenidas: 000000000000000000
+  listRespuestaC1: 010100000001000000
+  listRespuestaC2: 010100000000010100
 --- !u!4 &1202637487
 Transform:
   m_ObjectHideFlags: 0
@@ -11879,7 +11896,7 @@ MonoBehaviour:
   txtMensaje: {fileID: 1022797796}
   txtPersonaje: {fileID: 711070592}
   txtPregunta: {fileID: 0}
-  contador: 0
+  contador: 22
   btn_Siguiente: {fileID: 991657155}
   btn_aceptar: {fileID: 465658957}
   container_preguntas: {fileID: 1087265199}

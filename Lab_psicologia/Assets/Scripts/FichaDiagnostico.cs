@@ -7,8 +7,8 @@ using TMPro;
 public class FichaDiagnostico : MonoBehaviour
 {
     public Toggle[] toggles;
+    public Toggle[] togglesNo;
 
-    public TMP_InputField[] comentarios;
     public TMP_InputField resultadoText;
     public Button submitButton;
     [SerializeField]
@@ -28,8 +28,19 @@ public class FichaDiagnostico : MonoBehaviour
     [SerializeField]
     [TextArea(3, 2)]
     private string notaTexto;
-    private int criteriosObservados;
-    private int criteriosObservadosEscritos;
+    public int criteriosObservados;
+    public int criteriosObservadosEscritos;
+    [SerializeField]
+    private int nroCaso;
+    [SerializeField]
+    private int[] listResultados;
+    [SerializeField]
+    private ApiManager apiManager;
+    [SerializeField]
+    private bool[] listaRespuestaObtenidas;
+    [SerializeField]
+    private bool[] listRespuestaC1, listRespuestaC2;
+
     void Start()
     {
         submitButton.onClick.AddListener(SubmitFicha);
@@ -42,9 +53,21 @@ public class FichaDiagnostico : MonoBehaviour
 
         for (int i = 0; i < toggles.Length; i++)
         {
-            if (toggles[i].isOn)
+            if (toggles[i].isOn )
+
             {
+                
                 criteriosObservados++;
+            }
+            if (toggles[i].isOn || togglesNo[i].isOn)
+
+            {
+
+                listaRespuestaObtenidas[i] = true;
+            }
+            else
+            {
+                listaRespuestaObtenidas[i] = false;
             }
         }
 
@@ -56,10 +79,24 @@ public class FichaDiagnostico : MonoBehaviour
         }
         else
         {
+            if (listResultados[nroCaso - 1] == criteriosObservadosEscritos)
+            {
+                if (verificarRespuestasCaso())
+                {
+                    panelFicha.SetActive(false);
+                    dialogosManager.iniciarFase("Desarrollo");
+                    dialogosManager.darFuncionBtnAceptar();
+                }
+               
+               
+            }
+            else
+            {
+                panelAlerta.SetActive(true);
+                txtObservacion.text = "Los criterios escritos no estan de acuerdo con el caso clinicio revisalos nuevamente.";
+            }
             Debug.Log("Estan bien contado los criterios");
-            panelFicha.SetActive(false);
-            dialogosManager.iniciarFase("Desarrollo");
-            dialogosManager.darFuncionBtnAceptar();
+         
         }
 
         // Aquí puedes agregar lógica para enviar los datos a un servidor o almacenarlos localmente
@@ -68,6 +105,7 @@ public class FichaDiagnostico : MonoBehaviour
     public void notaFichaDiagnostico()
     {
         btnAceptar.SetActive(false);
+        nroCaso = apiManager.nroCaso;
         objectGuia.SetActive(true);
         StartCoroutine(escribirTexto(notaTexto, txtNota, btnAceptar));
         btnAceptar.GetComponent<Button>().onClick.RemoveAllListeners();
@@ -96,6 +134,35 @@ public class FichaDiagnostico : MonoBehaviour
         }
     }
 
+    public bool verificarRespuestasCaso()
+    {
+        bool verificado=false;
+        switch (nroCaso)
+        {
+            case 1:
+                verificado= comprobarRespuest(listRespuestaC1);
+                break;
+            case 2:
+                verificado =comprobarRespuest(listRespuestaC2);
+                break;
+        }
 
+        return verificado;
+    }
+    public bool comprobarRespuest(bool [] list)
+    {
+        bool esCorrecta=true;
+        for(int i =0; i < list.Length; i++)
+        {
+            if (list[i] != listaRespuestaObtenidas[i])
+            {
+                panelAlerta.SetActive(true);
+                txtObservacion.text = "Los criterios que seleccionaste no están de acuerdo con el caso clínico.";
+                esCorrecta = false;
+                break;
+            }
+        }
+        return esCorrecta;
+    }
     }
 
