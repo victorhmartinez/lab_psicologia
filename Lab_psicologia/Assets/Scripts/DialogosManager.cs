@@ -173,7 +173,7 @@ public class DialogosManager : MonoBehaviour
     public  void cargarPreguntas(Preguntas pregunta)
     {
         uiDialogo.SetActive(false);
-       
+        btn_aceptar.gameObject.SetActive(false);
         ui_retroalimentacion.SetActive(true);
         StopAllCoroutines();
         StartCoroutine(escribirPregunta(pregunta.pregunta, txtRetroalimentacion, pregunta));
@@ -256,6 +256,7 @@ public class DialogosManager : MonoBehaviour
 
     public void darFuncionAceptar(bool correcto)
     {
+        btn_aceptar.gameObject.SetActive(false);
         if (correcto)
         {
             btn_aceptar.gameObject.SetActive(false);
@@ -294,7 +295,7 @@ public class DialogosManager : MonoBehaviour
         {
             btn_aceptar.onClick.RemoveAllListeners();
             btn_aceptar.onClick.AddListener(() => {
-                uiPreguntas.SetActive(true);
+              //  uiPreguntas.SetActive(true);
                 ui_retroalimentacion.SetActive(true);
                 cargarPreguntas(pregunta);
                 btn_aceptar.gameObject.SetActive(false);
