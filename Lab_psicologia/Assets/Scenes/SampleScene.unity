@@ -13995,7 +13995,7 @@ MonoBehaviour:
   txtMensaje: {fileID: 1022797796}
   txtPersonaje: {fileID: 711070592}
   txtPregunta: {fileID: 0}
-  contador: 22
+  contador: 0
   btn_Siguiente: {fileID: 991657155}
   btn_aceptar: {fileID: 465658957}
   container_preguntas: {fileID: 1087265199}
