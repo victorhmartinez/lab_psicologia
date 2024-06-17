@@ -10,11 +10,12 @@ public class Dialogos
     public bool tienePregunta;
     public string preguntaId;
     public string personaje;
+    public bool esImportante;
     public Preguntas pregunta=null;
     public int caso;
 
     // Constructor que recibe parámetros para inicializar el obejto dialogo
-    public Dialogos(int orden, string contenido, bool tienePregunta, string preguntaId, string personaje, int caso, Preguntas pregunta)
+    public Dialogos(int orden, string contenido, bool tienePregunta, string preguntaId, string personaje, int caso, Preguntas pregunta, bool esImportante)
     {
         this.orden = orden;
         this.contenido = contenido;
@@ -23,5 +24,6 @@ public class Dialogos
         this.personaje = personaje;
         this.caso = caso;
         this.pregunta = null;
+        this.esImportante = esImportante;
     }
 }

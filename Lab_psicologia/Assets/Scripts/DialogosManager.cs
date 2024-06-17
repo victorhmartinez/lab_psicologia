@@ -48,9 +48,10 @@ public class DialogosManager : MonoBehaviour
     [SerializeField]
     private GameObject dialagoPaciente;
     [SerializeField]
-    private TextMeshProUGUI txtPersonaje1;
+    private TextMeshProUGUI txtDialogoPsiscologo, txtDialogoPaciente;
     [SerializeField]
-    private TextMeshProUGUI txtPersonaje2;
+    private Button btnSigPaciente;
+  
     Preguntas pregunta;
     void Start()
     {
@@ -60,6 +61,8 @@ public class DialogosManager : MonoBehaviour
             apiManager.DialogosCargadosDesarrolladoEvent += OnDialogosDesarrolloCargados;
             apiManager.DialogosCargadosFinalEvent += OnDialogosFinCargados;
         }
+        dialagoPaciente.SetActive(false);
+        dialagoPsicologo.SetActive(false);
     }
 
     private void OnDestroy()
@@ -122,50 +125,70 @@ public class DialogosManager : MonoBehaviour
             yield return new WaitForSeconds(15f / 500);
 
         }
-        if(btn != null)
-        {
-            btn.gameObject.SetActive(true);
+        if (contador<dialogosList.Count) {
+            if (txt.gameObject.name != "txt_retroalimentacion")
+            {
+
+                if (dialogosList[contador].esImportante)
+                {
+                    btn.gameObject.SetActive(true);
+                }
+                else
+                {
+                    funcionalidadBtnSiguiente();
+                }
+
+
+            }
+            else if (btn != null)
+            {
+                btn.gameObject.SetActive(true);
+            }
         }
+      
        
     }
 
     public void funcionalidadBtnSiguiente()
     {
-        btn_Siguiente.gameObject.SetActive(false);
+        btnSigPaciente.gameObject.SetActive(false);
        
-        Debug.Log("Voy reutilizar");     
-        if (dialogosList[contador].tienePregunta)
+        Debug.Log("Voy reutilizar");
+        if (contador<dialogosList.Count)
         {
-            dialagoPaciente.SetActive(false);
-            dialagoPsicologo.SetActive(false);
-            txtPersonaje1.gameObject.SetActive(false);
-            txtPersonaje2.gameObject.SetActive(false);
-            pregunta = dialogosList[contador].pregunta;
-            cargarPreguntas(pregunta);
-        }
-        else
-        {
-            contador++;
-            if (contador < dialogosList.Count)
+            if (dialogosList[contador].tienePregunta)
             {
-                buscarPersonaje(dialogosList[contador].personaje);
-                txtPersonaje.text = dialogosList[contador].personaje;
-                StartCoroutine(escribirTexto(dialogosList[contador].contenido, txtMensaje, btn_Siguiente));
+                dialagoPaciente.SetActive(false);
+                dialagoPsicologo.SetActive(false);
+
+                pregunta = dialogosList[contador].pregunta;
+                cargarPreguntas(pregunta);
             }
             else
             {
-                if (fase == "Desarrollo")
+                contador++;
+                if (contador < dialogosList.Count)
                 {
-                    Debug.Log("entre aqui");
-                    txtPersonaje1.gameObject.SetActive(false);
-                    txtPersonaje2.gameObject.SetActive(false);
-                    dialagoPsicologo.SetActive(false);
-                    dialagoPaciente.SetActive(false);
-                    uiDialogo.SetActive(false);
-                    inventarioBeck.notaInventarioBecker();
+                    buscarPersonaje(dialogosList[contador].personaje);
+                    txtPersonaje.text = dialogosList[contador].personaje;
+                    llamarUiDialogos();
+
+                }
+                else
+                {
+                    if (fase == "Desarrollo")
+                    {
+                        Debug.Log("entre aqui");
+
+                        dialagoPsicologo.SetActive(false);
+                        dialagoPaciente.SetActive(false);
+                        uiDialogo.SetActive(false);
+                        inventarioBeck.notaInventarioBecker();
+                    }
                 }
             }
         }
+      
        
        
     }
@@ -226,8 +249,7 @@ public class DialogosManager : MonoBehaviour
     public void darFuncionBtn( string retroalimentacion, bool esCorrecta)
     {
 
-        txtPersonaje1.gameObject.SetActive(false);
-        txtPersonaje2.gameObject.SetActive(false);
+     
         ui_retroalimentacion.SetActive(true);
         txtRetroalimentacion.text = retroalimentacion;
         uiPreguntas.SetActive(false);
@@ -241,17 +263,16 @@ public class DialogosManager : MonoBehaviour
     {
         uiDialogo.SetActive(true);
         buscarPersonaje(dialogosList[contador].personaje);
-        txtPersonaje1.text= dialogosList[contador].personaje;
-        txtPersonaje2.text = dialogosList[contador+1].personaje;
-        txtPersonaje1.gameObject.SetActive(true);
-        txtPersonaje2.gameObject.SetActive(true);
+    
         txtPersonaje.text = dialogosList[contador].personaje;
-        StartCoroutine(escribirTexto(dialogosList[contador].contenido, txtMensaje, btn_Siguiente));
+        llamarUiDialogos();
 
-        btn_Siguiente.GetComponent<Button>().onClick.RemoveAllListeners();
-        btn_Siguiente.GetComponent<Button>().onClick.AddListener(() => {
+       
+        btnSigPaciente.GetComponent<Button>().onClick.RemoveAllListeners();
+        btnSigPaciente.GetComponent<Button>().onClick.AddListener(() => {
             funcionalidadBtnSiguiente();
         });
+       
     }
 
     public void darFuncionAceptar(bool correcto)
@@ -268,19 +289,18 @@ public class DialogosManager : MonoBehaviour
                 if (contador < dialogosList.Count)
                 {
                     uiDialogo.SetActive(true);
-                    txtPersonaje1.gameObject.SetActive(true);
-                    txtPersonaje2.gameObject.SetActive(true);
+                  
                     txtPersonaje.text = dialogosList[contador].personaje;
                     buscarPersonaje(dialogosList[contador].personaje);
-                    StartCoroutine(escribirTexto(dialogosList[contador].contenido, txtMensaje, btn_Siguiente));
+                    llamarUiDialogos();
+                    // StartCoroutine(escribirTexto(dialogosList[contador].contenido, txtMensaje, btn_Siguiente));
                     container_preguntas.gameObject.SetActive(false);
                 }
                 else
                 {
                     Debug.Log("Se termino la fase inicial");
                     fichaDiagnostico.notaFichaDiagnostico();
-                    txtPersonaje1.gameObject.SetActive(false);
-                    txtPersonaje2.gameObject.SetActive(false);
+                  
                 }
                
                 
@@ -337,4 +357,15 @@ public class DialogosManager : MonoBehaviour
         }
     }
     
+    public void llamarUiDialogos()
+    {
+        if (dialogosList[contador].personaje.Contains("Psicólogo"))
+        {
+            StartCoroutine(escribirTexto(dialogosList[contador].contenido, txtDialogoPsiscologo, btnSigPaciente.gameObject));
+        }
+        else
+        {
+            StartCoroutine(escribirTexto(dialogosList[contador].contenido, txtDialogoPaciente, btnSigPaciente.gameObject));
+        }
+    }
 }
