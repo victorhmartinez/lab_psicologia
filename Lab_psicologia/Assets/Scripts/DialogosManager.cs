@@ -51,6 +51,8 @@ public class DialogosManager : MonoBehaviour
     private TextMeshProUGUI txtDialogoPsiscologo, txtDialogoPaciente;
     [SerializeField]
     private Button btnSigPaciente;
+    [SerializeField]
+    private Animator animDoctor,animPaciente;
   
     Preguntas pregunta;
     void Start()
@@ -216,13 +218,9 @@ public class DialogosManager : MonoBehaviour
 
                     string retroalimentacion = pregunta.respuestas[i].retroalimentacion;
                     bool esCorrecta = pregunta.respuestas[i].esCorrecta;
-                    //Dialogo dialogo = null;
-                    if (esCorrecta)
-                    {
-                        //dialogo = pregunta.respuestas[i].conveResultante;
-                    }
+                    string respuesta = pregunta.respuestas[i].respuesta;
 
-                    listButtons[i].onClick.AddListener(() => darFuncionBtn(retroalimentacion, esCorrecta));
+                    listButtons[i].onClick.AddListener(() => darFuncionBtn(retroalimentacion, esCorrecta,respuesta));
                     listButtons[i].gameObject.SetActive(true);
 
                 }
@@ -246,7 +244,7 @@ public class DialogosManager : MonoBehaviour
         }
     }
    // Metodo pata asignar la funcionalidad a los botones de las respuestas
-    public void darFuncionBtn( string retroalimentacion, bool esCorrecta)
+    public void darFuncionBtn( string retroalimentacion, bool esCorrecta, string respuesta)
     {
 
      
@@ -255,13 +253,17 @@ public class DialogosManager : MonoBehaviour
         uiPreguntas.SetActive(false);
         StopAllCoroutines();
         StartCoroutine(escribirTexto(retroalimentacion, txtRetroalimentacion,btn_aceptar.gameObject));
-
+        if(respuesta== "Frente al terapeuta")
+        {
+            animDoctor.SetBool("sentarse", true);
+            animPaciente.SetBool("sentarse", true);
+        }
         darFuncionAceptar(esCorrecta);
 
     }
     public void  darFuncionBtnAceptar()
     {
-        uiDialogo.SetActive(true);
+        //uiDialogo.SetActive(true);
         buscarPersonaje(dialogosList[contador].personaje);
     
         txtPersonaje.text = dialogosList[contador].personaje;
@@ -288,7 +290,7 @@ public class DialogosManager : MonoBehaviour
                 contador++;
                 if (contador < dialogosList.Count)
                 {
-                    uiDialogo.SetActive(true);
+                    //uiDialogo.SetActive(true);
                   
                     txtPersonaje.text = dialogosList[contador].personaje;
                     buscarPersonaje(dialogosList[contador].personaje);

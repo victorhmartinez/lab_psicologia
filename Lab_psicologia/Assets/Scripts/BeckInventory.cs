@@ -32,7 +32,11 @@ public class BeckInventory : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI txtError;
     [SerializeField]
-    private GameObject panelAlerta;
+    private GameObject panelAlerta, btnAceptarAlert, panelRetroalimentacionFase;
+    [SerializeField]
+    private Button btnContinuar;
+    [SerializeField]
+    private TextMeshProUGUI lblTitulo;
     void Start()
     {
       
@@ -50,17 +54,32 @@ public class BeckInventory : MonoBehaviour
              if (resultado != listResultados[nroCaso - 1])
                 {
                     Debug.Log("Los criterios no coinciden, realiza bien el conteo");
-            panelAlerta.SetActive(true);
-            txtError.text = "Los criterios no coinciden, realiza bien el conteo";
-                }
-                else
+                    panelAlerta.SetActive(true);
+                    txtError.text = "Los criterios no coinciden, realiza bien el conteo";
+             }
+             else
                 {
                     Debug.Log("Los puntaje coiniciden");
-                     dialogosManager.iniciarFase("Final");
-                     panelBeck.SetActive(false);
+            panelAlerta.SetActive(true);
+            txtError.text = "Felicitaciones, has realizado correctamente el conteo de los puntajes de los puntos del inventario de beck";
+
+            btnAceptarAlert.GetComponent<Button>().onClick.RemoveAllListeners();
+            btnAceptarAlert.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                panelBeck.SetActive(false);
+                panelRetroalimentacionFase.SetActive(true);
+                lblTitulo.text = "Felicidades, has terminado la fase de desarrollo.";
+                btnContinuar.onClick.RemoveAllListeners();
+                btnContinuar.onClick.AddListener(() =>
+                {
+                    panelRetroalimentacionFase.SetActive(false);
+                    dialogosManager.iniciarFase("Final");
                     dialogosManager.darFuncionBtnAceptar();
 
-        }
+                });
+            });
+            
+                }
               
         
     }

@@ -12,13 +12,15 @@ public class FichaDiagnostico : MonoBehaviour
     public TMP_InputField resultadoText;
     public Button submitButton;
     [SerializeField]
-    private TextMeshProUGUI txtObservacion;
+    private TextMeshProUGUI txtObservacion, lblTitulo;
     [SerializeField]
     private GameObject objectGuia;
     [SerializeField]
     private TextMeshProUGUI txtNota;
     [SerializeField]
     private GameObject btnAceptar;
+    [SerializeField]
+    private GameObject btnAceptarAlert;
     [SerializeField]
     private GameObject panelFicha;
     [SerializeField]
@@ -40,6 +42,10 @@ public class FichaDiagnostico : MonoBehaviour
     private bool[] listaRespuestaObtenidas;
     [SerializeField]
     private bool[] listRespuestaC1, listRespuestaC2;
+    [SerializeField]
+    private GameObject panelRetroalimentacionFase;
+    [SerializeField]
+    private Button btnContinuar;
 
     void Start()
     {
@@ -83,9 +89,25 @@ public class FichaDiagnostico : MonoBehaviour
             {
                 if (verificarRespuestasCaso())
                 {
-                    panelFicha.SetActive(false);
-                    dialogosManager.iniciarFase("Desarrollo");
-                    dialogosManager.darFuncionBtnAceptar();
+                    
+                   
+                    panelAlerta.SetActive(true);
+                    txtObservacion.text = "Felicitaciones, has realizado correctamente el conteo de los criterios del DMS-5";
+                    btnAceptarAlert.GetComponent<Button>().onClick.RemoveAllListeners();
+                    btnAceptarAlert.GetComponent<Button>().onClick.AddListener(() =>
+                    {
+                        panelFicha.SetActive(false);
+                        panelRetroalimentacionFase.SetActive(true);
+                        lblTitulo.text = "Felicidades, has terminado la fase inicial.";
+                        btnContinuar.onClick.RemoveAllListeners();
+                        btnContinuar.onClick.AddListener(() =>
+                        {
+                            panelRetroalimentacionFase.SetActive(false);
+                            dialogosManager.iniciarFase("Desarrollo");
+                            dialogosManager.darFuncionBtnAceptar();
+                            
+                        });
+                    });
                 }
                
                
