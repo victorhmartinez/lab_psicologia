@@ -103,10 +103,21 @@ public class ApiManager : MonoBehaviour
             else
             {
                 string preguntaData = request.downloadHandler.text;
+                
                 Debug.Log("Pregunta obtenida correctamente.");
 
                 // Deserializamos el JSON en un objeto Preguntas
                 Preguntas pregunta = JsonUtility.FromJson<Preguntas>(preguntaData);
+                // Carga el audio desde Resources si se ha especificado un audioPath
+                if (!string.IsNullOrEmpty(pregunta.srcAudio))
+                {
+                    string audioResourcePath = pregunta.srcAudio.Replace(".wav", "").Replace(".mp3", ""); // Remove extension if present
+                    pregunta.audio = Resources.Load<AudioClip>(audioResourcePath);
+                    if (pregunta.audio == null)
+                    {
+                        Debug.LogError("No se pudo cargar el audio en Resources: " + audioResourcePath);
+                    }
+                }
                 dialogo.pregunta = pregunta;
             }
         }

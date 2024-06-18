@@ -53,8 +53,12 @@ public class DialogosManager : MonoBehaviour
     private Button btnSigPaciente;
     [SerializeField]
     private Animator animDoctor,animPaciente;
+    [SerializeField]
+    private AudioSource audioSource;
   
     Preguntas pregunta;
+    [SerializeField]
+    private ManejadorCamara manejadorCamara;
     void Start()
     {
         if (apiManager != null)
@@ -124,7 +128,7 @@ public class DialogosManager : MonoBehaviour
         for (int i = 0; i < texto.ToCharArray().Length; i++)
         {
             txt.maxVisibleCharacters++;
-            yield return new WaitForSeconds(15f / 500);
+            yield return new WaitForSeconds(25f / 500);
 
         }
         if (contador<dialogosList.Count) {
@@ -197,9 +201,12 @@ public class DialogosManager : MonoBehaviour
 
     public  void cargarPreguntas(Preguntas pregunta)
     {
+        manejadorCamara.activarCamaraGeneral();
         uiDialogo.SetActive(false);
         btn_aceptar.gameObject.SetActive(false);
         ui_retroalimentacion.SetActive(true);
+        audioSource.clip = pregunta.audio;
+        audioSource.Play();
         StopAllCoroutines();
         StartCoroutine(escribirPregunta(pregunta.pregunta, txtRetroalimentacion, pregunta));
     }
@@ -336,7 +343,7 @@ public class DialogosManager : MonoBehaviour
         for (int i = 0; i < texto.ToCharArray().Length; i++)
         {
             txt.maxVisibleCharacters++;
-            yield return new WaitForSeconds(15f / 500);
+            yield return new WaitForSeconds(25f / 500);
 
         }
         uiPreguntas.SetActive(true);
@@ -362,11 +369,14 @@ public class DialogosManager : MonoBehaviour
     public void llamarUiDialogos()
     {
         if (dialogosList[contador].personaje.Contains("Psicólogo"))
+
         {
+            manejadorCamara.activarCamaraPsicologo();
             StartCoroutine(escribirTexto(dialogosList[contador].contenido, txtDialogoPsiscologo, btnSigPaciente.gameObject));
         }
         else
         {
+            manejadorCamara.activarCamaraPaciente();
             StartCoroutine(escribirTexto(dialogosList[contador].contenido, txtDialogoPaciente, btnSigPaciente.gameObject));
         }
     }

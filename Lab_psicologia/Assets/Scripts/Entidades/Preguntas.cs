@@ -9,14 +9,18 @@ public class Preguntas
     public bool tieneDialogo;
     public string personajePregunta;
     public string pregunta;
+    public AudioClip audio;
+    public string srcAudio; // Ruta del archivo de audio relativa a Resources
     public Respuestas[] respuestas;
-    public Preguntas(int calificacion, bool tieneDialogo, string personajePregunta, string pregunta, Respuestas[] respuestas)
+    public Preguntas(int calificacion, bool tieneDialogo, string personajePregunta, string pregunta, Respuestas[] respuestas,string srcAudio,AudioClip audio)
     {
         this.calificacion = calificacion;
         this.tieneDialogo = tieneDialogo;
         this.personajePregunta = personajePregunta;
         this.pregunta = pregunta;
         this.respuestas = respuestas;
+        this.srcAudio = srcAudio;
+        this.audio = audio;
     }
 }
 
