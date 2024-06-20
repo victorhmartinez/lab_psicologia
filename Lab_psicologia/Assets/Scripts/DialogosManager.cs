@@ -131,10 +131,11 @@ public class DialogosManager : MonoBehaviour
             yield return new WaitForSeconds(25f / 500);
 
         }
+       
         if (contador<dialogosList.Count) {
             if (txt.gameObject.name != "txt_retroalimentacion")
             {
-
+                yield return new WaitForSeconds(3f);
                 if (dialogosList[contador].esImportante)
                 {
                     btn.gameObject.SetActive(true);
