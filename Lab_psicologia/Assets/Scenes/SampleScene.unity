@@ -17572,7 +17572,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f473250cd5c11aa4a9063aa86a34ae7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puntuacion: 0
+  puntuacionActual: 0
+  valorIncorrecto: 0
+  valorPregunta: 0
+  valorCalificacionTotal: 0
 --- !u!4 &1543157086
 Transform:
   m_ObjectHideFlags: 0
@@ -18364,6 +18367,10 @@ PrefabInstance:
       propertyPath: btnContinuar
       value: 
       objectReference: {fileID: 1753285858}
+    - target: {fileID: 8017885462062985965, guid: 6ae4b73b843a2904b94c56edfe276ba2, type: 3}
+      propertyPath: calificacion
+      value: 
+      objectReference: {fileID: 1543157085}
     - target: {fileID: 8017885462062985965, guid: 6ae4b73b843a2904b94c56edfe276ba2, type: 3}
       propertyPath: btnAceptarAlert
       value: 
