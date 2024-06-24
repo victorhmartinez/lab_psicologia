@@ -7,8 +7,8 @@ using System;
 
 public class ApiManager : MonoBehaviour
 {
-    [SerializeField]
-    private string apiUrl = "http://localhost:3000/api";
+
+    private string apiUrl = "https://api-lab-psicologia.onrender.com/api";
     [SerializeField]
     private TextMeshProUGUI txtDatos;
     public List<Dialogos> dialogosList = new List<Dialogos>();
@@ -55,6 +55,7 @@ public class ApiManager : MonoBehaviour
     IEnumerator GetDialogosFromApi(int caso, string fase, Action<List<Dialogos>> callback)
     {
         string url = apiUrl + "/get-dialogos?caso=" + caso + "&fase=" + fase;
+        Debug.Log(url);
         using (UnityWebRequest request = UnityWebRequest.Get(url))
         {
             yield return request.SendWebRequest();
@@ -118,6 +119,21 @@ public class ApiManager : MonoBehaviour
                         Debug.LogError("No se pudo cargar el audio en Resources: " + audioResourcePath);
                     }
                 }
+                // Cargar audios para las respuestas
+                foreach (var respuesta in pregunta.respuestas)
+                {
+                    if (!string.IsNullOrEmpty(respuesta.srcAudio))
+                    {
+                        string respuestaAudioPath = respuesta.srcAudio.Replace(".wav", "").Replace(".mp3", "");
+                        respuesta.audio = Resources.Load<AudioClip>(respuestaAudioPath);
+                        if (respuesta.audio == null)
+                        {
+                            Debug.LogError("No se pudo cargar el audio de la respuesta en Resources: " + respuestaAudioPath);
+                        }
+                    }
+                }
+
+
                 dialogo.pregunta = pregunta;
             }
         }

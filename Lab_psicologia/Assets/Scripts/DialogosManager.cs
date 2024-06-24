@@ -59,6 +59,7 @@ public class DialogosManager : MonoBehaviour
     Preguntas pregunta;
     [SerializeField]
     private ManejadorCamara manejadorCamara;
+    private bool parado;
     void Start()
     {
         if (apiManager != null)
@@ -223,12 +224,12 @@ public class DialogosManager : MonoBehaviour
                 {
                     listButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = pregunta.respuestas[i].respuesta;
                     listButtons[i].onClick.RemoveAllListeners();
-
+                    Respuestas respuestaObj = pregunta.respuestas[i];
                     string retroalimentacion = pregunta.respuestas[i].retroalimentacion;
                     bool esCorrecta = pregunta.respuestas[i].esCorrecta;
                     string respuesta = pregunta.respuestas[i].respuesta;
 
-                    listButtons[i].onClick.AddListener(() => darFuncionBtn(retroalimentacion, esCorrecta,respuesta));
+                    listButtons[i].onClick.AddListener(() => darFuncionBtn(retroalimentacion, esCorrecta,respuesta, respuestaObj));
                     listButtons[i].gameObject.SetActive(true);
 
                 }
@@ -252,10 +253,11 @@ public class DialogosManager : MonoBehaviour
         }
     }
    // Metodo pata asignar la funcionalidad a los botones de las respuestas
-    public void darFuncionBtn( string retroalimentacion, bool esCorrecta, string respuesta)
+    public void darFuncionBtn( string retroalimentacion, bool esCorrecta, string respuesta,Respuestas respuestasobj)
     {
 
-     
+        audioSource.clip = respuestasobj.audio;
+        audioSource.Play();
         ui_retroalimentacion.SetActive(true);
         txtRetroalimentacion.text = retroalimentacion;
         uiPreguntas.SetActive(false);
@@ -372,11 +374,14 @@ public class DialogosManager : MonoBehaviour
         if (dialogosList[contador].personaje.Contains("Psicólogo"))
 
         {
+            animPaciente.SetBool("hablar", true);
             manejadorCamara.activarCamaraPsicologo();
             StartCoroutine(escribirTexto(dialogosList[contador].contenido, txtDialogoPsiscologo, btnSigPaciente.gameObject));
         }
         else
         {
+            animDoctor.SetBool("hablar", true);
+
             manejadorCamara.activarCamaraPaciente();
             StartCoroutine(escribirTexto(dialogosList[contador].contenido, txtDialogoPaciente, btnSigPaciente.gameObject));
         }
