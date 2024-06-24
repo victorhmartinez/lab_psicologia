@@ -37,6 +37,9 @@ public class BeckInventory : MonoBehaviour
     private Button btnContinuar;
     [SerializeField]
     private TextMeshProUGUI lblTitulo;
+
+    [SerializeField]
+    private Calificacion calificacion;
     void Start()
     {
       
@@ -56,10 +59,13 @@ public class BeckInventory : MonoBehaviour
                     Debug.Log("Los criterios no coinciden, realiza bien el conteo");
                     panelAlerta.SetActive(true);
                     txtError.text = "Los criterios no coinciden, realiza bien el conteo";
+                    calificacion.decrementar(calificacion.valorIncorrecto);
              }
              else
                 {
-                    Debug.Log("Los puntaje coiniciden");
+            calificacion.incrementar(calificacion.valorPregunta);
+            calificacion.incrementarFinal(calificacion.valorPregunta);
+            Debug.Log("Los puntaje coiniciden");
             panelAlerta.SetActive(true);
             txtError.text = "Felicitaciones, has realizado correctamente el conteo de los puntajes de los puntos del inventario de beck";
 

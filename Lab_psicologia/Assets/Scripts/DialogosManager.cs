@@ -59,6 +59,10 @@ public class DialogosManager : MonoBehaviour
     Preguntas pregunta;
     [SerializeField]
     private ManejadorCamara manejadorCamara;
+
+    private double caliPorIncorrecto=0;
+    [SerializeField]
+    private Calificacion calificacion;
     void Start()
     {
         if (apiManager != null)
@@ -227,8 +231,15 @@ public class DialogosManager : MonoBehaviour
                     string retroalimentacion = pregunta.respuestas[i].retroalimentacion;
                     bool esCorrecta = pregunta.respuestas[i].esCorrecta;
                     string respuesta = pregunta.respuestas[i].respuesta;
+                    int cali = pregunta.calificacion;
 
-                    listButtons[i].onClick.AddListener(() => darFuncionBtn(retroalimentacion, esCorrecta,respuesta));
+                    double result = cali / pregunta.respuestas.Length;
+                    caliPorIncorrecto = result;
+                    calificacion.valorIncorrecto = result;
+                    calificacion.valorPregunta = cali;
+                    calificacion.incrementarFinal(cali);
+
+                    listButtons[i].onClick.AddListener(() => darFuncionBtn(retroalimentacion, esCorrecta,respuesta,cali));
                     listButtons[i].gameObject.SetActive(true);
 
                 }
@@ -252,7 +263,7 @@ public class DialogosManager : MonoBehaviour
         }
     }
    // Metodo pata asignar la funcionalidad a los botones de las respuestas
-    public void darFuncionBtn( string retroalimentacion, bool esCorrecta, string respuesta)
+    public void darFuncionBtn( string retroalimentacion, bool esCorrecta, string respuesta, int valor)
     {
 
      
@@ -266,7 +277,7 @@ public class DialogosManager : MonoBehaviour
             animDoctor.SetBool("sentarse", true);
             animPaciente.SetBool("sentarse", true);
         }
-        darFuncionAceptar(esCorrecta);
+        darFuncionAceptar(esCorrecta,valor);
 
     }
     public void  darFuncionBtnAceptar()
@@ -285,11 +296,13 @@ public class DialogosManager : MonoBehaviour
        
     }
 
-    public void darFuncionAceptar(bool correcto)
+    public void darFuncionAceptar(bool correcto, int valorSumar)
     {
         btn_aceptar.gameObject.SetActive(false);
         if (correcto)
         {
+            //Debug.LogWarning("Hizo click en algo correcto");
+            calificacion.incrementar(valorSumar);
             btn_aceptar.gameObject.SetActive(false);
             btn_aceptar.onClick.RemoveAllListeners();
             btn_aceptar.onClick.AddListener(() => {
@@ -323,6 +336,8 @@ public class DialogosManager : MonoBehaviour
         }
         else
         {
+            //Debug.LogError("Hizo click en algo incorrecto");
+            calificacion.decrementar(caliPorIncorrecto);
             btn_aceptar.onClick.RemoveAllListeners();
             btn_aceptar.onClick.AddListener(() => {
               //  uiPreguntas.SetActive(true);
@@ -382,3 +397,4 @@ public class DialogosManager : MonoBehaviour
         }
     }
 }
+
