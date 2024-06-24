@@ -31,11 +31,15 @@ public class Respuestas
     public string retroalimentacion;
     public bool esCorrecta;
     public string respuesta;
- 
-    public Respuestas(string retroalimentacion,bool esCorrecta,string respuesta)
+    public AudioClip audio;
+    public string srcAudio; // Ruta del archivo de audio relativa a Resources
+
+    public Respuestas(string retroalimentacion,bool esCorrecta,string respuesta, AudioClip audio, string srcAudio)
     {
         this.retroalimentacion = retroalimentacion;
          this.esCorrecta = esCorrecta;
         this.respuesta = respuesta;
+        this.audio = audio;
+        this.srcAudio = srcAudio;
     }
 }

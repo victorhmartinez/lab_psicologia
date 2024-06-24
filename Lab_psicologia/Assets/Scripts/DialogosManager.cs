@@ -63,6 +63,7 @@ public class DialogosManager : MonoBehaviour
     private double caliPorIncorrecto=0;
     [SerializeField]
     private Calificacion calificacion;
+    private bool parado;
     void Start()
     {
         if (apiManager != null)
@@ -85,24 +86,24 @@ public class DialogosManager : MonoBehaviour
         }
     }
 
-    // Método llamado cuando se cargan los diálogos desde ApiManager
+    // Mï¿½todo llamado cuando se cargan los diï¿½logos desde ApiManager
     private void OnDialogosInicialCargados(List<Dialogos> dialogos)
     {
-        // Guardar los diálogos cargados
+        // Guardar los diï¿½logos cargados
         dialogosList = dialogos;
         Debug.Log("Hola estas en el evento con las listas cargadas");
      
     }
     private void OnDialogosDesarrolloCargados(List<Dialogos> dialogos)
     {
-        // Guardar los diálogos cargados
+        // Guardar los diï¿½logos cargados
         dialogosListDesarrollo = dialogos;
         Debug.Log("Hola estas en el evento con las listas de desarrollo");
 
     }
     private void OnDialogosFinCargados(List<Dialogos> dialogos)
     {
-        // Guardar los diálogos cargados
+        // Guardar los diï¿½logos cargados
         dialogosListFin = dialogos;
         Debug.Log("Hola estas en el evento con las listas de fnal");
 
@@ -227,7 +228,7 @@ public class DialogosManager : MonoBehaviour
                 {
                     listButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = pregunta.respuestas[i].respuesta;
                     listButtons[i].onClick.RemoveAllListeners();
-
+                    Respuestas respuestaObj = pregunta.respuestas[i];
                     string retroalimentacion = pregunta.respuestas[i].retroalimentacion;
                     bool esCorrecta = pregunta.respuestas[i].esCorrecta;
                     string respuesta = pregunta.respuestas[i].respuesta;
@@ -239,7 +240,7 @@ public class DialogosManager : MonoBehaviour
                     calificacion.valorPregunta = cali;
                     calificacion.incrementarFinal(cali);
 
-                    listButtons[i].onClick.AddListener(() => darFuncionBtn(retroalimentacion, esCorrecta,respuesta,cali));
+                    listButtons[i].onClick.AddListener(() => darFuncionBtn(retroalimentacion, esCorrecta,respuesta,respuestaObj,cali));
                     listButtons[i].gameObject.SetActive(true);
 
                 }
@@ -263,10 +264,11 @@ public class DialogosManager : MonoBehaviour
         }
     }
    // Metodo pata asignar la funcionalidad a los botones de las respuestas
-    public void darFuncionBtn( string retroalimentacion, bool esCorrecta, string respuesta, int valor)
+    public void darFuncionBtn( string retroalimentacion, bool esCorrecta, string respuesta,Respuestas respuestasobj, int valor)
     {
 
-     
+        audioSource.clip = respuestasobj.audio;
+        audioSource.Play();
         ui_retroalimentacion.SetActive(true);
         txtRetroalimentacion.text = retroalimentacion;
         uiPreguntas.SetActive(false);
@@ -370,7 +372,7 @@ public class DialogosManager : MonoBehaviour
     public void buscarPersonaje(string personajeHabalndo)
     {
      
-        if (personajeHabalndo.Contains("Psicólogo"))
+        if (personajeHabalndo.Contains("Psicï¿½logo"))
         {
             dialagoPsicologo.SetActive(true);
             dialagoPaciente.SetActive(false);
@@ -384,14 +386,17 @@ public class DialogosManager : MonoBehaviour
     
     public void llamarUiDialogos()
     {
-        if (dialogosList[contador].personaje.Contains("Psicólogo"))
+        if (dialogosList[contador].personaje.Contains("Psicï¿½logo"))
 
         {
+            animPaciente.SetBool("hablar", true);
             manejadorCamara.activarCamaraPsicologo();
             StartCoroutine(escribirTexto(dialogosList[contador].contenido, txtDialogoPsiscologo, btnSigPaciente.gameObject));
         }
         else
         {
+            animDoctor.SetBool("hablar", true);
+
             manejadorCamara.activarCamaraPaciente();
             StartCoroutine(escribirTexto(dialogosList[contador].contenido, txtDialogoPaciente, btnSigPaciente.gameObject));
         }
