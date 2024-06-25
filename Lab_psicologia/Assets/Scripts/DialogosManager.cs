@@ -372,7 +372,7 @@ public class DialogosManager : MonoBehaviour
     public void buscarPersonaje(string personajeHabalndo)
     {
      
-        if (personajeHabalndo.Contains("Psic�logo"))
+        if (personajeHabalndo.Contains("Psicólogo"))
         {
             dialagoPsicologo.SetActive(true);
             dialagoPaciente.SetActive(false);
@@ -386,7 +386,7 @@ public class DialogosManager : MonoBehaviour
     
     public void llamarUiDialogos()
     {
-        if (dialogosList[contador].personaje.Contains("Psic�logo"))
+        if (dialogosList[contador].personaje.Contains("Psicólogo"))
 
         {
             animPaciente.SetBool("hablar", true);
