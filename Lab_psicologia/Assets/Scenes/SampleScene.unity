@@ -15574,6 +15574,14 @@ MonoBehaviour:
     peque\xF1as,  conllev\xE1ndola a tener problemas en su trabajo y su pareja actual
     .\r\n"
   introCaso1:
+  - "\"Bienvenidos a la Simulaci\xF3n de C\xE1mara de Gesell, un entorno virtual
+    interactivo dise\xF1ado para sumergirte en el fascinante mundo de la observaci\xF3n
+    psicol\xF3gica.<br>\nTendr\xE1s acceso a una variedad de escenarios y situaciones
+    cuidadosamente planificadas, donde podr\xE1s observar diversos comportamientos
+    de diferentes personas resolviendo tareas o enfrentando desaf\xEDos. Tu objetivo
+    ser\xE1 identificar patrones de comportamiento, detectar posibles dificultades
+    en el desarrollo y registrar tus observaciones para un posterior an\xE1lisis.<br>\n<b>\xA1Comencemos
+    esta emocionante aventura hacia el conocimiento!\"</b>"
   - "En este entorno virtual interactivo, tendr\xE1s la oportunidad de sumergirte
     en el rol del psic\xF3logo, tu objetivo principal ser\xE1 interactuar con pacientes
     virtuales que presentar\xE1n una variedad de situaciones y trastornos psicol\xF3gicos.
@@ -15583,14 +15591,6 @@ MonoBehaviour:
     entidad bancaria, asiste a consulta debido a que se encuentra experimentando
     una gran presi\xF3n laboral la cual ha tenido un impacto negativo en su vida
     \xFAltimamente."
-  - "\"Bienvenidos a la Simulaci\xF3n de C\xE1mara de Gesell, un entorno virtual
-    interactivo dise\xF1ado para sumergirte en el fascinante mundo de la observaci\xF3n
-    psicol\xF3gica.<br>\nTendr\xE1s acceso a una variedad de escenarios y situaciones
-    cuidadosamente planificadas, donde podr\xE1s observar diversos comportamientos
-    de diferentes personas resolviendo tareas o enfrentando desaf\xEDos. Tu objetivo
-    ser\xE1 identificar patrones de comportamiento, detectar posibles dificultades
-    en el desarrollo y registrar tus observaciones para un posterior an\xE1lisis.<br>\n<b>\xA1Comencemos
-    esta emocionante aventura hacia el conocimiento!\"</b>"
   txtIntroduccion: {fileID: 1894535748}
   panelIntroduccion: {fileID: 707625743}
   api: {fileID: 1424561234}
