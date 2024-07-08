@@ -236,7 +236,9 @@ public class FichaDiagnostico : MonoBehaviour
         {
             panelIndicacionTiempo.SetActive(false);
             dialogosManager.iniciarFase("Desarrollo");
+            dialogosManager.ubicarPersonajeCentro();
             dialogosManager.darFuncionBtnAceptar();
+
         });
        
     }

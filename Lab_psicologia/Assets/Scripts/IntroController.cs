@@ -46,7 +46,14 @@ public class IntroController : MonoBehaviour
     {
         panelIntroduccion.SetActive(true);
         Debug.Log("Número aleatorio recibido en IntroController: " + numeroAleatorio);
-        StartCoroutine(escribirIntro(listIntros[numeroAleatorio - 1]));
+        StartCoroutine(escribirIntro(introCaso1[0]));
+        btnAceptar.GetComponent<Button>().onClick.RemoveAllListeners();
+        btnAceptar.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            cambiarDialgo();
+
+
+        });
     }
 
     IEnumerator escribirIntro(string texto)
@@ -60,13 +67,18 @@ public class IntroController : MonoBehaviour
             yield return new WaitForSeconds(15f / 500);
         }
         btnAceptar.SetActive(true);
+      
+    }
+    public void cambiarDialgo()
+    {
+        btnAceptar.gameObject.SetActive(false);
+        StartCoroutine(escribirIntro(introCaso1[1]));
         btnAceptar.GetComponent<Button>().onClick.RemoveAllListeners();
         btnAceptar.GetComponent<Button>().onClick.AddListener(() =>
         {
             dialogosManager.darFuncionBtnAceptar();
+            panelIntroduccion.SetActive(false);
 
-           
         });
     }
-
 }

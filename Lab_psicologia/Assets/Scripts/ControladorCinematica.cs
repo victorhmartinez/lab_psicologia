@@ -11,11 +11,13 @@ public class ControladorCinematica : MonoBehaviour
     [SerializeField] private GameObject player;
     [Header("Puertas para abrir cerrar")]
     [SerializeField] private GameObject[] listPuertas;
-
+    [Header("Panel de indicaciones")]
+    [SerializeField] private GameObject panelIndicacion;
     private bool isSkipping = false;
 
     void Start()
     {
+        panelIndicacion.SetActive(true);
         player.SetActive(false);
         abrirPuertas(false);
         recorridoController.SetBool(nombreBoolRecorrido, true); // Inicia la animación
@@ -25,7 +27,7 @@ public class ControladorCinematica : MonoBehaviour
     {
         if (recorridoController.GetBool(nombreBoolRecorrido))
         {
-            Debug.Log("Presione espacio para saltar la cinemática");
+            
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -58,10 +60,12 @@ public class ControladorCinematica : MonoBehaviour
         abrirPuertas(true);
         camaraRecorrido.enabled = false;
         Debug.Log("Cinemática finalizada");
+        panelIndicacion.SetActive(false);
+
     }
 
 
-    
+
 
     // Método para abrir o cerrar puertas
     void abrirPuertas(bool estado)
