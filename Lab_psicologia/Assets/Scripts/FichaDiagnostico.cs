@@ -47,6 +47,8 @@ public class FichaDiagnostico : MonoBehaviour
     [SerializeField]
     private Button btnContinuar;
 
+    [SerializeField]
+    private Calificacion calificacion;
     void Start()
     {
         submitButton.onClick.AddListener(SubmitFicha);
@@ -82,6 +84,7 @@ public class FichaDiagnostico : MonoBehaviour
         {
             panelAlerta.SetActive(true);
             txtObservacion.text="Recuerda revisar bien los criterios seleccionados con los ingresados.";
+            calificacion.decrementar(calificacion.valorIncorrecto);
         }
         else
         {
@@ -93,6 +96,7 @@ public class FichaDiagnostico : MonoBehaviour
                    
                     panelAlerta.SetActive(true);
                     txtObservacion.text = "Felicitaciones, has realizado correctamente el conteo de los criterios del DMS-5";
+                    calificacion.incrementar(calificacion.valorPregunta);
                     btnAceptarAlert.GetComponent<Button>().onClick.RemoveAllListeners();
                     btnAceptarAlert.GetComponent<Button>().onClick.AddListener(() =>
                     {
@@ -181,6 +185,7 @@ public class FichaDiagnostico : MonoBehaviour
                 panelAlerta.SetActive(true);
                 txtObservacion.text = "Los criterios que seleccionaste no están de acuerdo con el caso clínico.";
                 esCorrecta = false;
+                calificacion.decrementar(calificacion.valorIncorrecto);
                 break;
             }
         }
