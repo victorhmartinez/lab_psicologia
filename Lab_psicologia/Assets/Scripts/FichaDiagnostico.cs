@@ -46,12 +46,33 @@ public class FichaDiagnostico : MonoBehaviour
     private GameObject panelRetroalimentacionFase;
     [SerializeField]
     private Button btnContinuar;
+    [SerializeField]
+    private AudioClip audioFinFase;
+    [SerializeField]
+    private AudioSource audioSource;
+    [SerializeField]
+    private GameObject escenarioTrabPsicologo;
+    [Header("Propiedades de indicacacion de tiempo")]
+    [SerializeField]
+    private GameObject panelIndicacionTiempo;
+    [SerializeField]
+    private TextMeshProUGUI txtIndicaciones;
+    [SerializeField]
+    [TextArea(4, 2)]
+    private string [] indicacionesSesion;
+    [SerializeField]
+    private AudioClip audioIndicaciones;
+    [SerializeField]
+    private int contadorIndicaciones;
+    [SerializeField]
+    private Button btnContinuarFase;
 
     [SerializeField]
     private Calificacion calificacion;
     void Start()
     {
         submitButton.onClick.AddListener(SubmitFicha);
+    
     }
 
     public void SubmitFicha()
@@ -107,9 +128,17 @@ public class FichaDiagnostico : MonoBehaviour
                         btnContinuar.onClick.AddListener(() =>
                         {
                             panelRetroalimentacionFase.SetActive(false);
-                            dialogosManager.iniciarFase("Desarrollo");
-                            dialogosManager.darFuncionBtnAceptar();
-                            
+                            panelIndicacionTiempo.SetActive(true);
+                            StopAllCoroutines();
+                            StartCoroutine(escribirTexto(indicacionesSesion[0], txtIndicaciones, btnContinuarFase.gameObject));
+
+                            btnContinuarFase.onClick.RemoveAllListeners();
+                            btnContinuarFase.onClick.AddListener(() =>
+                            {
+                                funcionBtnContinuar();
+                            });
+
+
                         });
                     });
                 }
@@ -134,12 +163,15 @@ public class FichaDiagnostico : MonoBehaviour
         nroCaso = apiManager.nroCaso;
         objectGuia.SetActive(true);
         StartCoroutine(escribirTexto(notaTexto, txtNota, btnAceptar));
+        audioSource.clip = audioFinFase;
+        audioSource.Play();
+        escenarioTrabPsicologo.SetActive(true); 
         btnAceptar.GetComponent<Button>().onClick.RemoveAllListeners();
         btnAceptar.GetComponent<Button>().onClick.AddListener(()=>{
             objectGuia.SetActive(false);
             panelFicha.SetActive(true);
-         
-            
+            escenarioTrabPsicologo.SetActive(false);
+
         });
     }
 
@@ -151,7 +183,7 @@ public class FichaDiagnostico : MonoBehaviour
         for (int i = 0; i < texto.ToCharArray().Length; i++)
         {
             txt.maxVisibleCharacters++;
-            yield return new WaitForSeconds(15f / 500);
+            yield return new WaitForSeconds(25f / 500);
 
         }
         if (btn != null)
@@ -191,5 +223,24 @@ public class FichaDiagnostico : MonoBehaviour
         }
         return esCorrecta;
     }
+    public void funcionBtnContinuar()
+    {
+        btnContinuarFase.gameObject.SetActive(false);
+        txtIndicaciones.text = "";
+        StopAllCoroutines();
+        StartCoroutine(escribirTexto(indicacionesSesion[1], txtIndicaciones, btnContinuarFase.gameObject));
+        audioSource.clip = audioIndicaciones;
+        audioSource.Play();
+        btnContinuarFase.onClick.RemoveAllListeners();
+        btnContinuarFase.onClick.AddListener(() =>
+        {
+            panelIndicacionTiempo.SetActive(false);
+            dialogosManager.iniciarFase("Desarrollo");
+            dialogosManager.darFuncionBtnAceptar();
+        });
+       
     }
+}
+
+
 

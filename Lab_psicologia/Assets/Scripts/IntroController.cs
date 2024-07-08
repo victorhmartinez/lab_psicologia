@@ -11,13 +11,16 @@ public class IntroController : MonoBehaviour
     [TextArea(5,6)]
     private List<string> listIntros = new List<string>();
     [SerializeField]
+    [TextArea(3,4)]
+    private string[] introCaso1;
+    [SerializeField]
     private TextMeshProUGUI txtIntroduccion;
     [SerializeField]
     private GameObject panelIntroduccion;
     [SerializeField]
     private ApiManager api; // Referencia al ApiManager
     [SerializeField]
-    private DialogosManager dialogosManager; // Referencia al ApiManager
+    private DialogosManager dialogosManager; // Referencia al DialogoManager
     [SerializeField]
     private GameObject btnAceptar;
     [SerializeField]

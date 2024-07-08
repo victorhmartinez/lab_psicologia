@@ -40,6 +40,21 @@ public class BeckInventory : MonoBehaviour
 
     [SerializeField]
     private Calificacion calificacion;
+
+    [Header("Propiedades de indicacacion de tiempo")]
+    [SerializeField]
+    private GameObject panelIndicacionTiempo;
+    [SerializeField]
+    private TextMeshProUGUI txtIndicaciones;
+    [SerializeField]
+    [TextArea(4, 2)]
+    private string [] indicacionesSesion;
+    [SerializeField]
+    private Button btnContinuarFase;
+    [SerializeField]
+    private AudioClip audioIndicaciones;
+    [SerializeField]
+    private AudioSource audioSource;
     void Start()
     {
       
@@ -78,9 +93,18 @@ public class BeckInventory : MonoBehaviour
                 btnContinuar.onClick.RemoveAllListeners();
                 btnContinuar.onClick.AddListener(() =>
                 {
+                  
+
                     panelRetroalimentacionFase.SetActive(false);
-                    dialogosManager.iniciarFase("Final");
-                    dialogosManager.darFuncionBtnAceptar();
+                    panelIndicacionTiempo.SetActive(true);
+                    StopAllCoroutines();
+                    StartCoroutine(escribirTexto(indicacionesSesion[0], txtIndicaciones, btnContinuarFase.gameObject));
+
+                    btnContinuarFase.onClick.RemoveAllListeners();
+                    btnContinuarFase.onClick.AddListener(() =>
+                    {
+                        funcionBtnContinuar();
+                    });
 
                 });
             });
@@ -124,5 +148,23 @@ public class BeckInventory : MonoBehaviour
         {
             btn.gameObject.SetActive(true);
         }
+    }
+
+    public void funcionBtnContinuar()
+    {
+        btnContinuarFase.gameObject.SetActive(false);
+        txtIndicaciones.text = "";
+        StopAllCoroutines();
+        StartCoroutine(escribirTexto(indicacionesSesion[0], txtIndicaciones, btnContinuarFase.gameObject));
+        audioSource.clip = audioIndicaciones;
+        audioSource.Play();
+       
+        btnContinuarFase.onClick.RemoveAllListeners();
+        btnContinuarFase.onClick.AddListener(() =>
+        {
+            panelIndicacionTiempo.SetActive(false);
+            dialogosManager.iniciarFase("Final");
+            dialogosManager.darFuncionBtnAceptar();
+        });
     }
 }

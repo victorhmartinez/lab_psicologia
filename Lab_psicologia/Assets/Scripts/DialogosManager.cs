@@ -63,7 +63,22 @@ public class DialogosManager : MonoBehaviour
     private double caliPorIncorrecto=0;
     [SerializeField]
     private Calificacion calificacion;
-    private bool parado;
+    private bool parado = true;
+    [Header("Label nombres personajes")]
+    [SerializeField]
+    private TextMeshProUGUI txtNombrePaciente;
+    [SerializeField]
+    private TextMeshProUGUI txtNombrePsicologo;
+    [Header("Ubicaciones personajes no se muevan")]
+    [SerializeField]
+    private Transform ubiSerntadoPsicologo;
+    [SerializeField]
+    private Transform ubiSerntadoPaciente;
+    [SerializeField]
+    private GameObject gameObjectPiscolog;
+    [SerializeField]
+    private GameObject gameObjectPaciente;
+
     void Start()
     {
         if (apiManager != null)
@@ -207,6 +222,8 @@ public class DialogosManager : MonoBehaviour
 
     public  void cargarPreguntas(Preguntas pregunta)
     {
+        txtNombrePsicologo.gameObject.SetActive(false);
+        txtNombrePaciente.gameObject.SetActive(false);
         manejadorCamara.activarCamaraGeneral();
         uiDialogo.SetActive(false);
         btn_aceptar.gameObject.SetActive(false);
@@ -278,6 +295,8 @@ public class DialogosManager : MonoBehaviour
         {
             animDoctor.SetBool("sentarse", true);
             animPaciente.SetBool("sentarse", true);
+            parado = false;
+            manejadorCamara.cambiarPosiciones(parado);
         }
         darFuncionAceptar(esCorrecta,valor);
 
@@ -289,7 +308,7 @@ public class DialogosManager : MonoBehaviour
     
         txtPersonaje.text = dialogosList[contador].personaje;
         llamarUiDialogos();
-
+        manejadorCamara.cambiarPosiciones(parado);
        
         btnSigPaciente.GetComponent<Button>().onClick.RemoveAllListeners();
         btnSigPaciente.GetComponent<Button>().onClick.AddListener(() => {
@@ -372,13 +391,28 @@ public class DialogosManager : MonoBehaviour
     public void buscarPersonaje(string personajeHabalndo)
     {
      
-        if (personajeHabalndo.Contains("Psic�logo"))
+        if (personajeHabalndo.Contains("Psicólogo"))
         {
+            txtNombrePsicologo.text = personajeHabalndo;
+            if (!parado)
+            {
+                txtNombrePaciente.gameObject.SetActive(false);
+                txtNombrePsicologo.gameObject.SetActive(true);
+            }
+           
             dialagoPsicologo.SetActive(true);
             dialagoPaciente.SetActive(false);
         }
         else if (personajeHabalndo.Contains("Paciente"))
         {
+            txtNombrePaciente.text = personajeHabalndo;
+            if (!parado)
+            {
+                txtNombrePaciente.gameObject.SetActive(true);
+                txtNombrePsicologo.gameObject.SetActive(false);
+            }
+          
+            
             dialagoPaciente.SetActive(true);
             dialagoPsicologo.SetActive(false);
         }
@@ -386,17 +420,27 @@ public class DialogosManager : MonoBehaviour
     
     public void llamarUiDialogos()
     {
-        if (dialogosList[contador].personaje.Contains("Psic�logo"))
+        if (dialogosList[contador].personaje.Contains("Psicólogo"))
 
         {
-            animPaciente.SetBool("hablar", true);
+            if (!parado)
+            {
+                animPaciente.SetBool("hablar", true);
+                gameObjectPaciente.transform.position = ubiSerntadoPaciente.transform.position;
+            }
+            
             manejadorCamara.activarCamaraPsicologo();
             StartCoroutine(escribirTexto(dialogosList[contador].contenido, txtDialogoPsiscologo, btnSigPaciente.gameObject));
         }
         else
         {
-            animDoctor.SetBool("hablar", true);
-
+            
+            if (!parado)
+            {
+                animDoctor.SetBool("hablar", true);
+                gameObjectPiscolog.transform.position = ubiSerntadoPsicologo.transform.position;
+            }
+        
             manejadorCamara.activarCamaraPaciente();
             StartCoroutine(escribirTexto(dialogosList[contador].contenido, txtDialogoPaciente, btnSigPaciente.gameObject));
         }
