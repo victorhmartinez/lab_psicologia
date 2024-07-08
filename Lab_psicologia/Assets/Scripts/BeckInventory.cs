@@ -25,6 +25,8 @@ public class BeckInventory : MonoBehaviour
     [TextArea(5,8)]
     private string notaBeck;
     [SerializeField]
+    private AudioClip audioFinFase;
+    [SerializeField]
     private TextMeshProUGUI txtNota;
     [SerializeField]
     private GameObject [] uiCuestionarioBeck;
@@ -40,7 +42,9 @@ public class BeckInventory : MonoBehaviour
 
     [SerializeField]
     private Calificacion calificacion;
-
+    [Header("Escenario Trabajo")]
+    [SerializeField]
+    private GameObject escenarioTrabPsicologo;
     [Header("Propiedades de indicacacion de tiempo")]
     [SerializeField]
     private GameObject panelIndicacionTiempo;
@@ -118,10 +122,13 @@ public class BeckInventory : MonoBehaviour
         btnAceptar.SetActive(false);
         objectGuia.SetActive(true);
      StartCoroutine(escribirTexto(notaBeck, txtNota, btnAceptar));
+
+        escenarioTrabPsicologo.SetActive(true);
         btnAceptar.GetComponent<Button>().onClick.RemoveAllListeners();
         btnAceptar.GetComponent<Button>().onClick.AddListener(() => {
             objectGuia.SetActive(false);
             panelBeck.SetActive(true);
+            escenarioTrabPsicologo.SetActive(false);
 
 
         });
@@ -141,7 +148,7 @@ public class BeckInventory : MonoBehaviour
         for (int i = 0; i < texto.ToCharArray().Length; i++)
         {
             txt.maxVisibleCharacters++;
-            yield return new WaitForSeconds(15f / 500);
+            yield return new WaitForSeconds(35f / 500);
 
         }
         if (btn != null)
@@ -155,7 +162,7 @@ public class BeckInventory : MonoBehaviour
         btnContinuarFase.gameObject.SetActive(false);
         txtIndicaciones.text = "";
         StopAllCoroutines();
-        StartCoroutine(escribirTexto(indicacionesSesion[0], txtIndicaciones, btnContinuarFase.gameObject));
+        StartCoroutine(escribirTexto(indicacionesSesion[1], txtIndicaciones, btnContinuarFase.gameObject));
         audioSource.clip = audioIndicaciones;
         audioSource.Play();
        

@@ -183,7 +183,7 @@ public class FichaDiagnostico : MonoBehaviour
         for (int i = 0; i < texto.ToCharArray().Length; i++)
         {
             txt.maxVisibleCharacters++;
-            yield return new WaitForSeconds(25f / 500);
+            yield return new WaitForSeconds(35f / 500);
 
         }
         if (btn != null)

@@ -64,6 +64,8 @@ public class IntroController : MonoBehaviour
         btnAceptar.GetComponent<Button>().onClick.AddListener(() =>
         {
             dialogosManager.darFuncionBtnAceptar();
+
+           
         });
     }
 

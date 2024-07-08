@@ -78,6 +78,9 @@ public class DialogosManager : MonoBehaviour
     private GameObject gameObjectPiscolog;
     [SerializeField]
     private GameObject gameObjectPaciente;
+    [Header("Cambios escena")]
+    [SerializeField]
+    private FinalizarCaso finalizarCaso;
 
     void Start()
     {
@@ -206,11 +209,18 @@ public class DialogosManager : MonoBehaviour
                     if (fase == "Desarrollo")
                     {
                         Debug.Log("entre aqui");
-
+                        txtDialogoPaciente.gameObject.SetActive(false);
+                        txtDialogoPsiscologo.gameObject.SetActive(false);
                         dialagoPsicologo.SetActive(false);
                         dialagoPaciente.SetActive(false);
                         uiDialogo.SetActive(false);
                         inventarioBeck.notaInventarioBecker();
+                    }else if (fase == "Final")
+                    {
+                        dialagoPsicologo.SetActive(false);
+                        dialagoPaciente.SetActive(false);
+                        uiDialogo.SetActive(false);
+                        finalizarCaso.activarRetroFinal();
                     }
                 }
             }
@@ -283,26 +293,72 @@ public class DialogosManager : MonoBehaviour
    // Metodo pata asignar la funcionalidad a los botones de las respuestas
     public void darFuncionBtn( string retroalimentacion, bool esCorrecta, string respuesta,Respuestas respuestasobj, int valor)
     {
-
-        audioSource.clip = respuestasobj.audio;
-        audioSource.Play();
-        ui_retroalimentacion.SetActive(true);
-        txtRetroalimentacion.text = retroalimentacion;
-        uiPreguntas.SetActive(false);
-        StopAllCoroutines();
-        StartCoroutine(escribirTexto(retroalimentacion, txtRetroalimentacion,btn_aceptar.gameObject));
-        if(respuesta== "Frente al terapeuta")
+        if (retroalimentacion != "")
         {
-            animDoctor.SetBool("sentarse", true);
-            animPaciente.SetBool("sentarse", true);
-            parado = false;
-            manejadorCamara.cambiarPosiciones(parado);
+            audioSource.clip = respuestasobj.audio;
+            audioSource.Play();
+            ui_retroalimentacion.SetActive(true);
+            txtRetroalimentacion.text = retroalimentacion;
+            uiPreguntas.SetActive(false);
+            StopAllCoroutines();
+            StartCoroutine(escribirTexto(retroalimentacion, txtRetroalimentacion, btn_aceptar.gameObject));
+            if (respuesta == "Frente al terapeuta")
+            {
+                animDoctor.SetBool("sentarse", true);
+                animPaciente.SetBool("sentarse", true);
+                parado = false;
+                manejadorCamara.cambiarPosiciones(parado);
+            }
+            darFuncionAceptar(esCorrecta, valor);
         }
-        darFuncionAceptar(esCorrecta,valor);
+        else
+        {
+            noRetroaliemntacion(esCorrecta, valor);
+        }
+        
+        
+
+    }
+
+    public void noRetroaliemntacion(bool correcto, int valorSumar)
+    {
+        btn_aceptar.gameObject.SetActive(false);
+        uiPreguntas.SetActive(false);
+        if (correcto)
+        {
+            //Debug.LogWarning("Hizo click en algo correcto");
+            calificacion.incrementar(valorSumar);     
+                ui_retroalimentacion.SetActive(false);
+
+                contador++;
+                if (contador < dialogosList.Count)
+                {
+                    //uiDialogo.SetActive(true);
+
+                    txtPersonaje.text = dialogosList[contador].personaje;
+                    buscarPersonaje(dialogosList[contador].personaje);
+                    llamarUiDialogos();
+                    // StartCoroutine(escribirTexto(dialogosList[contador].contenido, txtMensaje, btn_Siguiente));
+                    container_preguntas.gameObject.SetActive(false);
+                }
+        }
+        else
+        {
+         
+           
+                //  uiPreguntas.SetActive(true);
+                ui_retroalimentacion.SetActive(true);
+                cargarPreguntas(pregunta);
+                btn_aceptar.gameObject.SetActive(false);
+
+           
+        }
 
     }
     public void  darFuncionBtnAceptar()
     {
+
+        
         //uiDialogo.SetActive(true);
         buscarPersonaje(dialogosList[contador].personaje);
     
