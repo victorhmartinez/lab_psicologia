@@ -86,8 +86,9 @@ public class DialogosManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI txtAnimaciones;
     [SerializeField]
-    private PresentarInfoSalas presentarInfo;
-
+    private GameObject[] listUbicacionesCamera;
+    [SerializeField]
+    private Camera mainCamera;
 
     void Start()
     {
@@ -255,7 +256,7 @@ public class DialogosManager : MonoBehaviour
                     txtAnimaciones.text = "El terapeuta entrega el consentimiento informado al paciente) \n" +
                         "(El paciente simula leerlo y luego procede a firmar el consentimiento informado dado por el terapeuta. Posterior a ello se continua con la entrevista).";
                     StopAllCoroutines();
-                    StartCoroutine(esperarAnimacion(panelIndiAniamciones,false,"Inicial"));
+                    StartCoroutine(esperarAnimacion(panelIndiAniamciones,false,"Inicial",listUbicacionesCamera[1]));
 
                 }else if (fase== "Desarrollo" && contador==1)
                 {
@@ -266,7 +267,7 @@ public class DialogosManager : MonoBehaviour
                     panelIndiAniamciones.SetActive(true);
                     txtAnimaciones.text = "(Paciente pasa y se sienta frente al terapeuta";
                     StopAllCoroutines();
-                    StartCoroutine(esperarAnimacion(panelIndiAniamciones, false, fase));
+                    StartCoroutine(esperarAnimacion(panelIndiAniamciones, false, fase,null));
                 }else if (fase == "Desarrollo" && contador == 8)
                 {
                     dialagoPaciente.SetActive(false);
@@ -277,7 +278,7 @@ public class DialogosManager : MonoBehaviour
                     panelIndiAniamciones.SetActive(true);
                     txtAnimaciones.text = "El terapeuta le presenta al paciente el test y empieza a simular que lo completa)";
                     StopAllCoroutines();
-                    StartCoroutine(esperarAnimacion(panelIndiAniamciones, false, fase));
+                    StartCoroutine(esperarAnimacion(panelIndiAniamciones, false, fase,listUbicacionesCamera[3]));
                 } 
                 else
                 {
@@ -294,7 +295,7 @@ public class DialogosManager : MonoBehaviour
                         panelIndiAniamciones.SetActive(true);
                         txtAnimaciones.text = "(El terapeuta acompaña al paciente hasta la puerta y el paciente sala de la sala)";
                         StopAllCoroutines();
-                        StartCoroutine(esperarAnimacion(panelIndiAniamciones, true, "Final"));
+                        StartCoroutine(esperarAnimacion(panelIndiAniamciones, true, "Final",null));
                     }
 
 
@@ -470,7 +471,7 @@ public class DialogosManager : MonoBehaviour
                     txtAnimaciones.text = "(Paciente se despide del terapeuta y sale de la sala)" +
                     "\n(Terapeuta se dirige a su escritorio y simula a empieza a llenar el documento con los criterios diagnósticos descritos)";
                     StopAllCoroutines();
-                    StartCoroutine(esperarAnimacion(panelIndiAniamciones, true,"Inicial"));
+                    StartCoroutine(esperarAnimacion(panelIndiAniamciones, true,"Inicial",listUbicacionesCamera[2]));
                     
                     
                   
@@ -512,13 +513,20 @@ public class DialogosManager : MonoBehaviour
         container_preguntas.gameObject.SetActive(true);
 
     }
-    IEnumerator esperarAnimacion(GameObject panel,bool faseInicial,string fase)
+    IEnumerator esperarAnimacion(GameObject panel,bool faseInicial,string fase,GameObject ubicacionCamera)
     {
+        if (ubicacionCamera != null)
+        {
+            mainCamera.transform.position = ubicacionCamera.transform.position;
+            mainCamera.transform.rotation = ubicacionCamera.transform.rotation;
+        }
+      
         dialagoPaciente.SetActive(false);
         dialagoPsicologo.SetActive(false);
         txtNombrePsicologo.gameObject.SetActive(false);
         txtNombrePaciente.gameObject.SetActive(false);
         manejadorCamara.activarCamaraGeneral();
+        
         yield return new WaitForSeconds(6.0f);
         panel.SetActive(false);
         if (!faseInicial )
@@ -536,7 +544,8 @@ public class DialogosManager : MonoBehaviour
             }
            
         }
-  
+        mainCamera.transform.position = listUbicacionesCamera[0].transform.position;
+        mainCamera.transform.rotation = listUbicacionesCamera[0].transform.rotation;
 
     }
     public void buscarPersonaje(string personajeHabalndo)
