@@ -69,6 +69,11 @@ public class FichaDiagnostico : MonoBehaviour
 
     [SerializeField]
     private Calificacion calificacion;
+    [Header("Animaciones")]
+    [SerializeField]
+    private GameObject panelAnimaciones, camaraAnimacion;
+    [SerializeField]
+    private TextMeshProUGUI txtAnimaciones;
     void Start()
     {
         submitButton.onClick.AddListener(SubmitFicha);
@@ -171,7 +176,7 @@ public class FichaDiagnostico : MonoBehaviour
             objectGuia.SetActive(false);
             panelFicha.SetActive(true);
             escenarioTrabPsicologo.SetActive(false);
-
+            btnAceptar.SetActive(false);
         });
     }
 
@@ -235,12 +240,25 @@ public class FichaDiagnostico : MonoBehaviour
         btnContinuarFase.onClick.AddListener(() =>
         {
             panelIndicacionTiempo.SetActive(false);
-            dialogosManager.iniciarFase("Desarrollo");
-            dialogosManager.ubicarPersonajeCentro();
-            dialogosManager.darFuncionBtnAceptar();
 
+            StartCoroutine(esperarAnimaciones());
+            btnContinuarFase.gameObject.SetActive(false);
         });
        
+    }
+
+    IEnumerator esperarAnimaciones()
+    {
+        panelAnimaciones.SetActive(true);
+        camaraAnimacion.SetActive(true);
+        txtAnimaciones.text = "Paciente toca la puerta) \n" +
+            "(Terapeuta abre la puerta e invita a pasar a la paciente)";
+        yield return new WaitForSeconds(3.0f);
+        dialogosManager.iniciarFase("Desarrollo");
+        dialogosManager.ubicarPersonajeCentro();
+        dialogosManager.darFuncionBtnAceptar();
+        camaraAnimacion.SetActive(false);
+        panelAnimaciones.SetActive(false);
     }
 }
 

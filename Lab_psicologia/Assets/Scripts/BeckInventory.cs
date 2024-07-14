@@ -24,8 +24,7 @@ public class BeckInventory : MonoBehaviour
     [SerializeField]
     [TextArea(5,8)]
     private string notaBeck;
-    [SerializeField]
-    private AudioClip audioFinFase;
+  
     [SerializeField]
     private TextMeshProUGUI txtNota;
     [SerializeField]
@@ -39,7 +38,8 @@ public class BeckInventory : MonoBehaviour
     private Button btnContinuar;
     [SerializeField]
     private TextMeshProUGUI lblTitulo;
-
+    [SerializeField]
+    private AudioClip audioNotaBeck;
     [SerializeField]
     private Calificacion calificacion;
     [Header("Escenario Trabajo")]
@@ -59,6 +59,14 @@ public class BeckInventory : MonoBehaviour
     private AudioClip audioIndicaciones;
     [SerializeField]
     private AudioSource audioSource;
+    [Header("Finalizar el caso")]
+    [SerializeField]
+    private FinalizarCaso fnCaso;
+    [Header("Animaciones")]
+    [SerializeField]
+    private GameObject panelAnimaciones, camaraAnimacion;
+    [SerializeField]
+    private TextMeshProUGUI txtAnimaciones;
     void Start()
     {
       
@@ -92,25 +100,11 @@ public class BeckInventory : MonoBehaviour
             btnAceptarAlert.GetComponent<Button>().onClick.AddListener(() =>
             {
                 panelBeck.SetActive(false);
-                panelRetroalimentacionFase.SetActive(true);
-                lblTitulo.text = "Felicidades, has terminado la fase de desarrollo.";
-                btnContinuar.onClick.RemoveAllListeners();
-                btnContinuar.onClick.AddListener(() =>
-                {
-                  
+                escenarioTrabPsicologo.SetActive(true);
+                fnCaso.activarPreguntaBeck();
 
-                    panelRetroalimentacionFase.SetActive(false);
-                    panelIndicacionTiempo.SetActive(true);
-                    StopAllCoroutines();
-                    StartCoroutine(escribirTexto(indicacionesSesion[0], txtIndicaciones, btnContinuarFase.gameObject));
 
-                    btnContinuarFase.onClick.RemoveAllListeners();
-                    btnContinuarFase.onClick.AddListener(() =>
-                    {
-                        funcionBtnContinuar();
-                    });
-
-                });
+           
             });
             
                 }
@@ -121,16 +115,19 @@ public class BeckInventory : MonoBehaviour
     {
         btnAceptar.SetActive(false);
         objectGuia.SetActive(true);
+       
      StartCoroutine(escribirTexto(notaBeck, txtNota, btnAceptar));
 
         escenarioTrabPsicologo.SetActive(true);
+        audioSource.clip = audioNotaBeck;
+        audioSource.Play();
         btnAceptar.GetComponent<Button>().onClick.RemoveAllListeners();
         btnAceptar.GetComponent<Button>().onClick.AddListener(() => {
             objectGuia.SetActive(false);
             panelBeck.SetActive(true);
             escenarioTrabPsicologo.SetActive(false);
 
-
+          
         });
         nroCaso = apiManager.nroCaso;
         for (int i = 0; i < uiCuestionarioBeck.Length; i++)
@@ -170,8 +167,48 @@ public class BeckInventory : MonoBehaviour
         btnContinuarFase.onClick.AddListener(() =>
         {
             panelIndicacionTiempo.SetActive(false);
-            dialogosManager.iniciarFase("Final");
-            dialogosManager.darFuncionBtnAceptar();
+            StopAllCoroutines();
+            StartCoroutine(esperarAnimaciones());
+          
+
         });
     }
+    public void continuarSesion()
+    {
+        escenarioTrabPsicologo.SetActive(false);
+        panelRetroalimentacionFase.SetActive(true);
+        lblTitulo.text = "Felicidades, has terminado la fase de desarrollo.";
+        btnContinuar.onClick.RemoveAllListeners();
+        btnContinuar.onClick.AddListener(() =>
+        {
+
+
+            panelRetroalimentacionFase.SetActive(false);
+            panelIndicacionTiempo.SetActive(true);
+            StopAllCoroutines();
+            StartCoroutine(escribirTexto(indicacionesSesion[0], txtIndicaciones, btnContinuarFase.gameObject));
+
+            btnContinuarFase.onClick.RemoveAllListeners();
+            btnContinuarFase.onClick.AddListener(() =>
+            {
+                funcionBtnContinuar();
+            });
+
+        });
+
+    }
+    IEnumerator esperarAnimaciones()
+    {
+        panelAnimaciones.SetActive(true);
+        camaraAnimacion.SetActive(true);
+        txtAnimaciones.text = "Paciente toca la puerta) \n" +
+            "(Terapeuta abre la puerta e invita a pasar a la paciente)";
+        yield return new WaitForSeconds(3.0f);
+        dialogosManager.iniciarFase("Final");
+        dialogosManager.ubicarPersonajeCentro();
+        dialogosManager.darFuncionBtnAceptar();
+        camaraAnimacion.SetActive(false);
+        panelAnimaciones.SetActive(false);
+    }
+
 }

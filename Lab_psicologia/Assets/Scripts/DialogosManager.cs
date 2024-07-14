@@ -80,6 +80,14 @@ public class DialogosManager : MonoBehaviour
     [Header("Cambios escena")]
     [SerializeField]
     private FinalizarCaso finalizarCaso;
+    [Header("Panel Indicaciones")]
+    [SerializeField]
+    private GameObject panelIndiAniamciones;
+    [SerializeField]
+    private TextMeshProUGUI txtAnimaciones;
+    [SerializeField]
+    private PresentarInfoSalas presentarInfo;
+
 
     void Start()
     {
@@ -129,14 +137,25 @@ public class DialogosManager : MonoBehaviour
     {
         switch(fase) {
             case "Desarrollo":
+            
+                animDoctor.SetBool("pararse", false);
+                animPaciente.SetBool("pararse", false);
+                animDoctor.SetBool("sentarse", false);
+                animPaciente.SetBool("sentarse", false);
+                dialogosList = dialogosListDesarrollo;
                 this.fase = fase;
                 contador = 0;
-                dialogosList = dialogosListDesarrollo;
+                parado = true;
                 break;
             case "Final":
+                animDoctor.SetBool("pararse", false);
+                animPaciente.SetBool("pararse", false);
+                animDoctor.SetBool("sentarse", false);
+                animPaciente.SetBool("sentarse", false);
                 this.fase = fase;
                 contador = 0;
                 dialogosList = dialogosListFin;
+                parado = true;
                 break;
 
         }
@@ -224,10 +243,62 @@ public class DialogosManager : MonoBehaviour
 
                     });
 
-                }
+                }else if (fase == "Inicial" && contador == 6)
+                {
+                    
+                    dialagoPaciente.SetActive(false);
+                    dialagoPsicologo.SetActive(false);
+                    txtNombrePsicologo.gameObject.SetActive(false);
+                    txtNombrePaciente.gameObject.SetActive(false);
+                    manejadorCamara.activarCamaraGeneral();
+                    panelIndiAniamciones.SetActive(true);
+                    txtAnimaciones.text = "El terapeuta entrega el consentimiento informado al paciente) \n" +
+                        "(El paciente simula leerlo y luego procede a firmar el consentimiento informado dado por el terapeuta. Posterior a ello se continua con la entrevista).";
+                    StopAllCoroutines();
+                    StartCoroutine(esperarAnimacion(panelIndiAniamciones,false,"Inicial"));
+
+                }else if (fase== "Desarrollo" && contador==1)
+                {
+                   animDoctor.SetBool("sentarse", true);
+                    animPaciente.SetBool("sentarse", true);
+                    parado = false;
+                    manejadorCamara.cambiarPosiciones(parado);
+                    panelIndiAniamciones.SetActive(true);
+                    txtAnimaciones.text = "(Paciente pasa y se sienta frente al terapeuta";
+                    StopAllCoroutines();
+                    StartCoroutine(esperarAnimacion(panelIndiAniamciones, false, fase));
+                }else if (fase == "Desarrollo" && contador == 8)
+                {
+                    dialagoPaciente.SetActive(false);
+                    dialagoPsicologo.SetActive(false);
+                    txtNombrePsicologo.gameObject.SetActive(false);
+                    txtNombrePaciente.gameObject.SetActive(false);
+                    manejadorCamara.activarCamaraGeneral();
+                    panelIndiAniamciones.SetActive(true);
+                    txtAnimaciones.text = "El terapeuta le presenta al paciente el test y empieza a simular que lo completa)";
+                    StopAllCoroutines();
+                    StartCoroutine(esperarAnimacion(panelIndiAniamciones, false, fase));
+                } 
                 else
                 {
-                    contador++;
+                    if (fase == "Final" && contador == 1)
+                    {
+                        animDoctor.SetBool("sentarse", true);
+                        animPaciente.SetBool("sentarse", true);
+                        parado = false;
+                        manejadorCamara.cambiarPosiciones(parado);
+                    }
+                        contador++;
+                    if (fase == "Final" && contador == dialogosList.Count)
+                    {
+                        panelIndiAniamciones.SetActive(true);
+                        txtAnimaciones.text = "(El terapeuta acompaña al paciente hasta la puerta y el paciente sala de la sala)";
+                        StopAllCoroutines();
+                        StartCoroutine(esperarAnimacion(panelIndiAniamciones, true, "Final"));
+                    }
+
+
+
                     if (contador < dialogosList.Count)
                     {
 
@@ -262,9 +333,7 @@ public class DialogosManager : MonoBehaviour
                 }
                
             }
-        }
-      
-       
+        }  
        
     }
 
@@ -346,11 +415,7 @@ public class DialogosManager : MonoBehaviour
                 parado = false;
                 manejadorCamara.cambiarPosiciones(parado);
             }
-            darFuncionAceptar(esCorrecta, valor);
-        
-       
-        
-        
+            darFuncionAceptar(esCorrecta, valor);   
 
     }
 
@@ -400,7 +465,14 @@ public class DialogosManager : MonoBehaviour
                 else
                 {
                     Debug.Log("Se termino la fase inicial");
-                    fichaDiagnostico.notaFichaDiagnostico();
+
+                    panelIndiAniamciones.SetActive(true);
+                    txtAnimaciones.text = "(Paciente se despide del terapeuta y sale de la sala)" +
+                    "\n(Terapeuta se dirige a su escritorio y simula a empieza a llenar el documento con los criterios diagnósticos descritos)";
+                    StopAllCoroutines();
+                    StartCoroutine(esperarAnimacion(panelIndiAniamciones, true,"Inicial"));
+                    
+                    
                   
                 }
                
@@ -438,6 +510,33 @@ public class DialogosManager : MonoBehaviour
         uiPreguntas.SetActive(true);
         ActivarBotones(pregunta.respuestas.Length, pregunta);
         container_preguntas.gameObject.SetActive(true);
+
+    }
+    IEnumerator esperarAnimacion(GameObject panel,bool faseInicial,string fase)
+    {
+        dialagoPaciente.SetActive(false);
+        dialagoPsicologo.SetActive(false);
+        txtNombrePsicologo.gameObject.SetActive(false);
+        txtNombrePaciente.gameObject.SetActive(false);
+        manejadorCamara.activarCamaraGeneral();
+        yield return new WaitForSeconds(6.0f);
+        panel.SetActive(false);
+        if (!faseInicial )
+        {
+            contador++;
+            buscarPersonaje(dialogosList[contador].personaje);
+
+            llamarUiDialogos();
+        }
+        else
+        {
+            if (fase == "Inicial")
+            {
+                fichaDiagnostico.notaFichaDiagnostico();
+            }
+           
+        }
+  
 
     }
     public void buscarPersonaje(string personajeHabalndo)

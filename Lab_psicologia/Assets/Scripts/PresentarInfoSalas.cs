@@ -26,6 +26,11 @@ public class PresentarInfoSalas : MonoBehaviour
     private Camera mainCamera;
     [SerializeField]
     private GameObject introController;
+    [Header("Animaciones")]
+    [SerializeField]
+    private GameObject panelAnimacion, cmaraAnimacion;
+    [SerializeField]
+    private TextMeshProUGUI txtAnimaciones;
 
 
     // Start is called before the first frame update
@@ -89,13 +94,36 @@ public class PresentarInfoSalas : MonoBehaviour
     public void fnBtnEmpezar()
     {
         player.SetActive(false);
-        mainCamera.gameObject.SetActive(true);
+       
         panelInformacion.SetActive(false);
-        StartCoroutine(esperarIntro());
+
+        if (gameObject.name == "Entrada3")
+        {
+            StartCoroutine(ejecutarAnimacion());
+        }
+        else
+        {
+            StartCoroutine(esperarIntro());
+        }
+
+        
     }
     IEnumerator esperarIntro()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.5f);
         introController.gameObject.SetActive(true);
+    }
+
+    IEnumerator ejecutarAnimacion()
+    {
+        cmaraAnimacion.SetActive(true);
+        panelAnimacion.SetActive(true);
+        txtAnimaciones.text = "Paciente toca la puerta) \n" +
+            "   (Terapeuta abre la puerta e invita a pasar a la paciente)";
+        yield return new WaitForSeconds(3.0f);
+        cmaraAnimacion.SetActive(false);
+        panelAnimacion.SetActive(false);
+        mainCamera.gameObject.SetActive(true);
+        StartCoroutine(esperarIntro());
     }
 }

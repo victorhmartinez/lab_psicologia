@@ -24,7 +24,9 @@ public class IntroController : MonoBehaviour
     [SerializeField]
     private GameObject btnAceptar;
     [SerializeField]
-
+    private GameObject panelAnimaciones,camaraAnima;
+   
+    
     void Start()
     {
         Debug.Log("Vamos a inicializar el intro controller");
@@ -69,6 +71,7 @@ public class IntroController : MonoBehaviour
         btnAceptar.SetActive(true);
       
     }
+
     public void cambiarDialgo()
     {
         btnAceptar.gameObject.SetActive(false);
