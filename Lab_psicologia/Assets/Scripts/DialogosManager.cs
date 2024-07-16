@@ -224,7 +224,7 @@ public class DialogosManager : MonoBehaviour
                     txtNombrePaciente.gameObject.SetActive(false);
                     manejadorCamara.activarCamaraGeneral();
                     ui_retroalimentacion.SetActive(true);
-
+                    btn_aceptar.gameObject.SetActive(false);
                     uiPreguntas.SetActive(false);
                     StopAllCoroutines();
                     StartCoroutine(escribirTexto("¡Atención! Lo que estás a punto de observar podría ser clave para el desarrollo de este caso", txtRetroalimentacion, btn_aceptar.gameObject));
