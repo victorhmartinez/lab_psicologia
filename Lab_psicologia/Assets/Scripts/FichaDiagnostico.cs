@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class FichaDiagnostico : MonoBehaviour
 {
@@ -74,6 +75,7 @@ public class FichaDiagnostico : MonoBehaviour
     private GameObject panelAnimaciones, camaraAnimacion;
     [SerializeField]
     private TextMeshProUGUI txtAnimaciones;
+    private bool estado=true;
     void Start()
     {
         submitButton.onClick.AddListener(SubmitFicha);
@@ -122,7 +124,13 @@ public class FichaDiagnostico : MonoBehaviour
                    
                     panelAlerta.SetActive(true);
                     txtObservacion.text = "Felicitaciones, has realizado correctamente el conteo de los criterios del DMS-5";
-                    calificacion.incrementar(calificacion.valorPregunta);
+                    if (estado==true)
+                    {
+                        calificacion.incrementar(calificacion.valorPregunta);
+                        calificacion.incrementarFinal(calificacion.valorPregunta);
+                        calificacion.incrementarContador();
+                        estado = false;
+                    }
                     btnAceptarAlert.GetComponent<Button>().onClick.RemoveAllListeners();
                     btnAceptarAlert.GetComponent<Button>().onClick.AddListener(() =>
                     {
@@ -136,7 +144,7 @@ public class FichaDiagnostico : MonoBehaviour
                             panelIndicacionTiempo.SetActive(true);
                             StopAllCoroutines();
                             StartCoroutine(escribirTexto(indicacionesSesion[0], txtIndicaciones, btnContinuarFase.gameObject));
-
+                            estado = true;
                             btnContinuarFase.onClick.RemoveAllListeners();
                             btnContinuarFase.onClick.AddListener(() =>
                             {
@@ -159,7 +167,7 @@ public class FichaDiagnostico : MonoBehaviour
          
         }
 
-        // Aquí puedes agregar lógica para enviar los datos a un servidor o almacenarlos localmente
+        // Aquï¿½ puedes agregar lï¿½gica para enviar los datos a un servidor o almacenarlos localmente
     }
 
     public void notaFichaDiagnostico()
@@ -220,7 +228,7 @@ public class FichaDiagnostico : MonoBehaviour
             if (list[i] != listaRespuestaObtenidas[i])
             {
                 panelAlerta.SetActive(true);
-                txtObservacion.text = "Los criterios que seleccionaste no están de acuerdo con el caso clínico.";
+                txtObservacion.text = "Los criterios que seleccionaste no estï¿½n de acuerdo con el caso clï¿½nico.";
                 esCorrecta = false;
                 calificacion.decrementar(calificacion.valorIncorrecto);
                 break;

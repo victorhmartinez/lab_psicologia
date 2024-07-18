@@ -42,6 +42,7 @@ public class BeckInventory : MonoBehaviour
     private AudioClip audioNotaBeck;
     [SerializeField]
     private Calificacion calificacion;
+    private bool estado = true;
     [Header("Escenario Trabajo")]
     [SerializeField]
     private GameObject escenarioTrabPsicologo;
@@ -90,8 +91,13 @@ public class BeckInventory : MonoBehaviour
              }
              else
                 {
-            calificacion.incrementar(calificacion.valorPregunta);
-            calificacion.incrementarFinal(calificacion.valorPregunta);
+            if (estado == true)
+            {
+                calificacion.incrementar(calificacion.valorPregunta);
+                calificacion.incrementarFinal(calificacion.valorPregunta);
+                calificacion.incrementarContador();
+                estado = false;
+            }
             Debug.Log("Los puntaje coiniciden");
             panelAlerta.SetActive(true);
             txtError.text = "Felicitaciones, has realizado correctamente el conteo de los puntajes de los puntos del inventario de beck";
@@ -103,11 +109,20 @@ public class BeckInventory : MonoBehaviour
                 escenarioTrabPsicologo.SetActive(true);
                 fnCaso.activarPreguntaBeck();
 
+                    panelRetroalimentacionFase.SetActive(false);
+                    panelIndicacionTiempo.SetActive(true);
+                    StopAllCoroutines();
+                    StartCoroutine(escribirTexto(indicacionesSesion[0], txtIndicaciones, btnContinuarFase.gameObject));
+                    estado = true;
+                    btnContinuarFase.onClick.RemoveAllListeners();
+                    btnContinuarFase.onClick.AddListener(() =>
+                    {
+                        funcionBtnContinuar();
+                    });
 
-           
-            });
+                });
             
-                }
+             }
               
         
     }

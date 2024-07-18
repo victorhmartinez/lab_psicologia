@@ -10,12 +10,18 @@ public class Calificacion : MonoBehaviour
     public double valorIncorrecto;
     public double valorPregunta;
 
+    public int preguntasCant=1;
     public double valorCalificacionTotal = 0;
 
+    private int contPre = 0;
     [SerializeField]
     private TextMeshProUGUI txtPorcentaje;
     [SerializeField]
     private TextMeshProUGUI txtPuntaje;
+    [SerializeField]
+    private TextMeshProUGUI txtPorcentajeFinal;
+    [SerializeField]
+    private TextMeshProUGUI txtPuntajeFinal;
 
     public double ValorPorcentaje=0;
     // Start is called before the first frame update
@@ -56,11 +62,21 @@ public class Calificacion : MonoBehaviour
     }
     public void porcentaje()
     {
-        ValorPorcentaje = (100 * puntuacionActual) / valorCalificacionTotal;
+        ValorPorcentaje = (100 * contPre) / preguntasCant;
+    }
+    public void incrementarContador()
+    {
+        contPre++;
+    }
+    public void decrementarContador()
+    {
+        contPre--;
     }
     public void Vista()
     {
         txtPuntaje.text = puntuacionActual+"";
         txtPorcentaje.text = ValorPorcentaje+" %";
+        txtPuntajeFinal.text = puntuacionActual + "";
+        txtPorcentajeFinal.text = ValorPorcentaje + " %";
     }
 }

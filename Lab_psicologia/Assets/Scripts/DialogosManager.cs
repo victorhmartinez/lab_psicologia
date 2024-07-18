@@ -90,6 +90,7 @@ public class DialogosManager : MonoBehaviour
     [SerializeField]
     private Camera mainCamera;
 
+    bool estado=true;
     void Start()
     {
         if (apiManager != null)
@@ -118,7 +119,9 @@ public class DialogosManager : MonoBehaviour
         // Guardar los di�logos cargados
         dialogosList = dialogos;
         Debug.Log("Hola estas en el evento con las listas cargadas");
-     
+
+       calificacion.preguntasCant = calcularCantidadP();
+
     }
     private void OnDialogosDesarrolloCargados(List<Dialogos> dialogos)
     {
@@ -373,8 +376,14 @@ public class DialogosManager : MonoBehaviour
                     caliPorIncorrecto = result;
                     calificacion.valorIncorrecto = result;
                     calificacion.valorPregunta = cali;
-                    calificacion.incrementarFinal(cali);
-
+                    if (estado==true)
+                    {
+                        calificacion.incrementarFinal(cali);
+                        calificacion.incrementarContador();
+                        Debug.LogError("se sumo");
+                        estado = false;
+                    }
+                    
                     listButtons[i].onClick.AddListener(() => darFuncionBtn(retroalimentacion, esCorrecta,respuesta,respuestaObj,cali));
                     listButtons[i].gameObject.SetActive(true);
 
@@ -448,6 +457,7 @@ public class DialogosManager : MonoBehaviour
         {
             //Debug.LogWarning("Hizo click en algo correcto");
             calificacion.incrementar(valorSumar);
+            estado = true;
             btn_aceptar.gameObject.SetActive(false);
             btn_aceptar.onClick.RemoveAllListeners();
             btn_aceptar.onClick.AddListener(() => {
@@ -611,6 +621,34 @@ public class DialogosManager : MonoBehaviour
     {
         gameObjectPiscolog.transform.position = ubiSerntadoPsicologo.transform.position;
         gameObjectPaciente.transform.position = ubiSerntadoPaciente.transform.position;
+    }
+
+    public int calcularCantidadP()
+    {
+        int cont = 0;
+        for (int i = 0; i < dialogosList.Count; i++)
+        {
+            if (dialogosList[i].tienePregunta)
+            {
+                cont++;
+            }
+        }
+        for (int i = 0; i < dialogosListDesarrollo.Count; i++)
+        {
+            if (dialogosListDesarrollo[i].tienePregunta)
+            {
+                cont++;
+            }
+        }
+        for (int i = 0; i < dialogosListFin.Count; i++)
+        {
+            if (dialogosListFin[i].tienePregunta)
+            {
+                cont++;
+            }
+        }
+        cont += 2;
+        return cont;
     }
 }
 
