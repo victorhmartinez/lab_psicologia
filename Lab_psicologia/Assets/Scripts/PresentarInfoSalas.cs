@@ -125,17 +125,18 @@ public class PresentarInfoSalas : MonoBehaviour
 
     IEnumerator ejecutarAnimacion()
     {
+        txtAnimaciones.text = "Paciente toca la puerta) \n" +
+              "   (Terapeuta abre la puerta e invita a pasar a la paciente)";
         PerAbriPuerta.SetActive(true);
         cmaraAnimacion.SetActive(true);
         panelAnimacion.SetActive(true);
         animTerapeuta.SetBool("abrir", true);
-        yield return new WaitForSeconds(animAbrir.length);
+        yield return new WaitForSeconds(animAbrir.length/2);
         animTerapeuta.SetBool("abrir", false);
         abriendoPuerta[0].SetActive(false);
         abriendoPuerta[1].SetActive(true);
-        txtAnimaciones.text = "Paciente toca la puerta) \n" +
-            "   (Terapeuta abre la puerta e invita a pasar a la paciente)";
-        yield return new WaitForSeconds(0.5f);
+       
+        yield return new WaitForSeconds(3.2f);
         abriendoPuerta[1].SetActive(false);
         abriendoPuerta[0].SetActive(true);
         cmaraAnimacion.SetActive(false);

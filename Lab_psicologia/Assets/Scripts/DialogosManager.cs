@@ -596,8 +596,9 @@ public class DialogosManager : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         animDoctor.SetBool("entregar", false);
         yield return new WaitForSeconds(animationEntregar.length);
-        animPaciente.SetBool("escribir", false);
+        animPaciente.SetBool("escribir", true);
         yield return new WaitForSeconds(0.3f);
+        animPaciente.SetBool("escribir", false);
     }
     public void llamarUiDialogos()
     {

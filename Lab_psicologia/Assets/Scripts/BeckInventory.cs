@@ -68,6 +68,14 @@ public class BeckInventory : MonoBehaviour
     private GameObject panelAnimaciones, camaraAnimacion;
     [SerializeField]
     private TextMeshProUGUI txtAnimaciones;
+    [SerializeField]
+    private GameObject PerAbriPuerta;
+    [SerializeField]
+    private AnimationClip animAbrir;
+    [SerializeField]
+    private Animator animTerapeuta;
+    [SerializeField]
+    private GameObject[] abriendoPuerta;
     void Start()
     {
       
@@ -214,10 +222,18 @@ public class BeckInventory : MonoBehaviour
     }
     IEnumerator esperarAnimaciones()
     {
+        txtAnimaciones.text = "Paciente toca la puerta) \n" +
+           "(Terapeuta abre la puerta e invita a pasar a la paciente)";
+        PerAbriPuerta.SetActive(true);
         panelAnimaciones.SetActive(true);
         camaraAnimacion.SetActive(true);
-        txtAnimaciones.text = "Paciente toca la puerta) \n" +
-            "(Terapeuta abre la puerta e invita a pasar a la paciente)";
+
+        animTerapeuta.SetBool("abrir", true);
+        yield return new WaitForSeconds(animAbrir.length / 2);
+        animTerapeuta.SetBool("abrir", false);
+        abriendoPuerta[0].SetActive(false);
+        abriendoPuerta[1].SetActive(true);
+
         yield return new WaitForSeconds(3.0f);
         dialogosManager.iniciarFase("Final");
         dialogosManager.ubicarPersonajeCentro();

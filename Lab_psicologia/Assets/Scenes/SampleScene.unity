@@ -15870,6 +15870,12 @@ MonoBehaviour:
   panelAnimaciones: {fileID: 90013674}
   camaraAnimacion: {fileID: 303561035}
   txtAnimaciones: {fileID: 731757352}
+  PerAbriPuerta: {fileID: 1910784753}
+  animAbrir: {fileID: 7400000, guid: 47bb8a63be7d6da4c8a5d2d32318c0ff, type: 2}
+  animTerapeuta: {fileID: 2064031144}
+  abriendoPuerta:
+  - {fileID: 418271618976138345}
+  - {fileID: 22711061}
 --- !u!4 &1202637487
 Transform:
   m_ObjectHideFlags: 0
@@ -20277,6 +20283,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 520277233}
     - target: {fileID: 8017885462062985965, guid: 6ae4b73b843a2904b94c56edfe276ba2, type: 3}
+      propertyPath: animAbrir
+      value: 
+      objectReference: {fileID: 7400000, guid: 47bb8a63be7d6da4c8a5d2d32318c0ff, type: 2}
+    - target: {fileID: 8017885462062985965, guid: 6ae4b73b843a2904b94c56edfe276ba2, type: 3}
       propertyPath: lblTitulo
       value: 
       objectReference: {fileID: 2608570935259266530}
@@ -20316,6 +20326,14 @@ PrefabInstance:
       propertyPath: calificacion
       value: 
       objectReference: {fileID: 1543157085}
+    - target: {fileID: 8017885462062985965, guid: 6ae4b73b843a2904b94c56edfe276ba2, type: 3}
+      propertyPath: PerAbriPuerta
+      value: 
+      objectReference: {fileID: 1910784753}
+    - target: {fileID: 8017885462062985965, guid: 6ae4b73b843a2904b94c56edfe276ba2, type: 3}
+      propertyPath: animTerapeuta
+      value: 
+      objectReference: {fileID: 2064031144}
     - target: {fileID: 8017885462062985965, guid: 6ae4b73b843a2904b94c56edfe276ba2, type: 3}
       propertyPath: audioNotaBeck
       value: 
@@ -20369,9 +20387,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2123279926}
     - target: {fileID: 8017885462062985965, guid: 6ae4b73b843a2904b94c56edfe276ba2, type: 3}
+      propertyPath: abriendoPuerta.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8017885462062985965, guid: 6ae4b73b843a2904b94c56edfe276ba2, type: 3}
       propertyPath: panelRetroalimentacionFase
       value: 
       objectReference: {fileID: 8860756956167967713}
+    - target: {fileID: 8017885462062985965, guid: 6ae4b73b843a2904b94c56edfe276ba2, type: 3}
+      propertyPath: abriendoPuerta.Array.data[0]
+      value: 
+      objectReference: {fileID: 418271618976138345}
+    - target: {fileID: 8017885462062985965, guid: 6ae4b73b843a2904b94c56edfe276ba2, type: 3}
+      propertyPath: abriendoPuerta.Array.data[1]
+      value: 
+      objectReference: {fileID: 22711061}
     - target: {fileID: 8017885462062985965, guid: 6ae4b73b843a2904b94c56edfe276ba2, type: 3}
       propertyPath: indicacionesSesion.Array.size
       value: 2
