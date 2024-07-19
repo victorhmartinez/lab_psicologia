@@ -80,6 +80,8 @@ public class DialogosManager : MonoBehaviour
     [Header("Cambios escena")]
     [SerializeField]
     private FinalizarCaso finalizarCaso;
+    [SerializeField]
+    private AnimationClip animationEntregar;
     [Header("Panel Indicaciones")]
     [SerializeField]
     private GameObject panelIndiAniamciones;
@@ -258,7 +260,9 @@ public class DialogosManager : MonoBehaviour
                     panelIndiAniamciones.SetActive(true);
                     txtAnimaciones.text = "El terapeuta entrega el consentimiento informado al paciente) \n" +
                         "(El paciente simula leerlo y luego procede a firmar el consentimiento informado dado por el terapeuta. Posterior a ello se continua con la entrevista).";
+                    animDoctor.SetBool("entregar", true);
                     StopAllCoroutines();
+                    StartCoroutine(ejecutarAnimacionFirmar());
                     StartCoroutine(esperarAnimacion(panelIndiAniamciones,false,"Inicial",listUbicacionesCamera[1]));
 
                 }else if (fase== "Desarrollo" && contador==1)
@@ -280,7 +284,9 @@ public class DialogosManager : MonoBehaviour
                     manejadorCamara.activarCamaraGeneral();
                     panelIndiAniamciones.SetActive(true);
                     txtAnimaciones.text = "El terapeuta le presenta al paciente el test y empieza a simular que lo completa)";
+                    animPaciente.SetBool("escribir", true);
                     StopAllCoroutines();
+                    StartCoroutine(ejecutarAnimacionFirmar());
                     StartCoroutine(esperarAnimacion(panelIndiAniamciones, false, fase,listUbicacionesCamera[3]));
                 } 
                 else
@@ -428,14 +434,9 @@ public class DialogosManager : MonoBehaviour
             darFuncionAceptar(esCorrecta, valor);   
 
     }
-
-   
-
-    
     public void  darFuncionBtnAceptar()
     {
 
-        
         //uiDialogo.SetActive(true);
         buscarPersonaje(dialogosList[contador].personaje);
     
@@ -525,6 +526,8 @@ public class DialogosManager : MonoBehaviour
     }
     IEnumerator esperarAnimacion(GameObject panel,bool faseInicial,string fase,GameObject ubicacionCamera)
     {
+
+        
         if (ubicacionCamera != null)
         {
             mainCamera.transform.position = ubicacionCamera.transform.position;
@@ -536,7 +539,8 @@ public class DialogosManager : MonoBehaviour
         txtNombrePsicologo.gameObject.SetActive(false);
         txtNombrePaciente.gameObject.SetActive(false);
         manejadorCamara.activarCamaraGeneral();
-        
+      
+
         yield return new WaitForSeconds(6.0f);
         panel.SetActive(false);
         if (!faseInicial )
@@ -587,7 +591,14 @@ public class DialogosManager : MonoBehaviour
             dialagoPsicologo.SetActive(false);
         }
     }
-    
+   IEnumerator ejecutarAnimacionFirmar()
+    {
+        yield return new WaitForSeconds(0.3f);
+        animDoctor.SetBool("entregar", false);
+        yield return new WaitForSeconds(animationEntregar.length);
+        animPaciente.SetBool("escribir", false);
+        yield return new WaitForSeconds(0.3f);
+    }
     public void llamarUiDialogos()
     {
         if (dialogosList[contador].personaje.Contains("Psicólogo"))
@@ -595,7 +606,8 @@ public class DialogosManager : MonoBehaviour
         {
             if (!parado)
             {
-                animPaciente.SetBool("hablar", true);
+
+                animDoctor.SetBool("hablar", true);
                 ubicarPersonajeCentro();
             }
             
@@ -607,7 +619,7 @@ public class DialogosManager : MonoBehaviour
             
             if (!parado)
             {
-                animDoctor.SetBool("hablar", true);
+                animPaciente.SetBool("hablar", true);
                 ubicarPersonajeCentro();
              
             }

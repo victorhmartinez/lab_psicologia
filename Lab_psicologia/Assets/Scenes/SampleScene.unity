@@ -8417,7 +8417,7 @@ Transform:
   m_GameObject: {fileID: 838235515}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.919, y: 0.0966256, z: -4.392}
+  m_LocalPosition: {x: -16.919, y: 0.016, z: -4.41}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15851,7 +15851,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cd250404a8d628147a7744f8b47c3501, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.00000059604645
+      value: -0.012
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cd250404a8d628147a7744f8b47c3501, type: 3}
       propertyPath: m_LocalPosition.z
@@ -16040,6 +16040,7 @@ MonoBehaviour:
   gameObjectPiscolog: {fileID: 136543803}
   gameObjectPaciente: {fileID: 338385629}
   finalizarCaso: {fileID: 1254019944}
+  animationEntregar: {fileID: 7400000, guid: 36c5a395af759274285911cd39412cea, type: 2}
   panelIndiAniamciones: {fileID: 90013674}
   txtAnimaciones: {fileID: 731757352}
   listUbicacionesCamera:
@@ -21942,8 +21943,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1813328669}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -1, z: 0, w: 0}
-  m_LocalPosition: {x: -16.937, y: 0.144, z: -2.667}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
+  m_LocalPosition: {x: -16.937, y: -0.007, z: -2.684}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -49219,7 +49220,9 @@ SceneRoots:
   - {fileID: 374868814}
   - {fileID: 838235516}
   - {fileID: 513468984}
+  - {fileID: 1234664593}
   - {fileID: 963194228}
+  - {fileID: 1429448543}
   - {fileID: 1592263503}
   - {fileID: 1160710519}
   - {fileID: 1179142448}
@@ -49239,5 +49242,3 @@ SceneRoots:
   - {fileID: 1888263702}
   - {fileID: 1409819407}
   - {fileID: 1405830043}
-  - {fileID: 1234664593}
-  - {fileID: 1429448543}
