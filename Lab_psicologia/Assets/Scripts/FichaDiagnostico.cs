@@ -279,11 +279,14 @@ public class FichaDiagnostico : MonoBehaviour
         abriendoPuerta[1].SetActive(true);
 
         yield return new WaitForSeconds(3.0f);
+         abriendoPuerta[1].SetActive(false);
+        abriendoPuerta[0].SetActive(true);
         dialogosManager.iniciarFase("Desarrollo");
         dialogosManager.ubicarPersonajeCentro();
         dialogosManager.darFuncionBtnAceptar();
         camaraAnimacion.SetActive(false);
         panelAnimaciones.SetActive(false);
+        PerAbriPuerta.SetActive(false);
     }
 }
 

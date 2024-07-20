@@ -44,11 +44,12 @@ public class PresentarInfoSalas : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PerAbriPuerta.SetActive(false);
+        
         btnAceptar.gameObject.SetActive(false);
         if (gameObject.name == "Entrada3")
         {
             btnComenzar.SetActive(false);
+            PerAbriPuerta.SetActive(false);
         }
     }
 

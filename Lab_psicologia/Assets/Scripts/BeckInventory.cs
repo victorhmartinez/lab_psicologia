@@ -115,16 +115,17 @@ public class BeckInventory : MonoBehaviour
             {
                 panelBeck.SetActive(false);
                 escenarioTrabPsicologo.SetActive(true);
-                fnCaso.activarPreguntaBeck();
 
-                    panelRetroalimentacionFase.SetActive(false);
-                    panelIndicacionTiempo.SetActive(true);
-                    StopAllCoroutines();
-                    StartCoroutine(escribirTexto(indicacionesSesion[0], txtIndicaciones, btnContinuarFase.gameObject));
-                    estado = true;
+                fnCaso.activarPreguntaBeck();
+                panelRetroalimentacionFase.SetActive(false);
+                    
                     btnContinuarFase.onClick.RemoveAllListeners();
                     btnContinuarFase.onClick.AddListener(() =>
                     {
+                        panelIndicacionTiempo.SetActive(true);
+                        StopAllCoroutines();
+                        StartCoroutine(escribirTexto(indicacionesSesion[0], txtIndicaciones, btnContinuarFase.gameObject));
+                        estado = true;
                         funcionBtnContinuar();
                     });
 
@@ -235,11 +236,14 @@ public class BeckInventory : MonoBehaviour
         abriendoPuerta[1].SetActive(true);
 
         yield return new WaitForSeconds(3.0f);
+        abriendoPuerta[1].SetActive(false);
+        abriendoPuerta[0].SetActive(true);
         dialogosManager.iniciarFase("Final");
         dialogosManager.ubicarPersonajeCentro();
         dialogosManager.darFuncionBtnAceptar();
         camaraAnimacion.SetActive(false);
         panelAnimaciones.SetActive(false);
+        PerAbriPuerta.SetActive(false);
     }
 
 }
