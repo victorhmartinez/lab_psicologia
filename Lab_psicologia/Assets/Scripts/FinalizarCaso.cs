@@ -42,6 +42,9 @@ public class FinalizarCaso : MonoBehaviour
     private TextMeshProUGUI txtAlerta;
     [SerializeField]
     private Button btnAceptar;
+    [SerializeField]
+    private Calificacion calificacion;
+    bool estado=true;
     // Start is called before the first frame update
     void Start()
     {
@@ -162,6 +165,13 @@ public class FinalizarCaso : MonoBehaviour
         panelAlerta.SetActive(true);
         panelOpciones.SetActive(false);
         txtAlerta.text = "El rango que seleccionaste de la tabla es el correcto";
+        if (estado == true)
+        {
+            calificacion.incrementar(calificacion.valorPregunta);
+            calificacion.incrementarFinal(calificacion.valorPregunta);
+            calificacion.incrementarContador();
+            estado = false;
+        }
         btnAceptar.onClick.RemoveAllListeners();
         btnAceptar.onClick.AddListener(() =>
         {

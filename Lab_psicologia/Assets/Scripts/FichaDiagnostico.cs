@@ -70,6 +70,8 @@ public class FichaDiagnostico : MonoBehaviour
 
     [SerializeField]
     private Calificacion calificacion;
+    [SerializeField]
+    private VistaFicha vistaFicha;
     [Header("Animaciones")]
     [SerializeField]
     private GameObject panelAnimaciones, camaraAnimacion;
@@ -139,6 +141,7 @@ public class FichaDiagnostico : MonoBehaviour
                         calificacion.incrementarFinal(calificacion.valorPregunta);
                         calificacion.incrementarContador();
                         estado = false;
+                        vistaFicha.presentarLista(listRespuestaC1, listaRespuestaObtenidas);
                     }
                     btnAceptarAlert.GetComponent<Button>().onClick.RemoveAllListeners();
                     btnAceptarAlert.GetComponent<Button>().onClick.AddListener(() =>

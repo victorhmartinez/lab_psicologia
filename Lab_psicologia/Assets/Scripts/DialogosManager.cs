@@ -660,7 +660,7 @@ public class DialogosManager : MonoBehaviour
                 cont++;
             }
         }
-        cont += 2;
+        cont += 3;
         return cont;
     }
 }
