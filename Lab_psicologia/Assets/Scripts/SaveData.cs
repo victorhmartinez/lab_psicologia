@@ -6,7 +6,7 @@ using Proyecto26;
 
 public class SaveData : MonoBehaviour
 {
-    private string url_api = "http://localhost:3000/api";
+    private string url_api = "https://api-lab-psicologia.onrender.com/api";
 
     public void writeNewUser(string name, string email, string username, string date)
     {
