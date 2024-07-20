@@ -60,8 +60,53 @@ public class FinalizarCaso : MonoBehaviour
                 Debug.Log("Toggle is Off");
             }
         });
+        listToggle[1].onValueChanged.AddListener(delegate
+        {
+            if (listToggle[1].isOn)
+            {
+                // Lógica cuando el Toggle está activado (true)
+                Debug.Log("Toggle is On");
+                opcionIncorrecta(listToggle[1]);
 
-        asignarMetodos();
+            }
+            else
+            {
+                // Lógica cuando el Toggle está desactivado (false)
+                Debug.Log("Toggle is Off");
+            }
+        });
+
+        listToggle[2].onValueChanged.AddListener(delegate
+        {
+            if (listToggle[2].isOn)
+            {
+                // Lógica cuando el Toggle está activado (true)
+                Debug.Log("Toggle is On");
+                opcionIncorrecta(listToggle[2]);
+            }
+            else
+            {
+                // Lógica cuando el Toggle está desactivado (false)
+                Debug.Log("Toggle is Off");
+            }
+        });
+        listToggle[3].onValueChanged.AddListener(delegate
+        {
+            if (listToggle[3].isOn)
+            {
+                // Lógica cuando el Toggle está activado (true)
+                Debug.Log("Toggle is On");
+                opcionIncorrecta(listToggle[3]);
+
+            }
+            else
+            {
+                // Lógica cuando el Toggle está desactivado (false)
+                Debug.Log("Toggle is Off");
+            }
+        });
+
+       
     }
 
     // Update is called once per frame
@@ -101,7 +146,7 @@ public class FinalizarCaso : MonoBehaviour
         for (int i = 0; i < texto.ToCharArray().Length; i++)
         {
             txt.maxVisibleCharacters++;
-            yield return new WaitForSeconds(25f / 500);
+            yield return new WaitForSeconds(35f / 500);
 
         }
         panelOpciones.SetActive(true);
@@ -130,6 +175,7 @@ public class FinalizarCaso : MonoBehaviour
     {
         panelAlerta.SetActive(true);
         panelOpciones.SetActive(false);
+        panelRetrolimentacion.SetActive(false);
         txtAlerta.text = "Incorrecto revisa los rangos de la tabla";
         btnAceptar.onClick.RemoveAllListeners();
         btnAceptar.onClick.AddListener(() =>
@@ -146,8 +192,11 @@ public class FinalizarCaso : MonoBehaviour
     {
         for(int i=1; i <listToggle.Length-1; i++)
         {
+            print(listToggle[i].gameObject.name);
+
             listToggle[i].onValueChanged.AddListener(delegate
             {
+                print(listToggle[i].gameObject.name);
                 if (listToggle[i].isOn)
                 {
                     // Lógica cuando el Toggle está activado (true)
@@ -162,5 +211,8 @@ public class FinalizarCaso : MonoBehaviour
                 }
             });
         }
+
+
+
     }
 }
