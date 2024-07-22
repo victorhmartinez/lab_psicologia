@@ -62,6 +62,8 @@ public class DialogosManager : MonoBehaviour
     private double caliPorIncorrecto=0;
     [SerializeField]
     private Calificacion calificacion;
+    [SerializeField]
+    private VistaFicha vistaFicha;
     private bool parado = true;
     [Header("Label nombres personajes")]
     [SerializeField]
@@ -397,7 +399,7 @@ public class DialogosManager : MonoBehaviour
                         estado = false;
                     }
                     
-                    listButtons[i].onClick.AddListener(() => darFuncionBtn(retroalimentacion, esCorrecta,respuesta,respuestaObj,cali));
+                    listButtons[i].onClick.AddListener(() => darFuncionBtn(pregunta.pregunta,retroalimentacion, esCorrecta,respuesta,respuestaObj,cali));
                     listButtons[i].gameObject.SetActive(true);
 
                 }
@@ -421,7 +423,7 @@ public class DialogosManager : MonoBehaviour
         }
     }
    // Metodo pata asignar la funcionalidad a los botones de las respuestas
-    public void darFuncionBtn( string retroalimentacion, bool esCorrecta, string respuesta,Respuestas respuestasobj, int valor)
+    public void darFuncionBtn(string pregunta, string retroalimentacion, bool esCorrecta, string respuesta,Respuestas respuestasobj, int valor)
     {
        
             audioSource.clip = respuestasobj.audio;
@@ -438,7 +440,7 @@ public class DialogosManager : MonoBehaviour
                 parado = false;
                 manejadorCamara.cambiarPosiciones(parado);
             }
-            darFuncionAceptar(esCorrecta, valor);   
+            darFuncionAceptar(esCorrecta, valor,pregunta,respuesta,retroalimentacion);   
 
     }
     public void  darFuncionBtnAceptar()
@@ -462,12 +464,13 @@ public class DialogosManager : MonoBehaviour
        
     }
 
-    public void darFuncionAceptar(bool correcto, int valorSumar)
+    public void darFuncionAceptar(bool correcto, int valorSumar,string preguntaRe, string respuesta, string retroalimentacion)
     {
         btn_aceptar.gameObject.SetActive(false);
         if (correcto)
         {
             //Debug.LogWarning("Hizo click en algo correcto");
+            vistaFicha.addPregunta(preguntaRe, respuesta, retroalimentacion);
             calificacion.incrementar(valorSumar);
             estado = true;
             btn_aceptar.gameObject.SetActive(false);

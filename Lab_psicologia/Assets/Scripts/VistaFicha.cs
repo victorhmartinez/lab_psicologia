@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -30,7 +31,15 @@ public class VistaFicha : MonoBehaviour
         "el paciente durante la entrevista no mencionó algún síntoma relacionado con su concentración.",
         "el paciente durante la entrevista no mencionó algún síntoma relacionado con intentos suicidas."
     };
+    public List<PreguntasResFinal> preguntasList = new List<PreguntasResFinal>();
+    [SerializeField]
+    private GameObject uiRes;
+    [SerializeField]
+    private GameObject scrollViewContentPre;
+    [SerializeField]
+    private GameObject vistaPre;
 
+    public List<GameObject> elements = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
@@ -91,5 +100,49 @@ public class VistaFicha : MonoBehaviour
     {
         uiResFicha.SetActive(estado);
         estado = !estado;
+    }
+
+    public void addPregunta(string pregunta, string respuesta, string retro)
+
+    {
+        PreguntasResFinal pre = new PreguntasResFinal(pregunta, respuesta, retro);
+        preguntasList.Add(pre);
+        //Debug.LogError(preguntasList[0].pregunta);
+    }
+
+    public void presentarListaPreguntas()
+    {
+        LImpiar();
+        for (int i = 0; i < preguntasList.Count; i++)
+        {
+            int valor = i + 1;
+
+            vistaPre.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = valor.ToString()+".";
+
+            vistaPre.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = preguntasList[i].pregunta;
+            vistaPre.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = preguntasList[i].respuesta;
+            vistaPre.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = preguntasList[i].retroalimentacion;
+
+            GameObject panel = (GameObject)Instantiate(vistaPre);
+            panel.transform.SetParent(scrollViewContentPre.transform);
+            panel.transform.localPosition = Vector3.zero;
+            panel.transform.localScale = Vector3.one;
+
+        }
+    }
+    void obtenerLista()
+    {
+        for (int i = 0; i < scrollViewContentPre.transform.childCount; i++)
+        {
+            elements.Add(scrollViewContentPre.transform.GetChild(i).gameObject);
+        }
+    }
+    void LImpiar()
+    {
+        obtenerLista();
+        foreach (GameObject element in elements)
+        {
+            Destroy(element);
+        }
     }
 }
