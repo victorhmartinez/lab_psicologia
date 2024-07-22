@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ControladorCinematica : MonoBehaviour
 {
@@ -14,13 +15,24 @@ public class ControladorCinematica : MonoBehaviour
     [Header("Panel de indicaciones")]
     [SerializeField] private GameObject panelIndicacion;
     private bool isSkipping = false;
+    [Header("Inidicaciones juego")]
+    [SerializeField] private GameObject btnContinuar;
+    [SerializeField] private Button btnSaltar;
+    [SerializeField] private GameObject panelInstruccioneJuego;
 
     void Start()
     {
-        panelIndicacion.SetActive(true);
-        player.SetActive(false);
-        abrirPuertas(false);
-        recorridoController.SetBool(nombreBoolRecorrido, true); // Inicia la animación
+        panelInstruccioneJuego.SetActive(true);
+        btnContinuar.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            darFuncionalidaBotonSC();
+        });
+        btnSaltar.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            darFuncionalidaBotonSC();
+        });
+
+
     }
 
     void Update()
@@ -65,7 +77,14 @@ public class ControladorCinematica : MonoBehaviour
     }
 
 
-
+    public void darFuncionalidaBotonSC()
+    {
+        panelInstruccioneJuego.SetActive(false);
+        panelIndicacion.SetActive(true);
+        player.SetActive(false);
+        abrirPuertas(false);
+        recorridoController.SetBool(nombreBoolRecorrido, true); // Inicia la animación
+    }
 
     // Método para abrir o cerrar puertas
     void abrirPuertas(bool estado)
