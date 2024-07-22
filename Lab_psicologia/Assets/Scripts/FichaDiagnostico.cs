@@ -87,10 +87,12 @@ public class FichaDiagnostico : MonoBehaviour
     private Animator animTerapeuta;
     [SerializeField]
     private GameObject[] abriendoPuerta;
+    [SerializeField]
+    private SaveData saveData;
     void Start()
     {
         submitButton.onClick.AddListener(SubmitFicha);
-    
+        saveData = GameObject.Find("LoginController").GetComponent<SaveData>();
     }
 
     public void SubmitFicha()
@@ -153,6 +155,7 @@ public class FichaDiagnostico : MonoBehaviour
                         btnContinuar.onClick.AddListener(() =>
                         {
                             panelRetroalimentacionFase.SetActive(false);
+                            saveData.updateUserIntentEntry(System.DateTime.Now.ToString("HH:mm:ss; dd MMMM yyyy"), calificacion.ValorPorcentaje+"%", calificacion.puntuacionActual);
                             panelIndicacionTiempo.SetActive(true);
                             StopAllCoroutines();
                             StartCoroutine(escribirTexto(indicacionesSesion[0], txtIndicaciones, btnContinuarFase.gameObject));

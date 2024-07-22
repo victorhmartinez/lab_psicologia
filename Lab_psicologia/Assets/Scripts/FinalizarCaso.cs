@@ -45,9 +45,13 @@ public class FinalizarCaso : MonoBehaviour
     [SerializeField]
     private Calificacion calificacion;
     bool estado=true;
+    [SerializeField]
+    private SaveData saveData;
     // Start is called before the first frame update
     void Start()
     {
+
+        saveData = GameObject.Find("LoginController").GetComponent<SaveData>();
         listToggle[0].onValueChanged.AddListener(delegate
         {
             if (listToggle[0].isOn)
@@ -125,6 +129,7 @@ public class FinalizarCaso : MonoBehaviour
         lblTitulo.text = "Felicidades, has terminado este caso clinico";
         btnContinuar.onClick.RemoveAllListeners();
         btnContinuar.onClick.AddListener(() => {
+            saveData.updateUserIntentEntry(System.DateTime.Now.ToString("HH:mm:ss; dd MMMM yyyy"), calificacion.ValorPorcentaje + "%", calificacion.puntuacionActual);
             panelRetroalimentacionFase.SetActive(false);
             sceneChange.changeScena("Iniciar Sesion");
         });

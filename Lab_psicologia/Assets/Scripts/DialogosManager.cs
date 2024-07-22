@@ -91,10 +91,16 @@ public class DialogosManager : MonoBehaviour
     private GameObject[] listUbicacionesCamera;
     [SerializeField]
     private Camera mainCamera;
+    [Header("Guardar informacion")]
+    [SerializeField]
+    private SaveData saveData;
 
     bool estado=true;
     void Start()
     {
+
+        saveData = GameObject.Find("LoginController").GetComponent<SaveData>();
+         
         if (apiManager != null)
         {
             apiManager.DialogosCargadosEvent += OnDialogosInicialCargados;
@@ -251,7 +257,7 @@ public class DialogosManager : MonoBehaviour
 
                 }else if (fase == "Inicial" && contador == 6)
                 {
-                    
+                  //      saveData.updatePartidaUser(fase, System.DateTime.Now.ToString("HH:mm:ss; dd MMMM yyyy"), "Caso " + apiManager.getNroCaso());
                     dialagoPaciente.SetActive(false);
                     dialagoPsicologo.SetActive(false);
                     txtNombrePsicologo.gameObject.SetActive(false);
@@ -299,14 +305,7 @@ public class DialogosManager : MonoBehaviour
                         manejadorCamara.cambiarPosiciones(parado);
                     }
                         contador++;
-                    if (fase == "Final" && contador == dialogosList.Count)
-                    {
-                        panelIndiAniamciones.SetActive(true);
-                        txtAnimaciones.text = "(El terapeuta acompaña al paciente hasta la puerta y el paciente sala de la sala)";
-                        animPaciente.SetBool("despedirse", true);
-                        StopAllCoroutines();
-                        StartCoroutine(esperarAnimacion(panelIndiAniamciones, true, "Final",null));
-                    }
+                  
 
 
 
@@ -337,8 +336,15 @@ public class DialogosManager : MonoBehaviour
                         {
                             dialagoPsicologo.SetActive(false);
                             dialagoPaciente.SetActive(false);
-
-                            finalizarCaso.activarRetroFinal();
+                            if (fase == "Final" && contador == dialogosList.Count)
+                            {
+                                panelIndiAniamciones.SetActive(true);
+                                txtAnimaciones.text = "(El terapeuta acompaña al paciente hasta la puerta y el paciente sala de la sala)";
+                                animPaciente.SetBool("despedirse", true);
+                                StopAllCoroutines();
+                                StartCoroutine(esperarAnimacion(panelIndiAniamciones, true, "Final", null));
+                            }
+                           
                         }
                     }
                 }
@@ -438,6 +444,10 @@ public class DialogosManager : MonoBehaviour
     public void  darFuncionBtnAceptar()
     {
 
+
+        saveData.updatePartidaUser(fase, System.DateTime.Now.ToString("HH:mm:ss; dd MMMM yyyy"), "Caso " + apiManager.getNroCaso());
+
+        saveData.fechaIncio = System.DateTime.Now.ToString("HH:mm:ss; dd MMMM yyyy");
         //uiDialogo.SetActive(true);
         buscarPersonaje(dialogosList[contador].personaje);
     
@@ -559,6 +569,10 @@ public class DialogosManager : MonoBehaviour
             if (fase == "Inicial")
             {
                 fichaDiagnostico.notaFichaDiagnostico();
+            }
+            else if(fase=="Final")
+            {
+                finalizarCaso.activarRetroFinal();
             }
            
         }

@@ -16195,6 +16195,7 @@ MonoBehaviour:
   abriendoPuerta:
   - {fileID: 418271618976138345}
   - {fileID: 22711061}
+  saveData: {fileID: 0}
 --- !u!4 &1202637487
 Transform:
   m_ObjectHideFlags: 0
@@ -16600,6 +16601,7 @@ MonoBehaviour:
   - {fileID: 1888263701}
   - {fileID: 1409819406}
   mainCamera: {fileID: 963194227}
+  saveData: {fileID: 0}
 --- !u!4 &1254019940
 Transform:
   m_ObjectHideFlags: 0
@@ -16790,6 +16792,7 @@ MonoBehaviour:
   txtAlerta: {fileID: 1763439489}
   btnAceptar: {fileID: 1506113716}
   calificacion: {fileID: 1543157085}
+  saveData: {fileID: 0}
 --- !u!114 &1254019945
 MonoBehaviour:
   m_ObjectHideFlags: 0

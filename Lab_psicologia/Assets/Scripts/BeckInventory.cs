@@ -76,10 +76,12 @@ public class BeckInventory : MonoBehaviour
     private Animator animTerapeuta;
     [SerializeField]
     private GameObject[] abriendoPuerta;
+    [SerializeField]
+    private SaveData saveData;
     void Start()
     {
-      
 
+        saveData = GameObject.Find("LoginController").GetComponent<SaveData>();
     }
 
     // Update is called once per frame
@@ -206,7 +208,7 @@ public class BeckInventory : MonoBehaviour
         btnContinuar.onClick.AddListener(() =>
         {
 
-
+            saveData.updateUserIntentEntry(System.DateTime.Now.ToString("HH:mm:ss; dd MMMM yyyy"), calificacion.ValorPorcentaje + "%", calificacion.puntuacionActual);
             panelRetroalimentacionFase.SetActive(false);
             panelIndicacionTiempo.SetActive(true);
             StopAllCoroutines();
