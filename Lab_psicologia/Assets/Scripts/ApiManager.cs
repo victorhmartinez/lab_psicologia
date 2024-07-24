@@ -15,6 +15,9 @@ public class ApiManager : MonoBehaviour
     public List<Dialogos> dialogosListDes = new List<Dialogos>();
     public List<Dialogos> dialogosListFin = new List<Dialogos>();
     public int nroCaso;
+    [SerializeField]
+    private GameObject [] personajesCasos;
+
     // Evento para indicar que los diálogos se han cargado fase inicial
     public event Action<List<Dialogos>> DialogosCargadosEvent;
     // Evento para indicar que los diálogos se han cargado fase desarrollo
@@ -32,7 +35,20 @@ public class ApiManager : MonoBehaviour
         nroCaso = UnityEngine.Random.Range(1, 2);
         Debug.Log("Número de caso generado: " + nroCaso);
 
-      
+        if (nroCaso == 1)
+        {
+            personajesCasos[0].SetActive(true);
+            personajesCasos[1].SetActive(true);
+            personajesCasos[2].SetActive(false);
+            personajesCasos[3].SetActive(false);
+        }
+        else if (nroCaso == 4)
+        {
+            personajesCasos[0].SetActive(false);
+            personajesCasos[1].SetActive(false);
+            personajesCasos[2].SetActive(true);
+            personajesCasos[3].SetActive(true);
+        }
 
         StartCoroutine(GetDialogosFromApi(nroCaso, "Inicial", (dialogos) => {
             dialogosList = dialogos;

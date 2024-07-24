@@ -48,6 +48,8 @@ public class IntroController : MonoBehaviour
     {
         panelIntroduccion.SetActive(true);
         Debug.Log("Número aleatorio recibido en IntroController: " + numeroAleatorio);
+        
+
         StartCoroutine(escribirIntro(introCaso1[0]));
         btnAceptar.GetComponent<Button>().onClick.RemoveAllListeners();
         btnAceptar.GetComponent<Button>().onClick.AddListener(() =>

@@ -99,6 +99,7 @@ public class DialogosManager : MonoBehaviour
     [SerializeField]
     private LoadData loadData;
     [SerializeField] private GameObject btnContinuarDesarrollo;
+    [SerializeField] private GameObject personajeC4Llorando, personajeC4;
 
     bool estado=true;
     private bool d1, d2, d3;
@@ -141,10 +142,10 @@ public class DialogosManager : MonoBehaviour
         d1 = true;
         if (d1 && d2 && d3)
         {
-            if (dialogosList.Count > 0 && loadData.tieneHistorial)
-            {
+         
                 btnContinuarDesarrollo.SetActive(true);
-            }
+       
+
         }
 
     }
@@ -156,10 +157,9 @@ public class DialogosManager : MonoBehaviour
         // Debug.Log("Hola estas en el evento con las listas de desarrollo");
         if (d1 && d2 && d3)
         {
-            if (dialogosList.Count > 0 && loadData.tieneHistorial)
-            {
-                btnContinuarDesarrollo.SetActive(true);
-            }
+            
+       
+            btnContinuarDesarrollo.SetActive(true);
         }
     }
     private void OnDialogosFinCargados(List<Dialogos> dialogos)
@@ -170,10 +170,8 @@ public class DialogosManager : MonoBehaviour
         //   Debug.Log("Hola estas en el evento con las listas de fnal");
         if (d1 && d2 && d3)
         {
-            if (dialogosList.Count > 0 && loadData.tieneHistorial)
-            {
-                btnContinuarDesarrollo.SetActive(true);
-            }
+          
+            btnContinuarDesarrollo.SetActive(true);
         }
 
     }
@@ -234,6 +232,12 @@ public class DialogosManager : MonoBehaviour
             }
             else if (btn != null)
             {
+                if(texto== "Gracias, doctor. A veces siento que no puedo controlar estos pensamientos y emociones, los cuales me hacen sentir sumamente desanimada.")
+                {
+                    personajeC4Llorando.SetActive(true);
+                    personajeC4.SetActive(false);
+                }
+
                 btn.gameObject.SetActive(true);
             }
         }
