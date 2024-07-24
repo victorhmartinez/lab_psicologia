@@ -96,13 +96,19 @@ public class DialogosManager : MonoBehaviour
     [Header("Guardar informacion")]
     [SerializeField]
     private SaveData saveData;
+    [SerializeField]
+    private LoadData loadData;
+    [SerializeField] private GameObject btnContinuarDesarrollo;
 
     bool estado=true;
+    private bool d1, d2, d3;
     void Start()
     {
 
         saveData = GameObject.Find("LoginController").GetComponent<SaveData>();
-         
+        loadData = GameObject.Find("LoginController").GetComponent<LoadData>();
+
+
         if (apiManager != null)
         {
             apiManager.DialogosCargadosEvent += OnDialogosInicialCargados;
@@ -128,30 +134,54 @@ public class DialogosManager : MonoBehaviour
     {
         // Guardar los di�logos cargados
         dialogosList = dialogos;
-        Debug.Log("Hola estas en el evento con las listas cargadas");
+       // Debug.Log("Hola estas en el evento con las listas cargadas");
 
        calificacion.preguntasCant = calcularCantidadP();
+      
+        d1 = true;
+        if (d1 && d2 && d3)
+        {
+            if (dialogosList.Count > 0 && loadData.tieneHistorial)
+            {
+                btnContinuarDesarrollo.SetActive(true);
+            }
+        }
 
     }
     private void OnDialogosDesarrolloCargados(List<Dialogos> dialogos)
     {
         // Guardar los di�logos cargados
         dialogosListDesarrollo = dialogos;
-        Debug.Log("Hola estas en el evento con las listas de desarrollo");
-
+        d2 = true;
+        // Debug.Log("Hola estas en el evento con las listas de desarrollo");
+        if (d1 && d2 && d3)
+        {
+            if (dialogosList.Count > 0 && loadData.tieneHistorial)
+            {
+                btnContinuarDesarrollo.SetActive(true);
+            }
+        }
     }
     private void OnDialogosFinCargados(List<Dialogos> dialogos)
     {
         // Guardar los di�logos cargados
         dialogosListFin = dialogos;
-        Debug.Log("Hola estas en el evento con las listas de fnal");
+        d3 = true;
+        //   Debug.Log("Hola estas en el evento con las listas de fnal");
+        if (d1 && d2 && d3)
+        {
+            if (dialogosList.Count > 0 && loadData.tieneHistorial)
+            {
+                btnContinuarDesarrollo.SetActive(true);
+            }
+        }
 
     }
     public void iniciarFase(string fase)
     {
         switch(fase) {
             case "Desarrollo":
-            
+                print("Enteeee");
                 animDoctor.SetBool("pararse", false);
                 animPaciente.SetBool("pararse", false);
                 animDoctor.SetBool("sentarse", false);
@@ -451,7 +481,14 @@ public class DialogosManager : MonoBehaviour
 
         saveData.fechaIncio = System.DateTime.Now.ToString("HH:mm:ss; dd MMMM yyyy");
         //uiDialogo.SetActive(true);
-        buscarPersonaje(dialogosList[contador].personaje);
+        if (dialogosList.Count!=0)
+        {
+            print(contador);
+            print(dialogosList[contador].personaje);
+            buscarPersonaje(dialogosList[contador].personaje);
+           
+        }
+        
     
         txtPersonaje.text = dialogosList[contador].personaje;
         llamarUiDialogos();
@@ -555,10 +592,11 @@ public class DialogosManager : MonoBehaviour
         txtNombrePsicologo.gameObject.SetActive(false);
         txtNombrePaciente.gameObject.SetActive(false);
         manejadorCamara.activarCamaraGeneral();
-      
 
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(0.2f);
         animPaciente.SetBool("despedirse", false);
+        yield return new WaitForSeconds(6.0f);
+        
         panel.SetActive(false);
         if (!faseInicial )
         {
