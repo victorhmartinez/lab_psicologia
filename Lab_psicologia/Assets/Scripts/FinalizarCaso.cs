@@ -56,14 +56,14 @@ public class FinalizarCaso : MonoBehaviour
         {
             if (listToggle[0].isOn)
             {
-                // Lógica cuando el Toggle está activado (true)
+                // Lï¿½gica cuando el Toggle estï¿½ activado (true)
                 Debug.Log("Toggle is On");
                 opcionCorrecta();
 
             }
             else
             {
-                // Lógica cuando el Toggle está desactivado (false)
+                // Lï¿½gica cuando el Toggle estï¿½ desactivado (false)
                 Debug.Log("Toggle is Off");
             }
         });
@@ -71,14 +71,14 @@ public class FinalizarCaso : MonoBehaviour
         {
             if (listToggle[1].isOn)
             {
-                // Lógica cuando el Toggle está activado (true)
+                // Lï¿½gica cuando el Toggle estï¿½ activado (true)
                 Debug.Log("Toggle is On");
                 opcionIncorrecta(listToggle[1]);
 
             }
             else
             {
-                // Lógica cuando el Toggle está desactivado (false)
+                // Lï¿½gica cuando el Toggle estï¿½ desactivado (false)
                 Debug.Log("Toggle is Off");
             }
         });
@@ -87,13 +87,13 @@ public class FinalizarCaso : MonoBehaviour
         {
             if (listToggle[2].isOn)
             {
-                // Lógica cuando el Toggle está activado (true)
+                // Lï¿½gica cuando el Toggle estï¿½ activado (true)
                 Debug.Log("Toggle is On");
                 opcionIncorrecta(listToggle[2]);
             }
             else
             {
-                // Lógica cuando el Toggle está desactivado (false)
+                // Lï¿½gica cuando el Toggle estï¿½ desactivado (false)
                 Debug.Log("Toggle is Off");
             }
         });
@@ -101,14 +101,14 @@ public class FinalizarCaso : MonoBehaviour
         {
             if (listToggle[3].isOn)
             {
-                // Lógica cuando el Toggle está activado (true)
+                // Lï¿½gica cuando el Toggle estï¿½ activado (true)
                 Debug.Log("Toggle is On");
                 opcionIncorrecta(listToggle[3]);
 
             }
             else
             {
-                // Lógica cuando el Toggle está desactivado (false)
+                // Lï¿½gica cuando el Toggle estï¿½ desactivado (false)
                 Debug.Log("Toggle is Off");
             }
         });
@@ -192,6 +192,11 @@ public class FinalizarCaso : MonoBehaviour
         panelOpciones.SetActive(false);
         panelRetrolimentacion.SetActive(false);
         txtAlerta.text = "Incorrecto revisa los rangos de la tabla";
+        if (estado == true)
+        {
+            calificacion.decrementar(calificacion.valorIncorrecto);
+            estado = false;
+        }
         btnAceptar.onClick.RemoveAllListeners();
         btnAceptar.onClick.AddListener(() =>
         {
@@ -202,7 +207,7 @@ public class FinalizarCaso : MonoBehaviour
         });
     }
 
-    // Este es el método que se ejecutará cuando el Toggle cambie de estado
+    // Este es el mï¿½todo que se ejecutarï¿½ cuando el Toggle cambie de estado
  public void asignarMetodos()
     {
         for(int i=1; i <listToggle.Length-1; i++)
@@ -214,14 +219,14 @@ public class FinalizarCaso : MonoBehaviour
                 print(listToggle[i].gameObject.name);
                 if (listToggle[i].isOn)
                 {
-                    // Lógica cuando el Toggle está activado (true)
+                    // Lï¿½gica cuando el Toggle estï¿½ activado (true)
                     Debug.Log("Toggle is On");
                     opcionIncorrecta(listToggle[i]);
 
                 }
                 else
                 {
-                    // Lógica cuando el Toggle está desactivado (false)
+                    // Lï¿½gica cuando el Toggle estï¿½ desactivado (false)
                     Debug.Log("Toggle is Off");
                 }
             });
