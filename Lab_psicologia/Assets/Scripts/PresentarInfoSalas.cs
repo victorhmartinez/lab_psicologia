@@ -152,7 +152,7 @@ public class PresentarInfoSalas : MonoBehaviour
             animTerapeutaC4.SetBool("abrir", true);
         }else if(apiManager.getNroCaso() == 1)
         {
-            PerAbriPuertaC4.SetActive(true);
+            PerAbriPuertaC1.SetActive(true);
             animTerapeutaC1.SetBool("abrir", true);
         }
         
@@ -163,7 +163,8 @@ public class PresentarInfoSalas : MonoBehaviour
             animTerapeutaC4.SetBool("abrir", false);
         }
         else if(apiManager.getNroCaso() == 1)
-        { PerAbriPuertaC1.SetActive(true);
+        { 
+            PerAbriPuertaC1.SetActive(true);
             animTerapeutaC1.SetBool("abrir", false);
         }
     

@@ -19,6 +19,8 @@ public class ControladorCinematica : MonoBehaviour
     [SerializeField] private GameObject btnContinuar;
     [SerializeField] private Button btnSaltar;
     [SerializeField] private GameObject panelInstruccioneJuego;
+    [SerializeField] private AudioClip audioRecorrido;
+    [SerializeField] private AudioSource audioSorce;
 
     void Start()
     {
@@ -66,6 +68,7 @@ public class ControladorCinematica : MonoBehaviour
     // Método para finalizar la cinemática
     private void FinalizarCinematica()
     {
+        audioSorce.Stop();
         isSkipping = true;
         recorridoController.SetBool(nombreBoolRecorrido, false); // Detener la animación
         player.SetActive(true);
@@ -80,6 +83,8 @@ public class ControladorCinematica : MonoBehaviour
     public void darFuncionalidaBotonSC()
     {
         panelInstruccioneJuego.SetActive(false);
+        audioSorce.clip = audioRecorrido;
+        audioSorce.Play();
         panelIndicacion.SetActive(true);
         player.SetActive(false);
         abrirPuertas(false);
