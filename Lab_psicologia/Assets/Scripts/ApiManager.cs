@@ -18,11 +18,11 @@ public class ApiManager : MonoBehaviour
     [SerializeField]
     private GameObject [] personajesCasos;
 
-    // Evento para indicar que los diálogos se han cargado fase inicial
+    // Evento para indicar que los diï¿½logos se han cargado fase inicial
     public event Action<List<Dialogos>> DialogosCargadosEvent;
-    // Evento para indicar que los diálogos se han cargado fase desarrollo
+    // Evento para indicar que los diï¿½logos se han cargado fase desarrollo
     public event Action<List<Dialogos>> DialogosCargadosDesarrolladoEvent;
-    // Evento para indicar que los diálogos se han cargado
+    // Evento para indicar que los diï¿½logos se han cargado
     public event Action<List<Dialogos>> DialogosCargadosFinalEvent;
    
 
@@ -31,9 +31,9 @@ public class ApiManager : MonoBehaviour
         //Consumimos la api mediante corrutinas por proceso asincrono
       
 
-        // Generar un número aleatorio entre 1 y 2 o 4,5
-        nroCaso = UnityEngine.Random.Range(4, 5);
-        Debug.Log("Número de caso generado: " + nroCaso);
+        // Generar un nï¿½mero aleatorio entre 1 y 2 o 4,5
+        nroCaso = UnityEngine.Random.Range(1, 2);
+        Debug.Log("Nï¿½mero de caso generado: " + nroCaso);
 
         if (nroCaso == 1)
         {
@@ -52,18 +52,18 @@ public class ApiManager : MonoBehaviour
 
         StartCoroutine(GetDialogosFromApi(nroCaso, "Inicial", (dialogos) => {
             dialogosList = dialogos;
-            Debug.Log("Diálogos Inicial cargados: " + dialogosList.Count);
+            Debug.Log("Diï¿½logos Inicial cargados: " + dialogosList.Count);
             DialogosCargadosEvent?.Invoke(dialogosList);
         }));
 
        StartCoroutine(GetDialogosFromApi(nroCaso, "Desarrollo", (dialogos) => {
             dialogosListDes = dialogos;
-            Debug.Log("Diálogos Desarrollo cargados: " + dialogosListDes.Count);
+            Debug.Log("Diï¿½logos Desarrollo cargados: " + dialogosListDes.Count);
             DialogosCargadosDesarrolladoEvent?.Invoke(dialogosListDes);
         }));
         StartCoroutine(GetDialogosFromApi(nroCaso, "Final", (dialogos) => {
             dialogosListFin = dialogos;
-            Debug.Log("Diálogos final cargados: " + dialogosListFin.Count);
+            Debug.Log("Diï¿½logos final cargados: " + dialogosListFin.Count);
             DialogosCargadosFinalEvent?.Invoke(dialogosListFin);
         }));
     }
