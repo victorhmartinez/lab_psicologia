@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Proyecto26;
-using SimpleJSON;
+
 
 
 public class SaveData : MonoBehaviour

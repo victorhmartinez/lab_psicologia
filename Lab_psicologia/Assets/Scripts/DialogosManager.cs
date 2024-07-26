@@ -100,14 +100,34 @@ public class DialogosManager : MonoBehaviour
     private LoadData loadData;
     [SerializeField] private GameObject btnContinuarDesarrollo;
     [SerializeField] private GameObject personajeC4Llorando, personajeC4;
-
+    [SerializeField] private GameObject pc1, pc4, tc1, tc4;
     bool estado=true;
     private bool d1, d2, d3;
     void Start()
     {
-
+        tc1 = GameObject.Find("TerapeutaC1");
+        pc1 = GameObject.Find("PacienteC1");
+        tc4 = GameObject.Find("TerapeutaC4");
+        pc4 = GameObject.Find("PacienteC4");
+        if (tc1!=null||pc1!=null)
+        {         
+                animDoctor = tc1.GetComponent<Animator>();
+                animPaciente = pc1.GetComponent<Animator>();
+                gameObjectPaciente = pc1;
+                gameObjectPiscolog = tc1;
+             
+        }else if (tc4 != null || pc4 != null)
+        {
+            animDoctor = tc4.GetComponent<Animator>();
+            animPaciente = pc4.GetComponent<Animator>();
+            gameObjectPaciente = pc4;
+            gameObjectPiscolog = tc4;
+        }
+     
         saveData = GameObject.Find("LoginController").GetComponent<SaveData>();
         loadData = GameObject.Find("LoginController").GetComponent<LoadData>();
+
+        
 
 
         if (apiManager != null)
@@ -205,6 +225,11 @@ public class DialogosManager : MonoBehaviour
 
     IEnumerator escribirTexto(string texto, TextMeshProUGUI txt,GameObject btn)
     {
+        if (texto == "Gracias, doctor. A veces siento que no puedo controlar estos pensamientos y emociones, los cuales me hacen sentir sumamente desanimada.")
+        {
+            personajeC4Llorando.SetActive(true);
+            personajeC4.SetActive(false);
+        }
         txt.maxVisibleCharacters = 0;
         txt.text = texto;
         txt.richText = true;
@@ -214,7 +239,8 @@ public class DialogosManager : MonoBehaviour
             yield return new WaitForSeconds(25f / 500);
 
         }
-       
+
+
         if (contador<dialogosList.Count) {
             if (txt.gameObject.name != "txt_retroalimentacion")
             {
@@ -232,11 +258,7 @@ public class DialogosManager : MonoBehaviour
             }
             else if (btn != null)
             {
-                if(texto== "Gracias, doctor. A veces siento que no puedo controlar estos pensamientos y emociones, los cuales me hacen sentir sumamente desanimada.")
-                {
-                    personajeC4Llorando.SetActive(true);
-                    personajeC4.SetActive(false);
-                }
+               
 
                 btn.gameObject.SetActive(true);
             }
@@ -628,7 +650,7 @@ public class DialogosManager : MonoBehaviour
     public void buscarPersonaje(string personajeHabalndo)
     {
      
-        if (personajeHabalndo.Contains("Psicólogo"))
+        if (personajeHabalndo.Contains("Psicólogo")|| personajeHabalndo.Contains("Terapeuta"))
         {
             txtNombrePsicologo.text = personajeHabalndo;
             if (!parado)
@@ -665,7 +687,7 @@ public class DialogosManager : MonoBehaviour
     }
     public void llamarUiDialogos()
     {
-        if (dialogosList[contador].personaje.Contains("Psicólogo"))
+        if (dialogosList[contador].personaje.Contains("Psicólogo")|| dialogosList[contador].personaje.Contains("Terapeuta"))
 
         {
             if (!parado)

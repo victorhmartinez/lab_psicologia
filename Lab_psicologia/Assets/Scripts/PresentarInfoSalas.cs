@@ -39,6 +39,8 @@ public class PresentarInfoSalas : MonoBehaviour
     private Animator animTerapeuta;
     [SerializeField]
     private GameObject[] abriendoPuerta;
+    [SerializeField] private AudioClip audioPuerta;
+    [SerializeField] private AudioSource audioSource;
 
 
     // Start is called before the first frame update
@@ -126,6 +128,8 @@ public class PresentarInfoSalas : MonoBehaviour
 
     IEnumerator ejecutarAnimacion()
     {
+        audioSource.clip = audioPuerta;
+        audioSource.Play();
         txtAnimaciones.text = "Paciente toca la puerta) \n" +
               "   (Terapeuta abre la puerta e invita a pasar a la paciente)";
         PerAbriPuerta.SetActive(true);

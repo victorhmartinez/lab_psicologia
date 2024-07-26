@@ -89,6 +89,8 @@ public class FichaDiagnostico : MonoBehaviour
     private GameObject[] abriendoPuerta;
     [SerializeField]
     private SaveData saveData;
+    [SerializeField] private AudioSource auidoPuerta;
+
     void Start()
     {
         submitButton.onClick.AddListener(SubmitFicha);
@@ -272,6 +274,7 @@ public class FichaDiagnostico : MonoBehaviour
 
     IEnumerator esperarAnimaciones()
     {
+        auidoPuerta.Play();
         txtAnimaciones.text = "Paciente toca la puerta) \n" +
          "(Terapeuta abre la puerta e invita a pasar a la paciente)";
         PerAbriPuerta.SetActive(true);

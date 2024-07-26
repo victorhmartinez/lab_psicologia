@@ -78,6 +78,8 @@ public class BeckInventory : MonoBehaviour
     private GameObject[] abriendoPuerta;
     [SerializeField]
     private SaveData saveData;
+    [SerializeField]
+    private AudioSource audioPuerta;
     void Start()
     {
 
@@ -182,12 +184,7 @@ public class BeckInventory : MonoBehaviour
 
     public void funcionBtnContinuar()
     {
-        btnContinuarFase.gameObject.SetActive(false);
-        txtIndicaciones.text = "";
-        StopAllCoroutines();
-        StartCoroutine(escribirTexto(indicacionesSesion[1], txtIndicaciones, btnContinuarFase.gameObject));
-        audioSource.clip = audioIndicaciones;
-        audioSource.Play();
+      
        
         btnContinuarFase.onClick.RemoveAllListeners();
         btnContinuarFase.onClick.AddListener(() =>
@@ -217,7 +214,9 @@ public class BeckInventory : MonoBehaviour
             btnContinuarFase.onClick.RemoveAllListeners();
             btnContinuarFase.onClick.AddListener(() =>
             {
-                funcionBtnContinuar();
+                panelIndicacionTiempo.SetActive(false);
+                StopAllCoroutines();
+                StartCoroutine(esperarAnimaciones());
             });
 
         });
@@ -225,6 +224,7 @@ public class BeckInventory : MonoBehaviour
     }
     IEnumerator esperarAnimaciones()
     {
+        audioPuerta.Play();
         txtAnimaciones.text = "Paciente toca la puerta) \n" +
            "(Terapeuta abre la puerta e invita a pasar a la paciente)";
         PerAbriPuerta.SetActive(true);

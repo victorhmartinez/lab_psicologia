@@ -31,7 +31,7 @@ public class ApiManager : MonoBehaviour
         //Consumimos la api mediante corrutinas por proceso asincrono
       
 
-        // Generar un número aleatorio entre 1 y 2
+        // Generar un número aleatorio entre 1 y 2 o 4,5
         nroCaso = UnityEngine.Random.Range(1, 2);
         Debug.Log("Número de caso generado: " + nroCaso);
 
