@@ -3622,6 +3622,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PacienteC4
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 62573897f5aafda4eb40c0f987fc51f5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 62573897f5aafda4eb40c0f987fc51f5, type: 3}
       propertyPath: m_Controller
       value: 
@@ -18967,7 +18971,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: cd250404a8d628147a7744f8b47c3501, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: cd250404a8d628147a7744f8b47c3501, type: 3}
       propertyPath: m_Controller
@@ -20974,7 +20978,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a8e79a632e7a4804c8eeee13113ab5fa, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: a8e79a632e7a4804c8eeee13113ab5fa, type: 3}
       propertyPath: m_Controller

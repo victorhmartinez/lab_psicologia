@@ -105,24 +105,8 @@ public class DialogosManager : MonoBehaviour
     private bool d1, d2, d3;
     void Start()
     {
-        tc1 = GameObject.Find("TerapeutaC1");
-        pc1 = GameObject.Find("PacienteC1");
-        tc4 = GameObject.Find("TerapeutaC4");
-        pc4 = GameObject.Find("PacienteC4");
-        if (tc1!=null||pc1!=null)
-        {         
-                animDoctor = tc1.GetComponent<Animator>();
-                animPaciente = pc1.GetComponent<Animator>();
-                gameObjectPaciente = pc1;
-                gameObjectPiscolog = tc1;
-             
-        }else if (tc4 != null || pc4 != null)
-        {
-            animDoctor = tc4.GetComponent<Animator>();
-            animPaciente = pc4.GetComponent<Animator>();
-            gameObjectPaciente = pc4;
-            gameObjectPiscolog = tc4;
-        }
+
+     
      
         saveData = GameObject.Find("LoginController").GetComponent<SaveData>();
         loadData = GameObject.Find("LoginController").GetComponent<LoadData>();
@@ -139,7 +123,28 @@ public class DialogosManager : MonoBehaviour
         dialagoPaciente.SetActive(false);
         dialagoPsicologo.SetActive(false);
     }
-
+    public void activaPersonajes()
+    {
+        if (apiManager.getNroCaso() == 1)
+        {
+            tc1 = GameObject.Find("TerapeutaC1");
+            pc1 = GameObject.Find("PacienteC1");
+         
+            animDoctor = tc1.GetComponent<Animator>();
+            animPaciente = pc1.GetComponent<Animator>();
+            gameObjectPaciente = pc1;
+            gameObjectPiscolog = tc1;
+        }
+        else if (apiManager.getNroCaso() == 4)
+        {
+            tc4 = GameObject.Find("TerapeutaC4");
+            pc4 = GameObject.Find("PacienteC4");
+            animDoctor = tc4.GetComponent<Animator>();
+            animPaciente = pc4.GetComponent<Animator>();
+            gameObjectPaciente = pc4;
+            gameObjectPiscolog = tc4;
+        }
+    }
     private void OnDestroy()
     {
         if (apiManager != null)
@@ -164,8 +169,8 @@ public class DialogosManager : MonoBehaviour
         {
          
                 btnContinuarDesarrollo.SetActive(true);
-       
 
+            activaPersonajes();
         }
 
     }
@@ -177,8 +182,9 @@ public class DialogosManager : MonoBehaviour
         // Debug.Log("Hola estas en el evento con las listas de desarrollo");
         if (d1 && d2 && d3)
         {
-            
-       
+
+            activaPersonajes();
+
             btnContinuarDesarrollo.SetActive(true);
         }
     }
@@ -190,7 +196,8 @@ public class DialogosManager : MonoBehaviour
         //   Debug.Log("Hola estas en el evento con las listas de fnal");
         if (d1 && d2 && d3)
         {
-          
+            activaPersonajes();
+
             btnContinuarDesarrollo.SetActive(true);
         }
 
@@ -225,11 +232,7 @@ public class DialogosManager : MonoBehaviour
 
     IEnumerator escribirTexto(string texto, TextMeshProUGUI txt,GameObject btn)
     {
-        if (texto == "Gracias, doctor. A veces siento que no puedo controlar estos pensamientos y emociones, los cuales me hacen sentir sumamente desanimada.")
-        {
-            personajeC4Llorando.SetActive(true);
-            personajeC4.SetActive(false);
-        }
+     
         txt.maxVisibleCharacters = 0;
         txt.text = texto;
         txt.richText = true;
@@ -239,7 +242,11 @@ public class DialogosManager : MonoBehaviour
             yield return new WaitForSeconds(25f / 500);
 
         }
-
+        if (texto == "Gracias, doctor. A veces siento que no puedo controlar estos pensamientos y emociones, los cuales me hacen sentir sumamente desanimada.")
+        {
+            personajeC4Llorando.SetActive(true);
+            personajeC4.SetActive(false);
+        }
 
         if (contador<dialogosList.Count) {
             if (txt.gameObject.name != "txt_retroalimentacion")
@@ -489,13 +496,17 @@ public class DialogosManager : MonoBehaviour
             uiPreguntas.SetActive(false);
             StopAllCoroutines();
             StartCoroutine(escribirTexto(retroalimentacion, txtRetroalimentacion, btn_aceptar.gameObject));
-            if (respuesta == "Frente al terapeuta")
-            {
-                animDoctor.SetBool("sentarse", true);
-                animPaciente.SetBool("sentarse", true);
-                parado = false;
-                manejadorCamara.cambiarPosiciones(parado);
-            }
+        if (respuesta == "Frente al terapeuta")
+        {
+            animDoctor.SetBool("sentarse", true);
+            animPaciente.SetBool("sentarse", true);
+            parado = false;
+            manejadorCamara.cambiarPosiciones(parado);
+        } else if(respuesta== "Dar a conocer aspectos relacionados a la confidencialidad")
+        {
+            personajeC4Llorando.SetActive(false);
+            personajeC4.SetActive(true);
+        }
             darFuncionAceptar(esCorrecta, valor,pregunta,respuesta,retroalimentacion);   
 
     }
