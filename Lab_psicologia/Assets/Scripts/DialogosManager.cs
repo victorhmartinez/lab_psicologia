@@ -502,10 +502,12 @@ public class DialogosManager : MonoBehaviour
             animPaciente.SetBool("sentarse", true);
             parado = false;
             manejadorCamara.cambiarPosiciones(parado);
-        } else if(respuesta== "Dar a conocer aspectos relacionados a la confidencialidad")
+        } else if(respuesta== "Dar contención emocional a la paciente ")
         {
             personajeC4Llorando.SetActive(false);
             personajeC4.SetActive(true);
+            animPaciente.SetBool("sentarse", true);
+            animPaciente.SetBool("hablar", true);
         }
             darFuncionAceptar(esCorrecta, valor,pregunta,respuesta,retroalimentacion);   
 

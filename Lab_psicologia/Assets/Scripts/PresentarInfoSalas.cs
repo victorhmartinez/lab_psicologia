@@ -32,15 +32,16 @@ public class PresentarInfoSalas : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI txtAnimaciones;
     [SerializeField]
-    private GameObject PerAbriPuerta;
+    private GameObject PerAbriPuertaC1, PerAbriPuertaC4;
     [SerializeField]
     private AnimationClip animAbrir;
     [SerializeField]
-    private Animator animTerapeuta;
+    private Animator animTerapeutaC1,animTerapeutaC4;
     [SerializeField]
     private GameObject[] abriendoPuerta;
     [SerializeField] private AudioClip audioPuerta;
     [SerializeField] private AudioSource audioSource;
+    [SerializeField] private ApiManager apiManager;
 
 
     // Start is called before the first frame update
@@ -51,7 +52,8 @@ public class PresentarInfoSalas : MonoBehaviour
         if (gameObject.name == "Entrada3")
         {
             btnComenzar.SetActive(false);
-            PerAbriPuerta.SetActive(false);
+            PerAbriPuertaC1.SetActive(false);
+            PerAbriPuertaC4.SetActive(false);
         }
     }
 
@@ -111,6 +113,15 @@ public class PresentarInfoSalas : MonoBehaviour
 
         if (gameObject.name == "Entrada3")
         {
+
+            if (apiManager.getNroCaso() == 4)
+            {
+                animTerapeutaC4.SetBool("abrir", true);
+            }
+            else if (apiManager.getNroCaso() == 1)
+            {
+                animTerapeutaC1.SetBool("abrir", true);
+            }
             StartCoroutine(ejecutarAnimacion());
         }
         else
@@ -132,12 +143,30 @@ public class PresentarInfoSalas : MonoBehaviour
         audioSource.Play();
         txtAnimaciones.text = "Paciente toca la puerta) \n" +
               "   (Terapeuta abre la puerta e invita a pasar a la paciente)";
-        PerAbriPuerta.SetActive(true);
+        
         cmaraAnimacion.SetActive(true);
         panelAnimacion.SetActive(true);
-        animTerapeuta.SetBool("abrir", true);
+        if (apiManager.getNroCaso() == 4)
+        {
+            PerAbriPuertaC1.SetActive(true);
+            animTerapeutaC4.SetBool("abrir", true);
+        }else if(apiManager.getNroCaso() == 1)
+        {
+            PerAbriPuertaC4.SetActive(true);
+            animTerapeutaC1.SetBool("abrir", true);
+        }
+        
         yield return new WaitForSeconds(animAbrir.length/2);
-        animTerapeuta.SetBool("abrir", false);
+        if (apiManager.getNroCaso() == 4)
+        {
+            PerAbriPuertaC4.SetActive(true);
+            animTerapeutaC4.SetBool("abrir", false);
+        }
+        else if(apiManager.getNroCaso() == 1)
+        { PerAbriPuertaC1.SetActive(true);
+            animTerapeutaC1.SetBool("abrir", false);
+        }
+    
         abriendoPuerta[0].SetActive(false);
         abriendoPuerta[1].SetActive(true);
        
@@ -147,7 +176,8 @@ public class PresentarInfoSalas : MonoBehaviour
         cmaraAnimacion.SetActive(false);
         panelAnimacion.SetActive(false);
         mainCamera.gameObject.SetActive(true);
-        PerAbriPuerta.SetActive(false);
+        PerAbriPuertaC1.SetActive(false);
+        PerAbriPuertaC4.SetActive(false);
         StartCoroutine(esperarIntro());
     }
 }
