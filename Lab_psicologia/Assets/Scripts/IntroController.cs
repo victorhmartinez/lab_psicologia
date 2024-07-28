@@ -12,7 +12,7 @@ public class IntroController : MonoBehaviour
     private List<string> listIntros = new List<string>();
     [SerializeField]
     [TextArea(3,4)]
-    private string[] introCaso1;
+    private string[] introCaso1,introCaso4;
     [SerializeField]
     private TextMeshProUGUI txtIntroduccion;
     [SerializeField]
@@ -48,13 +48,20 @@ public class IntroController : MonoBehaviour
     {
         panelIntroduccion.SetActive(true);
         Debug.Log("Número aleatorio recibido en IntroController: " + numeroAleatorio);
-        
 
-        StartCoroutine(escribirIntro(introCaso1[0]));
+        if (numeroAleatorio == 1)
+        {
+            StartCoroutine(escribirIntro(introCaso1[0]));
+        }
+        else if (numeroAleatorio == 4)
+        {
+            StartCoroutine(escribirIntro(introCaso4[0]));
+        }
+      
         btnAceptar.GetComponent<Button>().onClick.RemoveAllListeners();
         btnAceptar.GetComponent<Button>().onClick.AddListener(() =>
         {
-            cambiarDialgo();
+            cambiarDialgo(numeroAleatorio);
 
 
         });
@@ -74,10 +81,17 @@ public class IntroController : MonoBehaviour
       
     }
 
-    public void cambiarDialgo()
+    public void cambiarDialgo(int numeroAleatorio)
     {
         btnAceptar.gameObject.SetActive(false);
-        StartCoroutine(escribirIntro(introCaso1[1]));
+        if (numeroAleatorio == 1)
+        {
+            StartCoroutine(escribirIntro(introCaso1[1]));
+        }
+        else if (numeroAleatorio == 4)
+        {
+            StartCoroutine(escribirIntro(introCaso4[1]));
+        }
         btnAceptar.GetComponent<Button>().onClick.RemoveAllListeners();
         btnAceptar.GetComponent<Button>().onClick.AddListener(() =>
         {

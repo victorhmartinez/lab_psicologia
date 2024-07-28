@@ -114,14 +114,7 @@ public class PresentarInfoSalas : MonoBehaviour
         if (gameObject.name == "Entrada3")
         {
 
-            if (apiManager.getNroCaso() == 4)
-            {
-                animTerapeutaC4.SetBool("abrir", true);
-            }
-            else if (apiManager.getNroCaso() == 1)
-            {
-                animTerapeutaC1.SetBool("abrir", true);
-            }
+         
             StartCoroutine(ejecutarAnimacion());
         }
         else
@@ -148,7 +141,7 @@ public class PresentarInfoSalas : MonoBehaviour
         panelAnimacion.SetActive(true);
         if (apiManager.getNroCaso() == 4)
         {
-            PerAbriPuertaC1.SetActive(true);
+            PerAbriPuertaC4.SetActive(true);
             animTerapeutaC4.SetBool("abrir", true);
         }else if(apiManager.getNroCaso() == 1)
         {

@@ -42,7 +42,7 @@ public class FichaDiagnostico : MonoBehaviour
     [SerializeField]
     private bool[] listaRespuestaObtenidas;
     [SerializeField]
-    private bool[] listRespuestaC1, listRespuestaC2;
+    private bool[] listRespuestaC1, listRespuestaC4;
     [SerializeField]
     private GameObject panelRetroalimentacionFase;
     [SerializeField]
@@ -52,7 +52,7 @@ public class FichaDiagnostico : MonoBehaviour
     [SerializeField]
     private AudioSource audioSource;
     [SerializeField]
-    private GameObject escenarioTrabPsicologo;
+    private GameObject escenarioTrabPsicologoC1, escenarioTrabPsicologoC4;
     [Header("Propiedades de indicacacion de tiempo")]
     [SerializeField]
     private GameObject panelIndicacionTiempo;
@@ -80,11 +80,11 @@ public class FichaDiagnostico : MonoBehaviour
     private bool estado=true;
 
     [SerializeField]
-    private GameObject PerAbriPuerta;
+    private GameObject PerAbriPuerta1, PerAbriPuerta4;
     [SerializeField]
     private AnimationClip animAbrir;
     [SerializeField]
-    private Animator animTerapeuta;
+    private Animator animTerapeuta1, animTerapeuta4;
     [SerializeField]
     private GameObject[] abriendoPuerta;
     [SerializeField]
@@ -195,12 +195,26 @@ public class FichaDiagnostico : MonoBehaviour
         StartCoroutine(escribirTexto(notaTexto, txtNota, btnAceptar));
         audioSource.clip = audioFinFase;
         audioSource.Play();
-        escenarioTrabPsicologo.SetActive(true); 
+        if (apiManager.getNroCaso() == 1)
+        {
+            escenarioTrabPsicologoC1.SetActive(true);
+        }else if (apiManager.getNroCaso() == 4)
+        {
+            escenarioTrabPsicologoC4.SetActive(true);
+        }
+        
         btnAceptar.GetComponent<Button>().onClick.RemoveAllListeners();
         btnAceptar.GetComponent<Button>().onClick.AddListener(()=>{
             objectGuia.SetActive(false);
             panelFicha.SetActive(true);
-            escenarioTrabPsicologo.SetActive(false);
+            if (apiManager.getNroCaso() == 1)
+            {
+                escenarioTrabPsicologoC1.SetActive(false);
+            }
+            else if (apiManager.getNroCaso() == 4)
+            {
+                escenarioTrabPsicologoC4.SetActive(false);
+            }
             btnAceptar.SetActive(false);
         });
     }
@@ -230,8 +244,8 @@ public class FichaDiagnostico : MonoBehaviour
             case 1:
                 verificado= comprobarRespuest(listRespuestaC1);
                 break;
-            case 2:
-                verificado =comprobarRespuest(listRespuestaC2);
+            case 4:
+                verificado =comprobarRespuest(listRespuestaC4);
                 break;
         }
 
@@ -245,7 +259,7 @@ public class FichaDiagnostico : MonoBehaviour
             if (list[i] != listaRespuestaObtenidas[i])
             {
                 panelAlerta.SetActive(true);
-                txtObservacion.text = "Los criterios que seleccionaste no est�n de acuerdo con el caso cl�nico.";
+                txtObservacion.text = "Los criterios que seleccionaste no están de acuerdo con el caso clínico.";
                 esCorrecta = false;
                 calificacion.decrementar(calificacion.valorIncorrecto);
                 break;
@@ -277,13 +291,30 @@ public class FichaDiagnostico : MonoBehaviour
         auidoPuerta.Play();
         txtAnimaciones.text = "Paciente toca la puerta) \n" +
          "(Terapeuta abre la puerta e invita a pasar a la paciente)";
-        PerAbriPuerta.SetActive(true);
+        if (apiManager.getNroCaso() == 1)
+        {
+            PerAbriPuerta1.SetActive(true);
+            animTerapeuta1.SetBool("abrir", true);
+        }else if (apiManager.getNroCaso() == 4)
+        {
+            PerAbriPuerta4.SetActive(true);
+            animTerapeuta4.SetBool("abrir", true);
+        }
+        
         panelAnimaciones.SetActive(true);
         camaraAnimacion.SetActive(true);
 
-        animTerapeuta.SetBool("abrir", true);
+        
         yield return new WaitForSeconds(animAbrir.length / 2);
-        animTerapeuta.SetBool("abrir", false);
+        if (apiManager.getNroCaso() == 1)
+        {
+            animTerapeuta1.SetBool("abrir", false);
+        }
+        else if (apiManager.getNroCaso() == 4)
+        {
+            animTerapeuta4.SetBool("abrir", false);
+        }
+
         abriendoPuerta[0].SetActive(false);
         abriendoPuerta[1].SetActive(true);
 
@@ -295,7 +326,13 @@ public class FichaDiagnostico : MonoBehaviour
         dialogosManager.darFuncionBtnAceptar();
         camaraAnimacion.SetActive(false);
         panelAnimaciones.SetActive(false);
-        PerAbriPuerta.SetActive(false);
+        if (apiManager.getNroCaso() == 1)
+        {
+            PerAbriPuerta1.SetActive(false);
+        }else if(apiManager.getNroCaso() == 4){
+            PerAbriPuerta4.SetActive(false);
+        }
+     
     }
 }
 

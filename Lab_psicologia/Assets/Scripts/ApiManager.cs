@@ -32,7 +32,7 @@ public class ApiManager : MonoBehaviour
       
 
         // Generar un n�mero aleatorio entre 1 y 2 o 4,5
-        nroCaso = UnityEngine.Random.Range(1, 2);
+        nroCaso = UnityEngine.Random.Range(4, 5);
         Debug.Log("N�mero de caso generado: " + nroCaso);
 
         if (nroCaso == 1)
