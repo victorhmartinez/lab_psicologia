@@ -73,7 +73,7 @@ public class ControladorCinematica : MonoBehaviour
         recorridoController.SetBool(nombreBoolRecorrido, false); // Detener la animación
         player.SetActive(true);
         abrirPuertas(true);
-        camaraRecorrido.enabled = false;
+        camaraRecorrido.gameObject.SetActive(false);
         Debug.Log("Cinemática finalizada");
         panelIndicacion.SetActive(false);
 

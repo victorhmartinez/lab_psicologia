@@ -39,6 +39,8 @@ public class BeckInventory : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI lblTitulo;
     [SerializeField]
+    private TextMeshProUGUI [] lblEncabezado;
+    [SerializeField]
     private AudioClip audioNotaBeck;
     [SerializeField]
     private Calificacion calificacion;
@@ -46,6 +48,8 @@ public class BeckInventory : MonoBehaviour
     [Header("Escenario Trabajo")]
     [SerializeField]
     private GameObject escenarioTrabPsicologo;
+    [SerializeField]
+    private GameObject escenarioTrabPsicologo4;
     [Header("Propiedades de indicacacion de tiempo")]
     [SerializeField]
     private GameObject panelIndicacionTiempo;
@@ -71,9 +75,13 @@ public class BeckInventory : MonoBehaviour
     [SerializeField]
     private GameObject PerAbriPuerta;
     [SerializeField]
+    private GameObject PerAbriPuertaC4;
+    [SerializeField]
     private AnimationClip animAbrir;
     [SerializeField]
     private Animator animTerapeuta;
+    [SerializeField]
+    private Animator animTerapeutaC4;
     [SerializeField]
     private GameObject[] abriendoPuerta;
     [SerializeField]
@@ -118,7 +126,16 @@ public class BeckInventory : MonoBehaviour
             btnAceptarAlert.GetComponent<Button>().onClick.AddListener(() =>
             {
                 panelBeck.SetActive(false);
-                escenarioTrabPsicologo.SetActive(true);
+                if (nroCaso == 1)
+                {
+                    escenarioTrabPsicologo.SetActive(true);
+
+                }
+                else if(nroCaso == 4)
+                {
+                    escenarioTrabPsicologo4.SetActive(true);
+                }
+              
 
                 fnCaso.activarPreguntaBeck();
                 panelRetroalimentacionFase.SetActive(false);
@@ -146,23 +163,43 @@ public class BeckInventory : MonoBehaviour
        
      StartCoroutine(escribirTexto(notaBeck, txtNota, btnAceptar));
 
-        escenarioTrabPsicologo.SetActive(true);
+
+        if (nroCaso == 1)
+        {
+            escenarioTrabPsicologo.SetActive(true);
+
+        }
+        else if (nroCaso == 4)
+        {
+            escenarioTrabPsicologo4.SetActive(true);
+        }
         audioSource.clip = audioNotaBeck;
         audioSource.Play();
         btnAceptar.GetComponent<Button>().onClick.RemoveAllListeners();
         btnAceptar.GetComponent<Button>().onClick.AddListener(() => {
             objectGuia.SetActive(false);
             panelBeck.SetActive(true);
-            escenarioTrabPsicologo.SetActive(false);
+            if (nroCaso == 1)
+            {
+                escenarioTrabPsicologo.SetActive(false);
 
-          
+            }
+            else if (nroCaso == 4)
+            {
+                escenarioTrabPsicologo4.SetActive(false);
+            }
+
+
         });
         nroCaso = apiManager.nroCaso;
         for (int i = 0; i < uiCuestionarioBeck.Length; i++)
         {
             uiCuestionarioBeck[i].SetActive(false);
+            lblEncabezado[i].gameObject.SetActive(false);
+
         }
         uiCuestionarioBeck[nroCaso - 1].SetActive(true);
+        lblEncabezado[nroCaso - 1].gameObject.SetActive(true);
     }
 
     IEnumerator escribirTexto(string texto, TextMeshProUGUI txt, GameObject btn)
@@ -227,13 +264,31 @@ public class BeckInventory : MonoBehaviour
         audioPuerta.Play();
         txtAnimaciones.text = "Paciente toca la puerta) \n" +
            "(Terapeuta abre la puerta e invita a pasar a la paciente)";
-        PerAbriPuerta.SetActive(true);
+        if (nroCaso == 1)
+        {
+            PerAbriPuerta.SetActive(true);
+            animTerapeuta.SetBool("abrir", true);
+        }else if (nroCaso == 4)
+        {
+            PerAbriPuertaC4.SetActive(true);
+            animTerapeutaC4.SetBool("abrir", true);
+        }
+        
         panelAnimaciones.SetActive(true);
         camaraAnimacion.SetActive(true);
 
-        animTerapeuta.SetBool("abrir", true);
+        
         yield return new WaitForSeconds(animAbrir.length / 2);
-        animTerapeuta.SetBool("abrir", false);
+       
+        if (nroCaso == 1)
+        {
+           
+            animTerapeuta.SetBool("abrir", false);
+        }
+        else if (nroCaso == 4)
+        {
+            animTerapeutaC4.SetBool("abrir", false);
+        }
         abriendoPuerta[0].SetActive(false);
         abriendoPuerta[1].SetActive(true);
 
@@ -245,7 +300,16 @@ public class BeckInventory : MonoBehaviour
         dialogosManager.darFuncionBtnAceptar();
         camaraAnimacion.SetActive(false);
         panelAnimaciones.SetActive(false);
-        PerAbriPuerta.SetActive(false);
+        if (nroCaso == 1)
+        {
+
+            PerAbriPuerta.SetActive(false);
+        }
+        else if (nroCaso == 4)
+        {
+            PerAbriPuertaC4.SetActive(false);
+        }
+      
     }
 
 }

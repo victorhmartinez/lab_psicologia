@@ -54,7 +54,8 @@ public class DialogosManager : MonoBehaviour
     private Animator animDoctor,animPaciente;
     [SerializeField]
     private AudioSource audioSource;
-  
+    [SerializeField]
+    private AudioClip audioAtencion;
     Preguntas pregunta;
     [SerializeField]
     private ManejadorCamara manejadorCamara;
@@ -103,6 +104,7 @@ public class DialogosManager : MonoBehaviour
     [SerializeField] private GameObject pc1, pc4, tc1, tc4;
     bool estado=true;
     private bool d1, d2, d3;
+
     void Start()
     {
 
@@ -293,6 +295,8 @@ public class DialogosManager : MonoBehaviour
             {
                 if(fase=="Inicial" && contador ==16)
                 {
+                    audioSource.clip = audioAtencion;
+                    audioSource.Play();
                     Debug.Log("Aqui llama a david");
                     dialagoPaciente.SetActive(false);
                     dialagoPsicologo.SetActive(false);
@@ -355,7 +359,7 @@ public class DialogosManager : MonoBehaviour
                     manejadorCamara.activarCamaraGeneral();
                     panelIndiAniamciones.SetActive(true);
                     txtAnimaciones.text = "El terapeuta le presenta al paciente el test y empieza a simular que lo completa)";
-                    animPaciente.SetBool("escribir", true);
+                animDoctor.SetBool("entregar", true);
                     StopAllCoroutines();
                     StartCoroutine(ejecutarAnimacionFirmar());
                     StartCoroutine(esperarAnimacion(panelIndiAniamciones, false, fase,listUbicacionesCamera[3]));
@@ -406,6 +410,7 @@ public class DialogosManager : MonoBehaviour
                                 panelIndiAniamciones.SetActive(true);
                                 txtAnimaciones.text = "(El terapeuta acompaña al paciente hasta la puerta y el paciente sala de la sala)";
                                 animPaciente.SetBool("despedirse", true);
+                                animPaciente.SetBool("sentarse", false);
                                 StopAllCoroutines();
                                 StartCoroutine(esperarAnimacion(panelIndiAniamciones, true, "Final", null));
                             }
@@ -634,6 +639,8 @@ public class DialogosManager : MonoBehaviour
 
         yield return new WaitForSeconds(0.2f);
         animPaciente.SetBool("despedirse", false);
+       
+      
         yield return new WaitForSeconds(6.0f);
         
         panel.SetActive(false);

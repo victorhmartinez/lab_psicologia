@@ -131,7 +131,15 @@ public class FichaDiagnostico : MonoBehaviour
         }
         else
         {
-            if (listResultados[nroCaso - 1] == criteriosObservadosEscritos)
+            int index=0;
+            if (nroCaso == 1)
+            {
+                index = 0;
+            }else if (nroCaso == 4)
+            {
+                index = 1;
+            }
+            if (listResultados[index] == criteriosObservadosEscritos)
             {
                 if (verificarRespuestasCaso())
                 {
