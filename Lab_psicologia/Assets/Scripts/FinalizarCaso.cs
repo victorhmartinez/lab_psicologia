@@ -16,6 +16,8 @@ public class FinalizarCaso : MonoBehaviour
     private SceneChange sceneChange;
     [SerializeField]
     private BeckInventory beckInventory;
+    [SerializeField]
+    private ApiManager apiManager;
     [Header("Retroalimentacion")]
     [SerializeField]
     private GameObject panelRetrolimentacion;
@@ -52,66 +54,9 @@ public class FinalizarCaso : MonoBehaviour
     {
 
         saveData = GameObject.Find("LoginController").GetComponent<SaveData>();
-        listToggle[0].onValueChanged.AddListener(delegate
-        {
-            if (listToggle[0].isOn)
-            {
-                // L�gica cuando el Toggle est� activado (true)
-                Debug.Log("Toggle is On");
-                opcionCorrecta();
 
-            }
-            else
-            {
-                // L�gica cuando el Toggle est� desactivado (false)
-                Debug.Log("Toggle is Off");
-            }
-        });
-        listToggle[1].onValueChanged.AddListener(delegate
-        {
-            if (listToggle[1].isOn)
-            {
-                // L�gica cuando el Toggle est� activado (true)
-                Debug.Log("Toggle is On");
-                opcionIncorrecta(listToggle[1]);
+      
 
-            }
-            else
-            {
-                // L�gica cuando el Toggle est� desactivado (false)
-                Debug.Log("Toggle is Off");
-            }
-        });
-
-        listToggle[2].onValueChanged.AddListener(delegate
-        {
-            if (listToggle[2].isOn)
-            {
-                // L�gica cuando el Toggle est� activado (true)
-                Debug.Log("Toggle is On");
-                opcionIncorrecta(listToggle[2]);
-            }
-            else
-            {
-                // L�gica cuando el Toggle est� desactivado (false)
-                Debug.Log("Toggle is Off");
-            }
-        });
-        listToggle[3].onValueChanged.AddListener(delegate
-        {
-            if (listToggle[3].isOn)
-            {
-                // L�gica cuando el Toggle est� activado (true)
-                Debug.Log("Toggle is On");
-                opcionIncorrecta(listToggle[3]);
-
-            }
-            else
-            {
-                // L�gica cuando el Toggle est� desactivado (false)
-                Debug.Log("Toggle is Off");
-            }
-        });
 
        
     }
@@ -137,6 +82,132 @@ public class FinalizarCaso : MonoBehaviour
 
     public void activarPreguntaBeck()
     {
+        Debug.Log("Entre a este metodo");
+        if (apiManager.getNroCaso() == 1)
+        {
+            listToggle[0].onValueChanged.AddListener(delegate
+            {
+                if (listToggle[0].isOn)
+                {
+                    // L�gica cuando el Toggle est� activado (true)
+                    Debug.Log("Toggle is On");
+                    opcionCorrecta();
+
+                }
+                else
+                {
+                    // L�gica cuando el Toggle est� desactivado (false)
+                    Debug.Log("Toggle is Off");
+                }
+            });
+            listToggle[1].onValueChanged.AddListener(delegate
+            {
+                if (listToggle[1].isOn)
+                {
+                    // L�gica cuando el Toggle est� activado (true)
+                    Debug.Log("Toggle is On");
+                    opcionIncorrecta(listToggle[1]);
+
+                }
+                else
+                {
+                    // L�gica cuando el Toggle est� desactivado (false)
+                    Debug.Log("Toggle is Off");
+                }
+            });
+            listToggle[2].onValueChanged.AddListener(delegate
+            {
+                if (listToggle[2].isOn)
+                {
+                    // L�gica cuando el Toggle est� activado (true)
+                    Debug.Log("Toggle is On");
+                    opcionIncorrecta(listToggle[2]);
+                }
+                else
+                {
+                    // L�gica cuando el Toggle est� desactivado (false)
+                    Debug.Log("Toggle is Off");
+                }
+            });
+            listToggle[3].onValueChanged.AddListener(delegate
+            {
+                if (listToggle[3].isOn)
+                {
+                    // L�gica cuando el Toggle est� activado (true)
+                    Debug.Log("Toggle is On");
+                    opcionIncorrecta(listToggle[3]);
+
+                }
+                else
+                {
+                    // L�gica cuando el Toggle est� desactivado (false)
+                    Debug.Log("Toggle is Off");
+                }
+            });
+        }
+        else if (apiManager.getNroCaso() == 4)
+        {
+            listToggle[0].onValueChanged.AddListener(delegate
+            {
+                if (listToggle[0].isOn)
+                {
+                    // L�gica cuando el Toggle est� activado (true)
+                    Debug.Log("Toggle is On");
+                    opcionIncorrecta(listToggle[0]);
+
+                }
+                else
+                {
+                    // L�gica cuando el Toggle est� desactivado (false)
+                    Debug.Log("Toggle is Off");
+                }
+            });
+            listToggle[1].onValueChanged.AddListener(delegate
+            {
+                if (listToggle[1].isOn)
+                {
+                    // L�gica cuando el Toggle est� activado (true)
+                    Debug.Log("Toggle is On");
+                    opcionIncorrecta(listToggle[1]);
+
+                }
+                else
+                {
+                    // L�gica cuando el Toggle est� desactivado (false)
+                    Debug.Log("Toggle is Off");
+                }
+            });
+            listToggle[2].onValueChanged.AddListener(delegate
+            {
+                if (listToggle[2].isOn)
+                {
+                    // L�gica cuando el Toggle est� activado (true)
+                    Debug.Log("Toggle is On");
+                    opcionIncorrecta(listToggle[2]);
+                }
+                else
+                {
+                    // L�gica cuando el Toggle est� desactivado (false)
+                    Debug.Log("Toggle is Off");
+                }
+            });
+            listToggle[3].onValueChanged.AddListener(delegate
+            {
+                if (listToggle[3].isOn)
+                {
+                    // L�gica cuando el Toggle est� activado (true)
+                    Debug.Log("Toggle is On");
+
+                    opcionCorrecta();
+                }
+                else
+                {
+                    // L�gica cuando el Toggle est� desactivado (false)
+                    Debug.Log("Toggle is Off");
+                }
+            });
+        }
+
         panelRetrolimentacion.SetActive(true);
         btnAceptarRetro.SetActive(false);
         StopAllCoroutines();

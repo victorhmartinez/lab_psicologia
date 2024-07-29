@@ -163,7 +163,7 @@ public class BeckInventory : MonoBehaviour
        
      StartCoroutine(escribirTexto(notaBeck, txtNota, btnAceptar));
 
-
+        nroCaso = apiManager.nroCaso;
         if (nroCaso == 1)
         {
             escenarioTrabPsicologo.SetActive(true);
@@ -191,7 +191,7 @@ public class BeckInventory : MonoBehaviour
 
 
         });
-        nroCaso = apiManager.nroCaso;
+       
         for (int i = 0; i < uiCuestionarioBeck.Length; i++)
         {
             uiCuestionarioBeck[i].SetActive(false);
@@ -235,7 +235,9 @@ public class BeckInventory : MonoBehaviour
     }
     public void continuarSesion()
     {
+      
         escenarioTrabPsicologo.SetActive(false);
+        escenarioTrabPsicologo4.SetActive(false);
         panelRetroalimentacionFase.SetActive(true);
         lblTitulo.text = "Felicidades, has terminado la fase de desarrollo.";
         btnContinuar.onClick.RemoveAllListeners();

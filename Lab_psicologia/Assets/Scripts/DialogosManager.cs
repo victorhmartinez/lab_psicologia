@@ -410,7 +410,7 @@ public class DialogosManager : MonoBehaviour
                                 panelIndiAniamciones.SetActive(true);
                                 txtAnimaciones.text = "(El terapeuta acompaña al paciente hasta la puerta y el paciente sala de la sala)";
                                 animPaciente.SetBool("despedirse", true);
-                                animPaciente.SetBool("sentarse", false);
+                               
                                 StopAllCoroutines();
                                 StartCoroutine(esperarAnimacion(panelIndiAniamciones, true, "Final", null));
                             }
@@ -578,7 +578,8 @@ public class DialogosManager : MonoBehaviour
                     "\n(Terapeuta se dirige a su escritorio y simula a empieza a llenar el documento con los criterios diagnósticos descritos)";
                     StopAllCoroutines();
                     animPaciente.SetBool("despedirse", true);
-                   
+                    
+
                     StartCoroutine(esperarAnimacion(panelIndiAniamciones, true,"Inicial",listUbicacionesCamera[2]));
                     
                     

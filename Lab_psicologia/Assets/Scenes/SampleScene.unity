@@ -31221,7 +31221,7 @@ MonoBehaviour:
   animDoctor: {fileID: 136543804}
   animPaciente: {fileID: 338385630}
   audioSource: {fileID: 1254019941}
-  audioAtencion: {fileID: 0}
+  audioAtencion: {fileID: 8300000, guid: 2e37655665d1c584997cda360a3a1aca, type: 3}
   manejadorCamara: {fileID: 1254019942}
   calificacion: {fileID: 1543157085}
   vistaFicha: {fileID: 1754484512}
@@ -31425,6 +31425,7 @@ MonoBehaviour:
   lblTitulo: {fileID: 1987800157}
   sceneChange: {fileID: 1254019945}
   beckInventory: {fileID: 1987072938}
+  apiManager: {fileID: 1424561234}
   panelRetrolimentacion: {fileID: 219520341}
   txtRetroalimentacion: {fileID: 401300857}
   btnAceptarRetro: {fileID: 465658955}
