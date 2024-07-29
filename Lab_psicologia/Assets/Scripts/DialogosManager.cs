@@ -467,7 +467,7 @@ public class DialogosManager : MonoBehaviour
                         estado = false;
                     }
                     
-                    listButtons[i].onClick.AddListener(() => darFuncionBtn(pregunta.pregunta,retroalimentacion, esCorrecta,respuesta,respuestaObj,cali));
+                    listButtons[i].onClick.AddListener(() => darFuncionBtn(pregunta.pregunta,retroalimentacion, esCorrecta,respuesta,respuestaObj,cali,pregunta.id));
                     listButtons[i].gameObject.SetActive(true);
 
                 }
@@ -491,16 +491,41 @@ public class DialogosManager : MonoBehaviour
         }
     }
    // Metodo pata asignar la funcionalidad a los botones de las respuestas
-    public void darFuncionBtn(string pregunta, string retroalimentacion, bool esCorrecta, string respuesta,Respuestas respuestasobj, int valor)
+    public void darFuncionBtn(string pregunta, string retroalimentacion, bool esCorrecta, string respuesta,Respuestas respuestasobj, int valor,string id)
     {
-       
+   
+            uiPreguntas.SetActive(false);
+        ui_retroalimentacion.SetActive(false);
+        if (saveData.modo != "Evaluacion")
+        {
+            ui_retroalimentacion.SetActive(true);
             audioSource.clip = respuestasobj.audio;
             audioSource.Play();
-            ui_retroalimentacion.SetActive(true);
-           
-            uiPreguntas.SetActive(false);
+
             StopAllCoroutines();
             StartCoroutine(escribirTexto(retroalimentacion, txtRetroalimentacion, btn_aceptar.gameObject));
+        }
+        else
+        {
+            funcionAceptarEvaluacion();
+            if (id== "8YLueiNVSGXZ9LBFzS6r")
+            {
+                animDoctor.SetBool("sentarse", true);
+                animPaciente.SetBool("sentarse", true);
+                animDoctor.SetBool("hablar", true);
+                parado = false;
+                manejadorCamara.cambiarPosiciones(parado);
+            }
+            else if(id == "OWCRdkqf2t37Y4hrXtXl")
+            {
+                personajeC4Llorando.SetActive(false);
+                personajeC4.SetActive(true);
+                animPaciente.SetBool("sentarse", true);
+                animPaciente.SetBool("hablar", true);
+            }
+        }
+       
+           
         if (respuesta == "Frente al terapeuta")
         {
             animDoctor.SetBool("sentarse", true);
@@ -544,7 +569,36 @@ public class DialogosManager : MonoBehaviour
         });
        
     }
+    void funcionAceptarEvaluacion() {
+        ui_retroalimentacion.SetActive(false);
 
+        contador++;
+        if (contador < dialogosList.Count)
+        {
+            //uiDialogo.SetActive(true);
+
+            txtPersonaje.text = dialogosList[contador].personaje;
+            buscarPersonaje(dialogosList[contador].personaje);
+            llamarUiDialogos();
+            container_preguntas.gameObject.SetActive(false);
+        }
+        else
+        {
+            Debug.Log("Se termino la fase inicial");
+
+            panelIndiAniamciones.SetActive(true);
+            txtAnimaciones.text = "(Paciente se despide del terapeuta y sale de la sala)" +
+            "\n(Terapeuta se dirige a su escritorio y simula a empieza a llenar el documento con los criterios diagnósticos descritos)";
+            StopAllCoroutines();
+            animPaciente.SetBool("despedirse", true);
+
+
+            StartCoroutine(esperarAnimacion(panelIndiAniamciones, true, "Inicial", listUbicacionesCamera[2]));
+
+
+
+        }
+    }
     public void darFuncionAceptar(bool correcto, int valorSumar,string preguntaRe, string respuesta, string retroalimentacion)
     {
         btn_aceptar.gameObject.SetActive(false);
@@ -557,37 +611,10 @@ public class DialogosManager : MonoBehaviour
             btn_aceptar.gameObject.SetActive(false);
             btn_aceptar.onClick.RemoveAllListeners();
             btn_aceptar.onClick.AddListener(() => {
-                ui_retroalimentacion.SetActive(false);
-               
-                contador++;
-                if (contador < dialogosList.Count)
-                {
-                    //uiDialogo.SetActive(true);
-                  
-                    txtPersonaje.text = dialogosList[contador].personaje;
-                    buscarPersonaje(dialogosList[contador].personaje);
-                    llamarUiDialogos();
-                    container_preguntas.gameObject.SetActive(false);
-                }
-                else
-                {
-                    Debug.Log("Se termino la fase inicial");
+                funcionAceptarEvaluacion();
 
-                    panelIndiAniamciones.SetActive(true);
-                    txtAnimaciones.text = "(Paciente se despide del terapeuta y sale de la sala)" +
-                    "\n(Terapeuta se dirige a su escritorio y simula a empieza a llenar el documento con los criterios diagnósticos descritos)";
-                    StopAllCoroutines();
-                    animPaciente.SetBool("despedirse", true);
-                    
 
-                    StartCoroutine(esperarAnimacion(panelIndiAniamciones, true,"Inicial",listUbicacionesCamera[2]));
-                    
-                    
-                  
-                }
-               
-                
-               
+
             });
             
         }

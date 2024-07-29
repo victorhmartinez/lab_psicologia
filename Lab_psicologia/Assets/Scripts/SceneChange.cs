@@ -6,9 +6,12 @@ using UnityEngine.SceneManagement;
 public class SceneChange : MonoBehaviour
 {
     // Start is called before the first frame update
+    [SerializeField]
+    private SaveData saveData;
     void Start()
     {
-        
+        saveData = GameObject.Find("LoginController").GetComponent<SaveData>();
+       
     }
 
     // Update is called once per frame
@@ -19,5 +22,13 @@ public class SceneChange : MonoBehaviour
      public void changeScena(string nombre)
     {
         SceneManager.LoadScene(nombre);
-    } 
+    }
+    public void saveModo(string modo)
+    {
+       
+        if (saveData != null)
+        {
+            saveData.modo = modo;
+        }
+    }
 }

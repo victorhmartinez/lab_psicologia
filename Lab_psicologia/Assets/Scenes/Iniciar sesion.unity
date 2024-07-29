@@ -460,6 +460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faf9dc8e2aeabda4092f26f23212b03d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  saveData: {fileID: 0}
 --- !u!1 &112243467
 GameObject:
   m_ObjectHideFlags: 0
@@ -6764,6 +6765,18 @@ MonoBehaviour:
           m_StringArgument: SampleScene
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 97016287}
+        m_TargetAssemblyTypeName: SceneChange, Assembly-CSharp
+        m_MethodName: saveModo
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Simulador
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1057366647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9346,6 +9359,7 @@ MonoBehaviour:
   username: 
   idPartida: 
   fechaIncio: 
+  modo: 
 --- !u!114 &1583704501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11784,6 +11798,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: SampleScene
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 97016287}
+        m_TargetAssemblyTypeName: SceneChange, Assembly-CSharp
+        m_MethodName: saveModo
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Evaluacion
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2146234858
