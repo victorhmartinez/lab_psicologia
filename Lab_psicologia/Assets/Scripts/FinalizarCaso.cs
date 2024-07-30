@@ -49,6 +49,7 @@ public class FinalizarCaso : MonoBehaviour
     bool estado=true;
     [SerializeField]
     private SaveData saveData;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -309,5 +310,16 @@ public class FinalizarCaso : MonoBehaviour
 
 
 
+    }
+
+    public void FuncionEnviarSalir()
+    {
+        if (saveData.modo != "Evaluacion")
+        {
+            saveData.updateUserIntentEntry(System.DateTime.Now.ToString("HH:mm:ss; dd MMMM yyyy"), calificacion.ValorPorcentaje + "%", calificacion.puntuacionActual);
+        }
+
+        
+        sceneChange.changeScena("Iniciar Sesion");
     }
 }
