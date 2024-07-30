@@ -333,7 +333,7 @@ public class DialogosManager : MonoBehaviour
                     txtNombrePaciente.gameObject.SetActive(false);
                     manejadorCamara.activarCamaraGeneral();
                     panelIndiAniamciones.SetActive(true);
-                    txtAnimaciones.text = "El terapeuta entrega el consentimiento informado al paciente) \n" +
+                    txtAnimaciones.text = "(El terapeuta entrega el consentimiento informado al paciente) \n" +
                         "(El paciente simula leerlo y luego procede a firmar el consentimiento informado dado por el terapeuta. Posterior a ello se continua con la entrevista).";
                     animDoctor.SetBool("entregar", true);
                     StopAllCoroutines();
@@ -358,7 +358,7 @@ public class DialogosManager : MonoBehaviour
                     txtNombrePaciente.gameObject.SetActive(false);
                     manejadorCamara.activarCamaraGeneral();
                     panelIndiAniamciones.SetActive(true);
-                    txtAnimaciones.text = "El terapeuta le presenta al paciente el test y empieza a simular que lo completa)";
+                    txtAnimaciones.text = "(El terapeuta le presenta al paciente el test y empieza a simular que lo completa)";
                 animDoctor.SetBool("entregar", true);
                     StopAllCoroutines();
                     StartCoroutine(ejecutarAnimacionFirmar());
@@ -545,10 +545,12 @@ public class DialogosManager : MonoBehaviour
     public void  darFuncionBtnAceptar()
     {
 
-
-        saveData.updatePartidaUser(fase, System.DateTime.Now.ToString("HH:mm:ss; dd MMMM yyyy"), "Caso " + apiManager.getNroCaso());
-
-        saveData.fechaIncio = System.DateTime.Now.ToString("HH:mm:ss; dd MMMM yyyy");
+        if (saveData.modo != "Evaluacion")
+        {
+            saveData.updatePartidaUser(fase, System.DateTime.Now.ToString("HH:mm:ss; dd MMMM yyyy"), "Caso " + apiManager.getNroCaso());
+            saveData.fechaIncio = System.DateTime.Now.ToString("HH:mm:ss; dd MMMM yyyy");
+        }
+       
         //uiDialogo.SetActive(true);
         if (dialogosList.Count!=0)
         {

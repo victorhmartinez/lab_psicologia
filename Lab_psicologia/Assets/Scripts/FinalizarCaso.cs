@@ -74,7 +74,11 @@ public class FinalizarCaso : MonoBehaviour
         lblTitulo.text = "Felicidades, has terminado este caso clinico";
         btnContinuar.onClick.RemoveAllListeners();
         btnContinuar.onClick.AddListener(() => {
-            saveData.updateUserIntentEntry(System.DateTime.Now.ToString("HH:mm:ss; dd MMMM yyyy"), calificacion.ValorPorcentaje + "%", calificacion.puntuacionActual);
+            if (saveData.modo != "Evaluacion")
+            {
+                saveData.updateUserIntentEntry(System.DateTime.Now.ToString("HH:mm:ss; dd MMMM yyyy"), calificacion.ValorPorcentaje + "%", calificacion.puntuacionActual);
+            }
+            
             panelRetroalimentacionFase.SetActive(false);
             sceneChange.changeScena("Iniciar Sesion");
         });

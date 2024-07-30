@@ -165,7 +165,11 @@ public class FichaDiagnostico : MonoBehaviour
                         btnContinuar.onClick.AddListener(() =>
                         {
                             panelRetroalimentacionFase.SetActive(false);
-                            saveData.updateUserIntentEntry(System.DateTime.Now.ToString("HH:mm:ss; dd MMMM yyyy"), calificacion.ValorPorcentaje+"%", calificacion.puntuacionActual);
+                            if (saveData.modo != "Evaluacion")
+                            {
+                                saveData.updateUserIntentEntry(System.DateTime.Now.ToString("HH:mm:ss; dd MMMM yyyy"), calificacion.ValorPorcentaje + "%", calificacion.puntuacionActual);
+
+                            }
                             panelIndicacionTiempo.SetActive(true);
                             StopAllCoroutines();
                             StartCoroutine(escribirTexto(indicacionesSesion[0], txtIndicaciones, btnContinuarFase.gameObject));
@@ -297,7 +301,7 @@ public class FichaDiagnostico : MonoBehaviour
     IEnumerator esperarAnimaciones()
     {
         auidoPuerta.Play();
-        txtAnimaciones.text = "Paciente toca la puerta) \n" +
+        txtAnimaciones.text = "(Paciente toca la puerta) \n" +
          "(Terapeuta abre la puerta e invita a pasar a la paciente)";
         if (apiManager.getNroCaso() == 1)
         {

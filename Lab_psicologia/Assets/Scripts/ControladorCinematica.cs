@@ -21,6 +21,7 @@ public class ControladorCinematica : MonoBehaviour
     [SerializeField] private GameObject panelInstruccioneJuego;
     [SerializeField] private AudioClip audioRecorrido;
     [SerializeField] private AudioSource audioSorce;
+    [SerializeField] private AudioSource audioSourceFondo;
 
     void Start()
     {
@@ -76,6 +77,8 @@ public class ControladorCinematica : MonoBehaviour
         camaraRecorrido.gameObject.SetActive(false);
         Debug.Log("Cinemática finalizada");
         panelIndicacion.SetActive(false);
+        audioSourceFondo.Play();
+        audioSourceFondo.loop = true;
 
     }
 

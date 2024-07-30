@@ -134,7 +134,7 @@ public class PresentarInfoSalas : MonoBehaviour
     {
         audioSource.clip = audioPuerta;
         audioSource.Play();
-        txtAnimaciones.text = "Paciente toca la puerta) \n" +
+        txtAnimaciones.text = "(Paciente toca la puerta) \n" +
               "   (Terapeuta abre la puerta e invita a pasar a la paciente)";
         
         cmaraAnimacion.SetActive(true);

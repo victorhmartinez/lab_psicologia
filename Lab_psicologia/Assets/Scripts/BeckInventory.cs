@@ -243,8 +243,11 @@ public class BeckInventory : MonoBehaviour
         btnContinuar.onClick.RemoveAllListeners();
         btnContinuar.onClick.AddListener(() =>
         {
+            if (saveData.modo != "Evaluacion")
+            {
+                saveData.updateUserIntentEntry(System.DateTime.Now.ToString("HH:mm:ss; dd MMMM yyyy"), calificacion.ValorPorcentaje + "%", calificacion.puntuacionActual);
 
-            saveData.updateUserIntentEntry(System.DateTime.Now.ToString("HH:mm:ss; dd MMMM yyyy"), calificacion.ValorPorcentaje + "%", calificacion.puntuacionActual);
+            }
             panelRetroalimentacionFase.SetActive(false);
             panelIndicacionTiempo.SetActive(true);
             StopAllCoroutines();
@@ -264,7 +267,7 @@ public class BeckInventory : MonoBehaviour
     IEnumerator esperarAnimaciones()
     {
         audioPuerta.Play();
-        txtAnimaciones.text = "Paciente toca la puerta) \n" +
+        txtAnimaciones.text = "(Paciente toca la puerta) \n" +
            "(Terapeuta abre la puerta e invita a pasar a la paciente)";
         if (nroCaso == 1)
         {
