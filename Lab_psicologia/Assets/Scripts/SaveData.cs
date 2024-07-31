@@ -16,6 +16,7 @@ public class SaveData : MonoBehaviour
     public string fechaIncio;
     [SerializeField]
     public string modo;
+    public int caso;
     public void writeNewUser(string name, string email, string username, string date)
     {
         User user = new User(name, email, username, date);

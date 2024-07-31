@@ -31,4 +31,12 @@ public class SceneChange : MonoBehaviour
             saveData.modo = modo;
         }
     }
+    public void saveCaso(int caso)
+    {
+
+        if (saveData != null)
+        {
+            saveData.caso = caso;
+        }
+    }
 }
