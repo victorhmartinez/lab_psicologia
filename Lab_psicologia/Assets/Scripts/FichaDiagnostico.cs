@@ -153,7 +153,15 @@ public class FichaDiagnostico : MonoBehaviour
                         calificacion.incrementarFinal(calificacion.valorPregunta);
                         calificacion.incrementarContador();
                         estado = false;
-                        vistaFicha.presentarLista(listRespuestaC1, listaRespuestaObtenidas);
+                        if (nroCaso == 1)
+                        {
+                            vistaFicha.presentarLista(listRespuestaC1, listaRespuestaObtenidas);
+                        }
+                        else
+                        {
+                            vistaFicha.presentarLista(listRespuestaC4, listaRespuestaObtenidas);
+                        }
+                        
                     }
                     btnAceptarAlert.GetComponent<Button>().onClick.RemoveAllListeners();
                     btnAceptarAlert.GetComponent<Button>().onClick.AddListener(() =>

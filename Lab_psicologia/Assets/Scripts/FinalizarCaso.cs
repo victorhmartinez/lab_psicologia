@@ -256,6 +256,7 @@ public class FinalizarCaso : MonoBehaviour
         btnAceptar.onClick.RemoveAllListeners();
         btnAceptar.onClick.AddListener(() =>
         {
+            estado = true;
             panelAlerta.SetActive(false);
             panelRetrolimentacion.SetActive(false);
             beckInventory.continuarSesion();
@@ -271,7 +272,7 @@ public class FinalizarCaso : MonoBehaviour
         if (estado == true)
         {
             calificacion.decrementar(calificacion.valorIncorrecto);
-            estado = false;
+            estado = true;
         }
         btnAceptar.onClick.RemoveAllListeners();
         btnAceptar.onClick.AddListener(() =>
