@@ -42,6 +42,8 @@ public class PresentarInfoSalas : MonoBehaviour
     [SerializeField] private AudioClip audioPuerta;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private ApiManager apiManager;
+    [SerializeField]
+    private DialogosManager dialogosManager; // Referencia al DialogoManager
 
 
     // Start is called before the first frame update
@@ -113,24 +115,25 @@ public class PresentarInfoSalas : MonoBehaviour
 
         if (gameObject.name == "Entrada3")
         {
+            StartCoroutine(esperarIntro());
 
-         
-            StartCoroutine(ejecutarAnimacion());
+            
         }
         else
         {
-            StartCoroutine(esperarIntro());
+           
         }
 
         
     }
     IEnumerator esperarIntro()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
         introController.gameObject.SetActive(true);
+        mainCamera.gameObject.SetActive(true);
     }
 
-    IEnumerator ejecutarAnimacion()
+    public IEnumerator ejecutarAnimacion()
     {
         audioSource.clip = audioPuerta;
         audioSource.Play();
@@ -172,6 +175,6 @@ public class PresentarInfoSalas : MonoBehaviour
         mainCamera.gameObject.SetActive(true);
         PerAbriPuertaC1.SetActive(false);
         PerAbriPuertaC4.SetActive(false);
-        StartCoroutine(esperarIntro());
+        dialogosManager.darFuncionBtnAceptar();
     }
 }

@@ -25,8 +25,13 @@ public class IntroController : MonoBehaviour
     private GameObject btnAceptar;
     [SerializeField]
     private GameObject panelAnimaciones,camaraAnima;
-   
-    
+    [SerializeField]
+    private PresentarInfoSalas infoSala;
+    [SerializeField]
+    private AudioClip audioBienvenidaGeneral,audioIntroC1,audioIntroC2;
+    [SerializeField]
+    private AudioSource audioSource;
+
     void Start()
     {
         Debug.Log("Vamos a inicializar el intro controller");
@@ -52,9 +57,13 @@ public class IntroController : MonoBehaviour
         if (numeroAleatorio == 1)
         {
             StartCoroutine(escribirIntro(introCaso1[0]));
+            audioSource.clip = audioBienvenidaGeneral;
+            audioSource.Play();
         }
         else if (numeroAleatorio == 4)
         {
+            audioSource.clip = audioBienvenidaGeneral;
+            audioSource.Play();
             StartCoroutine(escribirIntro(introCaso4[0]));
         }
       
@@ -75,7 +84,7 @@ public class IntroController : MonoBehaviour
         for (int i = 0; i < texto.ToCharArray().Length; i++)
         {
             txtIntroduccion.maxVisibleCharacters++;
-            yield return new WaitForSeconds(15f / 500);
+            yield return new WaitForSeconds(25f / 500);
         }
         btnAceptar.SetActive(true);
       
@@ -86,17 +95,22 @@ public class IntroController : MonoBehaviour
         btnAceptar.gameObject.SetActive(false);
         if (numeroAleatorio == 1)
         {
+            audioSource.clip = audioIntroC1;
+            audioSource.Play();
             StartCoroutine(escribirIntro(introCaso1[1]));
         }
         else if (numeroAleatorio == 4)
         {
+            audioSource.clip = audioIntroC1;
+            audioSource.Play();
             StartCoroutine(escribirIntro(introCaso4[1]));
         }
         btnAceptar.GetComponent<Button>().onClick.RemoveAllListeners();
         btnAceptar.GetComponent<Button>().onClick.AddListener(() =>
         {
-            dialogosManager.darFuncionBtnAceptar();
+          //  dialogosManager.darFuncionBtnAceptar();
             panelIntroduccion.SetActive(false);
+            StartCoroutine(infoSala.ejecutarAnimacion());
 
         });
     }

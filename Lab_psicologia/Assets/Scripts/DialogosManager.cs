@@ -554,8 +554,7 @@ public class DialogosManager : MonoBehaviour
         //uiDialogo.SetActive(true);
         if (dialogosList.Count!=0)
         {
-            print(contador);
-            print(dialogosList[contador].personaje);
+        
             buscarPersonaje(dialogosList[contador].personaje);
            
         }
@@ -590,7 +589,7 @@ public class DialogosManager : MonoBehaviour
 
             panelIndiAniamciones.SetActive(true);
             txtAnimaciones.text = "(Paciente se despide del terapeuta y sale de la sala)" +
-            "\n(Terapeuta se dirige a su escritorio y simula a empieza a llenar el documento con los criterios diagnósticos descritos)";
+            "\n(El terapeuta empieza a llenar el documento con los criterios diagnósticos descritos)";
             StopAllCoroutines();
             animPaciente.SetBool("despedirse", true);
 

@@ -12,6 +12,8 @@ public class ControladorCinematica : MonoBehaviour
     [SerializeField] private GameObject player;
     [Header("Puertas para abrir cerrar")]
     [SerializeField] private GameObject[] listPuertas;
+    [SerializeField] private GameObject puertaControlAbierta;
+    [SerializeField] private GameObject puertaControlCerrada;
     [Header("Panel de indicaciones")]
     [SerializeField] private GameObject panelIndicacion;
     private bool isSkipping = false;
@@ -79,7 +81,8 @@ public class ControladorCinematica : MonoBehaviour
         panelIndicacion.SetActive(false);
         audioSourceFondo.Play();
         audioSourceFondo.loop = true;
-
+        puertaControlCerrada.SetActive(false);
+        puertaControlAbierta.SetActive(true);
     }
 
 

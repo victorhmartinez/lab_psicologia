@@ -17,7 +17,7 @@ public class ApiManager : MonoBehaviour
     public int nroCaso;
     [SerializeField]
     private GameObject [] personajesCasos;
-    private SaveData saveData;
+    
 
     // Evento para indicar que los di�logos se han cargado fase inicial
     public event Action<List<Dialogos>> DialogosCargadosEvent;
@@ -30,18 +30,12 @@ public class ApiManager : MonoBehaviour
     void Start()
     {
         //Consumimos la api mediante corrutinas por proceso asincrono
-        saveData = GameObject.Find("LoginController").GetComponent<SaveData>();
-        if (saveData.caso != 0)
-        {
-            nroCaso = saveData.caso;
-        }
-        else
-        {
+     
             // Generar un n�mero aleatorio entre 1 y 2 o 4,5
             nroCaso = new System.Random().Next(2) == 0 ? 1:4;
            // nroCaso = UnityEngine.Random.Range(4, 5);
             Debug.Log("N�mero de caso generado: " + nroCaso);
-        }
+        
         
 
 
