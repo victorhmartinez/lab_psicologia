@@ -109,10 +109,6 @@ public class FichaDiagnostico : MonoBehaviour
             {
                 
                 criteriosObservados++;
-            }
-            if (toggles[i].isOn || togglesNo[i].isOn)
-
-            {
 
                 listaRespuestaObtenidas[i] = true;
             }

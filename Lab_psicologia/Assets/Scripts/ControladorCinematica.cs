@@ -27,7 +27,7 @@ public class ControladorCinematica : MonoBehaviour
 
     void Start()
     {
-        panelInstruccioneJuego.SetActive(true);
+        //panelInstruccioneJuego.SetActive(true);
         btnContinuar.GetComponent<Button>().onClick.AddListener(() =>
         {
             darFuncionalidaBotonSC();
@@ -83,12 +83,13 @@ public class ControladorCinematica : MonoBehaviour
         audioSourceFondo.loop = true;
         puertaControlCerrada.SetActive(false);
         puertaControlAbierta.SetActive(true);
+        panelInstruccioneJuego.SetActive(true);
     }
 
 
     public void darFuncionalidaBotonSC()
     {
-        panelInstruccioneJuego.SetActive(false);
+        //panelInstruccioneJuego.SetActive(true);
         audioSorce.clip = audioRecorrido;
         audioSorce.Play();
         panelIndicacion.SetActive(true);
