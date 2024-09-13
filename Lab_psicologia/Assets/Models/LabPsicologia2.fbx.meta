@@ -3,7 +3,72 @@ guid: e42c4d1d182dbd941a50207ee238d6be
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: IMGLogoUTPLblanco
+    second: {fileID: 2100000, guid: 6e3eec49ca0d3c64aa872c108d1cc17e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MAT_Main_cafeteria
+    second: {fileID: 2100000, guid: e2838565e7e8db64cbcbf5fc48579a2d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MAT_baldosa_posterior
+    second: {fileID: 2100000, guid: 908658dc715a36c46bc3f4667c780cb1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MAT_madera_roja
+    second: {fileID: 2100000, guid: b37248d1693483141991a35816eb4a5a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MAT_posterior_ed7
+    second: {fileID: 2100000, guid: e42d144119fc2574fb3f4eb88d7635c5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MAT_vidrio
+    second: {fileID: 2100000, guid: 0ae6badc900ee55458243d161ee3e054, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MAT_vidrio_reflectivo_negro
+    second: {fileID: 2100000, guid: 89d2d44e32349414db8b613c2a3805ba, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MAT_zinc
+    second: {fileID: 2100000, guid: 37019027d14b1134fb5f2d89075c7130, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_E7_Letras
+    second: {fileID: 2100000, guid: 32ebc572d86790e4084d7419477f48c1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mural_ED7
+    second: {fileID: 2100000, guid: 1b13e0fbf561b92428c9935b944c81cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Piso
+    second: {fileID: 2100000, guid: 09333bcf413e11e4f8d6426a11b78b03, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: convenciones_main
+    second: {fileID: 2100000, guid: ff58b63228d942444aed62f894c9cff7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: vereda
+    second: {fileID: 2100000, guid: d3131e052c4b9c94fa6a61864c708256, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
