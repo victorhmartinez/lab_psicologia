@@ -142,7 +142,7 @@ public class FichaDiagnostico : MonoBehaviour
                     
                    
                     panelAlerta.SetActive(true);
-                    txtObservacion.text = "Felicitaciones, has realizado correctamente el conteo de los criterios del DMS-5";
+                    txtObservacion.text = "Felicitaciones, has realizado correctamente el conteo de los criterios del DSM-V TR";
                     if (estado==true)
                     {
                         calificacion.incrementar(calificacion.valorPregunta);
@@ -306,7 +306,7 @@ public class FichaDiagnostico : MonoBehaviour
     {
         auidoPuerta.Play();
         txtAnimaciones.text = "(Paciente toca la puerta) \n" +
-         "(Terapeuta abre la puerta e invita a pasar a la paciente)";
+         "(Terapeuta abre la puerta e invita a pasar al paciente)";
         if (apiManager.getNroCaso() == 1)
         {
             PerAbriPuerta1.SetActive(true);

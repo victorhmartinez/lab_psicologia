@@ -241,7 +241,7 @@ public class DialogosManager : MonoBehaviour
         for (int i = 0; i < texto.ToCharArray().Length; i++)
         {
             txt.maxVisibleCharacters++;
-            yield return new WaitForSeconds(25f / 500);
+            yield return new WaitForSeconds(15f / 500);
 
         }
         if (texto == "Gracias, doctor. A veces siento que no puedo controlar estos pensamientos y emociones, los cuales me hacen sentir sumamente desanimada.")
@@ -463,7 +463,7 @@ public class DialogosManager : MonoBehaviour
                     {
                         calificacion.incrementarFinal(cali);
                         calificacion.incrementarContador();
-                        Debug.LogError("se sumo");
+                        //Debug.LogError("se sumo");
                         estado = false;
                     }
                     
@@ -642,7 +642,7 @@ public class DialogosManager : MonoBehaviour
         for (int i = 0; i < texto.ToCharArray().Length; i++)
         {
             txt.maxVisibleCharacters++;
-            yield return new WaitForSeconds(25f / 500);
+            yield return new WaitForSeconds(15f / 500);
 
         }
         uiPreguntas.SetActive(true);

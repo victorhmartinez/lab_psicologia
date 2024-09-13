@@ -120,7 +120,7 @@ public class BeckInventory : MonoBehaviour
             }
             Debug.Log("Los puntaje coiniciden");
             panelAlerta.SetActive(true);
-            txtError.text = "Felicitaciones, has realizado correctamente el conteo de los puntajes de los puntos del inventario de beck";
+            txtError.text = "Felicitaciones, has calculado correctamente los puntajes del inventario de Beck.";
 
             btnAceptarAlert.GetComponent<Button>().onClick.RemoveAllListeners();
             btnAceptarAlert.GetComponent<Button>().onClick.AddListener(() =>

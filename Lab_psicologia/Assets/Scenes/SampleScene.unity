@@ -12783,6 +12783,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: letreros
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2d28f6a7214a5fa4e8072df500ced78f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17676,6 +17680,13 @@ PrefabInstance:
     - target: {fileID: 7315327706819853076, guid: a8c048c1d977dc545a046870c201a511, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7341499398573914177, guid: a8c048c1d977dc545a046870c201a511, type: 3}
+      propertyPath: m_text
+      value: "Marca con una \u201CX\u201D en el cuadro que refleje mejor la sintomatolog\xEDa
+        del paciente. \nNota: Cinco (o m\xE1s) de los siguientes s\xEDntomas han
+        estado presentes durante el mismo per\xEDodo de 2 semanas y representan un
+        cambio del funcionamiento anterior "
       objectReference: {fileID: 0}
     - target: {fileID: 7393067852719803727, guid: a8c048c1d977dc545a046870c201a511, type: 3}
       propertyPath: m_Group
@@ -26734,6 +26745,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -17.5
       objectReference: {fileID: 0}
+    - target: {fileID: 690792214062197755, guid: ef14fec851274b04c8b97148f118a2ee, type: 3}
+      propertyPath: m_text
+      value: "<b>Instrucciones: </b> Este cuestionario consta de 21 grupos de afirmaciones.
+        Por favor, lea con atenci\xF3n cada uno de ellos cuidadosamente. Luego elija
+        uno de cada grupo, el que mejor describa el modo como se ha sentido<b> las
+        \xFAltimas dos semanas, incluyendo el d\xEDa de hoy. </b>\r\nMarque con un
+        c\xEDrculo el n\xFAmero correspondiente al enunciado elegido Si varios enunciados
+        de un mismo grupo le parecen igualmente apropiados, marque el n\xFAmero m\xE1s 
+        alto. Verifique que no haya elegido m\xE1s de uno por grupo, incluyendo el
+        \xEDtem 16 (cambios en los h\xE1bitos de sue\xF1o) y el \xEDtem 18 (cambios
+        en el apetito) .\r\n"
+      objectReference: {fileID: 0}
     - target: {fileID: 735347852601405603, guid: ef14fec851274b04c8b97148f118a2ee, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -29129,7 +29152,7 @@ PrefabInstance:
     - target: {fileID: 6477028456534784999, guid: ef14fec851274b04c8b97148f118a2ee, type: 3}
       propertyPath: m_text
       value: "<b>Nombre:</b> Juan Artega  <b>Estado Civil:</b> Casado  <b>Edad:</b>
-        30 a\xF1os <b>Sexo:</b> Masculino   <b>Ocupaci\xF3n:</b> Gerente General
+        30 a\xF1os <b>Sexo:</b> Masculino   <b>Ocupaci\xF3n:</b> Asistente Financiero
         <b> Educaci\xF3n:</b> Superior <b>Fecha:</b> 11 - 09 - 2023"
       objectReference: {fileID: 0}
     - target: {fileID: 6492730148987977197, guid: ef14fec851274b04c8b97148f118a2ee, type: 3}
@@ -30027,6 +30050,14 @@ PrefabInstance:
     - target: {fileID: 8972518586558577257, guid: ef14fec851274b04c8b97148f118a2ee, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -17.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8986404139986579183, guid: ef14fec851274b04c8b97148f118a2ee, type: 3}
+      propertyPath: m_text
+      value: "Inventario de Depresi\xF3n de Beck (BDI-2)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8986404139986579183, guid: ef14fec851274b04c8b97148f118a2ee, type: 3}
+      propertyPath: m_fontSize
+      value: 29.2
       objectReference: {fileID: 0}
     - target: {fileID: 9022032215195180665, guid: ef14fec851274b04c8b97148f118a2ee, type: 3}
       propertyPath: m_AnchorMax.y
@@ -36053,8 +36084,8 @@ MonoBehaviour:
   txtRetroalimentacion: {fileID: 401300857}
   btnAceptarRetro: {fileID: 465658955}
   textoRetro: "Para continuar, seleccione la categor\xEDa de depresi\xF3n seg\xFAn
-    la puntuaci\xF3n obtenida. Recuerda que rango de las puntuaciones va desde 0
-    a 63 puntos. Cuanto m\xE1s alta sea la puntuaci\xF3n, mayor ser\xE1 la severidad
+    la puntuaci\xF3n obtenida. Recuerda que el rango de las puntuaciones va desde
+    0 a 63 puntos. Cuanto m\xE1s alta sea la puntuaci\xF3n, mayor ser\xE1 la severidad
     de los s\xEDntomas depresivos. A continuaci\xF3n, se establecen las cuatro categor\xEDas
     presentadas por el test:"
   panelOpciones: {fileID: 1821105367}
@@ -38454,6 +38485,13 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7341499398573914177, guid: a8c048c1d977dc545a046870c201a511, type: 3}
+      propertyPath: m_text
+      value: "Marca con una \u201CX\u201D en el cuadro que refleje mejor la sintomatolog\xEDa
+        del paciente. \nNota: Cinco (o m\xE1s) de los siguientes s\xEDntomas han
+        estado presentes durante el mismo per\xEDodo de 2 semanas y representan un
+        cambio del funcionamiento anterior "
+      objectReference: {fileID: 0}
     - target: {fileID: 7393067852719803727, guid: a8c048c1d977dc545a046870c201a511, type: 3}
       propertyPath: m_Group
       value: 
@@ -40595,7 +40633,7 @@ MonoBehaviour:
     virtuales que presentar\xE1n una variedad de situaciones y trastornos psicol\xF3gicos.
     Deber\xE1s analizar sus comportamientos, respuestas y expresiones, con el fin
     de realizar un diagn\xF3stico preciso.\nA continuaci\xF3n, te presentamos el
-    caso de Juan, un paciente de 30 a\xF1os, soltero y asistente financiero en una
+    caso de Juan, un paciente de 30 a\xF1os, casado y asistente financiero en una
     entidad bancaria, asiste a consulta debido a que se encuentra experimentando
     una gran presi\xF3n laboral la cual ha tenido un impacto negativo en su vida
     \xFAltimamente."
@@ -43850,6 +43888,95 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1602216566}
   m_CullTransparentMesh: 1
+--- !u!1001 &1602396629
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 377137145163973473, guid: ef857c4c251664d41a2e84c23d503198, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.411
+      objectReference: {fileID: 0}
+    - target: {fileID: 2644282747717288451, guid: ef857c4c251664d41a2e84c23d503198, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12.774
+      objectReference: {fileID: 0}
+    - target: {fileID: 2644282747717288451, guid: ef857c4c251664d41a2e84c23d503198, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.575
+      objectReference: {fileID: 0}
+    - target: {fileID: 3086799437677487532, guid: ef857c4c251664d41a2e84c23d503198, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 3539321103849332723, guid: ef857c4c251664d41a2e84c23d503198, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -16.565
+      objectReference: {fileID: 0}
+    - target: {fileID: 3539321103849332723, guid: ef857c4c251664d41a2e84c23d503198, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.192
+      objectReference: {fileID: 0}
+    - target: {fileID: 4941274403029355175, guid: ef857c4c251664d41a2e84c23d503198, type: 3}
+      propertyPath: m_Name
+      value: etiquetas_Letreros
+      objectReference: {fileID: 0}
+    - target: {fileID: 7229887624856017851, guid: ef857c4c251664d41a2e84c23d503198, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.413
+      objectReference: {fileID: 0}
+    - target: {fileID: 8231129972350379703, guid: ef857c4c251664d41a2e84c23d503198, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.002
+      objectReference: {fileID: 0}
+    - target: {fileID: 8231129972350379703, guid: ef857c4c251664d41a2e84c23d503198, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.006
+      objectReference: {fileID: 0}
+    - target: {fileID: 8231129972350379703, guid: ef857c4c251664d41a2e84c23d503198, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.012
+      objectReference: {fileID: 0}
+    - target: {fileID: 8231129972350379703, guid: ef857c4c251664d41a2e84c23d503198, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8231129972350379703, guid: ef857c4c251664d41a2e84c23d503198, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8231129972350379703, guid: ef857c4c251664d41a2e84c23d503198, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8231129972350379703, guid: ef857c4c251664d41a2e84c23d503198, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8231129972350379703, guid: ef857c4c251664d41a2e84c23d503198, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8231129972350379703, guid: ef857c4c251664d41a2e84c23d503198, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8231129972350379703, guid: ef857c4c251664d41a2e84c23d503198, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8737533420824643035, guid: ef857c4c251664d41a2e84c23d503198, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -16.559
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ef857c4c251664d41a2e84c23d503198, type: 3}
 --- !u!1 &1607455286
 GameObject:
   m_ObjectHideFlags: 0
@@ -52848,6 +52975,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3778644264426962316, guid: a5a23a962f65cc54da2b75eb1620abfb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2764512629625626004, guid: a5a23a962f65cc54da2b75eb1620abfb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2045257923548263128, guid: a5a23a962f65cc54da2b75eb1620abfb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 65702495048144492, guid: a5a23a962f65cc54da2b75eb1620abfb, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -52864,6 +53003,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4504409719310791647, guid: a5a23a962f65cc54da2b75eb1620abfb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4586665228114867117, guid: a5a23a962f65cc54da2b75eb1620abfb, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0
@@ -52875,6 +53018,14 @@ PrefabInstance:
     - target: {fileID: 5371671862244809227, guid: a5a23a962f65cc54da2b75eb1620abfb, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.802
+      objectReference: {fileID: 0}
+    - target: {fileID: 8009987137999418058, guid: a5a23a962f65cc54da2b75eb1620abfb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8485173162082002552, guid: a5a23a962f65cc54da2b75eb1620abfb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -56767,9 +56918,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Para que puedas seleccionar las opciones en las casillas en la ficha/test
-    tendr\xE1 usar la clic izquierdo.\n\nTambi\xE9n podr\xE1s en la ficha/test escribir
-    en el cuadro de texto la respuestas por medio del teclado"
+  m_text: "Para que pueda seleccionar las opciones en las casillas en la ficha/test
+    tendr\xE1 que usar el clic izquierdo del rat\xF3n.\n\nTambi\xE9n podr\xE1s en
+    la ficha/test, tambi\xE9n podr\xE1s escribir en el cuadro de texto la respuestas
+    por medio del teclado."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -62297,5 +62449,6 @@ SceneRoots:
   - {fileID: 1754484513}
   - {fileID: 59515208}
   - {fileID: 498881174}
+  - {fileID: 1602396629}
   - {fileID: 1418109058}
   - {fileID: 164076952}

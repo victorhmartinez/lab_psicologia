@@ -84,7 +84,7 @@ public class IntroController : MonoBehaviour
         for (int i = 0; i < texto.ToCharArray().Length; i++)
         {
             txtIntroduccion.maxVisibleCharacters++;
-            yield return new WaitForSeconds(25f / 500);
+            yield return new WaitForSeconds(15f / 500);
         }
         btnAceptar.SetActive(true);
       

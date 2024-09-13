@@ -245,7 +245,7 @@ public class FinalizarCaso : MonoBehaviour
         
         panelAlerta.SetActive(true);
         panelOpciones.SetActive(false);
-        txtAlerta.text = "El rango que seleccionaste de la tabla es el correcto";
+        txtAlerta.text = "El rango de la puntuación seleccionada es la correcta";
         if (estado == true)
         {
             calificacion.incrementar(calificacion.valorPregunta);
