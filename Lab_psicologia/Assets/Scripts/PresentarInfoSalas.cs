@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 public class PresentarInfoSalas : MonoBehaviour
 {
     [SerializeField]
@@ -102,6 +103,10 @@ public class PresentarInfoSalas : MonoBehaviour
         }
         else
         {
+            button.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                gameObject.SetActive(false);
+            });
             button.SetActive(true);
         }
         
