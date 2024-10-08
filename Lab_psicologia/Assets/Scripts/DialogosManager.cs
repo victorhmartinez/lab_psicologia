@@ -241,13 +241,14 @@ public class DialogosManager : MonoBehaviour
         for (int i = 0; i < texto.ToCharArray().Length; i++)
         {
             txt.maxVisibleCharacters++;
-            yield return new WaitForSeconds(15f / 500);
+            yield return new WaitForSeconds(25f / 500);
 
         }
         if (texto == "Gracias, doctor. A veces siento que no puedo controlar estos pensamientos y emociones, los cuales me hacen sentir sumamente desanimada.")
         {
             personajeC4Llorando.SetActive(true);
             personajeC4.SetActive(false);
+
         }
 
         if (contador<dialogosList.Count) {
@@ -363,7 +364,38 @@ public class DialogosManager : MonoBehaviour
                     StopAllCoroutines();
                     StartCoroutine(ejecutarAnimacionFirmar());
                     StartCoroutine(esperarAnimacion(panelIndiAniamciones, false, fase,listUbicacionesCamera[3]));
-                } 
+                }else if(fase == "Inicial" && contador == 27 && apiManager.nroCaso==4)
+                {
+                    audioSource.clip = audioAtencion;
+                    audioSource.Play();
+                    Debug.Log("Aqui llama a david");
+                    dialagoPaciente.SetActive(false);
+                    dialagoPsicologo.SetActive(false);
+                    txtNombrePsicologo.gameObject.SetActive(false);
+                    txtNombrePaciente.gameObject.SetActive(false);
+                    manejadorCamara.activarCamaraGeneral();
+                    ui_retroalimentacion.SetActive(true);
+                    btn_aceptar.gameObject.SetActive(false);
+                    uiPreguntas.SetActive(false);
+                    StopAllCoroutines();
+                    StartCoroutine(escribirTexto("¡Atención! Lo que estás a punto de observar podría ser clave para el desarrollo de este caso", txtRetroalimentacion, btn_aceptar.gameObject));
+                    //Debug.LogWarning("Hizo click en algo correcto");
+
+
+                    btn_aceptar.onClick.RemoveAllListeners();
+                    btn_aceptar.onClick.AddListener(() => {
+                        ui_retroalimentacion.SetActive(false);
+                        btn_aceptar.gameObject.SetActive(false);
+                        contador++;
+                        buscarPersonaje(dialogosList[contador].personaje);
+                        txtPersonaje.text = dialogosList[contador].personaje;
+                        llamarUiDialogos();
+
+
+
+                    });
+                }
+
                 else
                 {
                     if (fase == "Final" && contador == 1)
@@ -642,7 +674,7 @@ public class DialogosManager : MonoBehaviour
         for (int i = 0; i < texto.ToCharArray().Length; i++)
         {
             txt.maxVisibleCharacters++;
-            yield return new WaitForSeconds(15f / 500);
+            yield return new WaitForSeconds(25f / 500);
 
         }
         uiPreguntas.SetActive(true);
@@ -746,29 +778,8 @@ public class DialogosManager : MonoBehaviour
                 animDoctor.SetBool("hablar", true);
                 ubicarPersonajeCentro();
             }
-            //************* Separar dialogos ***************//
-            if (texto.Length > 400)
-            {
-                string[] parrafos = texto.Split('.');
-                // Recorremos cada oración
-                for (int i = 0; i < parrafos.Length; i++)
-                {
-                    string parrafo = parrafos[i].Trim(); 
-                    if (!string.IsNullOrEmpty(parrafo))
-                    {
-                        Debug.Log("Párrafo " + (i + 1) + ": " + parrafo + ".");
-                        manejadorCamara.activarCamaraPsicologo();
-                        StartCoroutine(escribirTexto(parrafo + ".", txtDialogoPsiscologo, btnSigPaciente.gameObject));
-                    }
-                }
-            }
-            else
-            {
-                manejadorCamara.activarCamaraPsicologo();
-                StartCoroutine(escribirTexto(dialogosList[contador].contenido, txtDialogoPsiscologo, btnSigPaciente.gameObject));
-            }
-            /*manejadorCamara.activarCamaraPsicologo();
-            StartCoroutine(escribirTexto(dialogosList[contador].contenido, txtDialogoPsiscologo, btnSigPaciente.gameObject));*/
+            manejadorCamara.activarCamaraPsicologo();
+            StartCoroutine(escribirTexto(dialogosList[contador].contenido, txtDialogoPsiscologo, btnSigPaciente.gameObject));
         }
         else
         {
@@ -779,29 +790,8 @@ public class DialogosManager : MonoBehaviour
                 ubicarPersonajeCentro();
              
             }
-            //************* Separar dialogos ***************//
-            if (texto.Length > 400)
-            {
-                string[] parrafos = texto.Split('.');
-                // Recorremos cada oración
-                for (int i = 0; i < parrafos.Length; i++)
-                {
-                    string parrafo = parrafos[i].Trim();
-                    if (!string.IsNullOrEmpty(parrafo))
-                    {
-                        Debug.Log("Párrafo " + (i + 1) + ": " + parrafo + ".");
-                        manejadorCamara.activarCamaraPaciente();
-                        StartCoroutine(escribirTexto(parrafo + ".", txtDialogoPaciente, btnSigPaciente.gameObject));
-                    }
-                }
-            }
-            else
-            {
-                manejadorCamara.activarCamaraPaciente();
-                StartCoroutine(escribirTexto(dialogosList[contador].contenido, txtDialogoPaciente, btnSigPaciente.gameObject));
-            }
-            /*manejadorCamara.activarCamaraPaciente();
-            StartCoroutine(escribirTexto(dialogosList[contador].contenido, txtDialogoPaciente, btnSigPaciente.gameObject));*/
+            manejadorCamara.activarCamaraPaciente();
+            StartCoroutine(escribirTexto(dialogosList[contador].contenido, txtDialogoPaciente, btnSigPaciente.gameObject));
         }
     }
 

@@ -101,7 +101,7 @@ public class IntroController : MonoBehaviour
         }
         else if (numeroAleatorio == 4)
         {
-            audioSource.clip = audioIntroC1;
+            audioSource.clip = audioIntroC2;
             audioSource.Play();
             StartCoroutine(escribirIntro(introCaso4[1]));
         }
