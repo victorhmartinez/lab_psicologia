@@ -40,7 +40,7 @@ public class LoginUsuario : MonoBehaviour
 
     public void IniciarSesion()
     {
-        btnLogin.GetComponent<Button>().interactable = false;
+        //btnLogin.GetComponent<Button>().interactable = false;
         Panel_Espera.SetActive(true);
         User_Email = IF_Email_Fb.text;
         User_Password = IF_Password_Fb.text;
