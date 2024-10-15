@@ -9,7 +9,7 @@ using System;
 public class LoadData : MonoBehaviour
 {
 
-    private string apiUrl = "https://api-lab-psicologia.onrender.com/api/";
+    private string apiUrl = "https://api-labpsicologia.onrender.com/api/";
     public event Action<List<Historial>> OnHistorialListReady;  // Evento que se dispara cuando el historial está listo
     [SerializeField]
     public bool tieneHistorial;

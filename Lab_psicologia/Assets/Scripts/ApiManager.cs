@@ -8,7 +8,7 @@ using System;
 public class ApiManager : MonoBehaviour
 {
     [SerializeField]
-    private string apiUrl = "https://api-lab-psicologia.onrender.com/api";
+    private string apiUrl = "https://api-labpsicologia.onrender.com/api";
     [SerializeField]
     private TextMeshProUGUI txtDatos;
     public List<Dialogos> dialogosList = new List<Dialogos>();

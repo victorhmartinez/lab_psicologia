@@ -7,7 +7,7 @@ using Proyecto26;
 
 public class SaveData : MonoBehaviour
 {
-    private string url_api = "https://api-lab-psicologia.onrender.com/api/";
+    private string url_api = "https://api-labpsicologia.onrender.com/api/";
     [SerializeField]
     private  string username;
     [SerializeField]
