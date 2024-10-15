@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +9,10 @@ public class SceneChange : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField]
     private SaveData saveData;
+    [SerializeField]
+    private TMP_InputField txtcorreo;
+    [SerializeField]
+    private TMP_InputField txtcontrasenia;
     void Start()
     {
         saveData = GameObject.Find("LoginController").GetComponent<SaveData>();
@@ -38,5 +43,11 @@ public class SceneChange : MonoBehaviour
         {
             saveData.caso = caso;
         }
+    }
+
+    public void LimpiarCampos()
+    {
+        txtcorreo.text = "";
+        txtcontrasenia.text = "";
     }
 }
